@@ -3,11 +3,19 @@ import "./header.scss";
 
 function Header() {
   return (
-    <div className="App">
+
       <header className="header">
-        <p>Header </p>
+        <div className="header-logo">
+          <p>Icon</p>
+          <p>Logo</p>
+        </div>
+
+        <div>
+          <p>Notification</p>
+
+        </div>
       </header>
-    </div>
+
   );
 }
 

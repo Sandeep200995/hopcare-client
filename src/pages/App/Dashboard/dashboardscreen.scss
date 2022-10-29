@@ -1,0 +1,23 @@
+
+.main-area{
+padding: 0 2rem;
+}
+
+.card-area{
+    display: flex;
+    gap: 40px;
+    overflow-x: auto;
+}
+.card-profile{
+    min-width: 250px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    overflow: hidden;
+ img{
+     max-width: 100%;
+
+ }
+ .card-profile-inner{
+     padding: 1rem;
+ }
+}

@@ -1,17 +1,24 @@
 .header {
     height: 7rem;
-    background-color: var(--color-white);
-    border-bottom: var(--line);
-
+    background-color: #fff;
     font-size: 1.4rem;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    padding: 0 2rem;
+
     // @media only screen and (max-width: $bp-smallest) {
     // 	flex-wrap: wrap;
     // 	height: 11rem;
     // 	align-content: space-around;
     // }
+
+    .header-logo{
+        display: flex;
+        p:first-child{
+            margin-right: 20px;
+        }
+    }
 }

@@ -1,0 +1,28 @@
+.side-bar{
+    position: absolute;
+    width: 0;
+    background-color: #5a189a;
+    height: 100vh;
+    top: 0;
+    &.active{
+        width: 20rem;
+    }
+
+    .side-items{
+        padding: 2rem 0;
+        display: flex;
+        gap: 2rem;
+        flex-direction: column;
+        max-width: 20rem;
+        align-items:center;
+    }
+
+    button{
+        width: 10rem;
+        border: none;
+        background-color: transparent;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
