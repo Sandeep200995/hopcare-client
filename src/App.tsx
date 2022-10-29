@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import "./App.css";
+import { AppRouting } from "./router/appRouting";
+import { AppLoaderContext } from "./contexts";
 
 function App() {
+  const { isAppLoader } = React.useContext(AppLoaderContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <ToastContainer /> */}
+      {isAppLoader && (
+        <div className="loader">
+          <p>Loading...</p>
+          {/* <Loader type="Puff" color="#00BFFF" height={100} width={100}  /> */}
+        </div>
+      )}
+      <Suspense
+        fallback={
+          <div className="loader">
+            <p>Loading...</p>
+          </div>
+        }
+      >
+        <AppRouting />
+      </Suspense>
+    </>
   );
 }
 
