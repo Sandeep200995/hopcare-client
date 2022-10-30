@@ -1,12 +1,16 @@
 import React from "react";
 import "./header.scss";
 
+import hmIcon from "../../../images/hm-menu.svg";
+
 function Header() {
   return (
 
       <header className="header">
         <div className="header-logo">
-          <p>Icon</p>
+          <button className="hm-icon">
+            <img src={hmIcon} alt="hm-icon" />
+          </button>
           <p>Logo</p>
         </div>
 

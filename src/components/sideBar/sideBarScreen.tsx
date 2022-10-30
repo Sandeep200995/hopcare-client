@@ -1,9 +1,14 @@
 import React from "react";
 import "./sidebar.scss";
+import closeIcon from "../../images/close-window-100.png";
 
 function SideBar() {
   return (
     <aside className="side-bar active">
+      <button className="close-icon">
+        <img  src={closeIcon} alt="close" />
+      </button>
+
       <div className="side-items">
         <button>Home</button>
         <button>Dashboard</button>
