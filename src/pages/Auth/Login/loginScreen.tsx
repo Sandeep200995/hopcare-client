@@ -14,8 +14,12 @@ function LoginScreen() {
         <input type="text" />
 
         <button className="btn-common">Login</button>
+        <p className="user-reset-link">Forgot Password</p>
       </div>
-
+      <div className="checkbox-field">
+          <input type="checkbox"></input>
+          <p>Terms and Conditions</p>
+      </div>
     </div>
   );
 }

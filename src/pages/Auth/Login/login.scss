@@ -6,7 +6,6 @@
     align-items: center;
     gap: 25px;
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(106,52,185,1) 21%, rgba(173,0,255,1) 96%);
-
     h2{
         font-size: 22px;
         color: #fff;
@@ -36,6 +35,15 @@
     }
 }
 
+.user-reset-link{
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    margin: 0;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
 .btn-common{
     background-color: transparent;
     border: none;
@@ -46,4 +54,21 @@
     font-weight: 600;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.checkbox-field{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    p{
+        font-size: 1rem;
+        color: #fff;
+        margin: 0;
+        padding-left: 0.5rem;
+    }
+    input[type="checkbox"]{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 }
