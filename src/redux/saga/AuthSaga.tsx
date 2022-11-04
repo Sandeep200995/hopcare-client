@@ -13,89 +13,49 @@ import * as AuthActionTypes from "../actions/Auth/types";
 // import * as STATIC_MSG from "../../../constants/LoaderMessages";
 
 // Authenticate User Saga
-// export function* authenticateUser(params: any): any {
-//   const { formdata } = params?.payload;
-//   // console.log("PAYLOAD @ Saga Auth function", params.payload);
-//   yield put({
-//     type: CommonActionTypes.LOADER,
-//     loading: true,
-//     loadingTxt: LoaderMsgs.common.SEND_REQUEST
-//   });
-//   try {
-//     const { email, password } = formdata;
-//     const res: any = yield Auth.signIn(email, password);
-//     // console.log('authenticateUser RESPONSE ', res);
-//     if (res.signInUserSession && res.signInUserSession.accessToken) {
-//       const roleList = res?.signInUserSession?.accessToken?.payload["cognito:groups"];
-//       const _salonId = res?.attributes?.sub;
-//       console.log("USER ROLE:", roleList);
-//       let _role = "Salon";
-//       if (_role && roleList) {
-//         let isValidUser = roleList.findIndex((ele: any) => ele === _role);
-//         if (isValidUser !== -1) {
-//           let userInfo: any = {
-//             email: res.username,
-//             profilePic: CONSTANTS.DUMMY_SALON_IMG
-//           };
-//           yield put({
-//             type: AuthActionTypes.AUTHENTICATE_USER_SUCCESS,
-//             payload: {
-//               cognito_key: res.userDataKey,
-//               user_details: userInfo,
-//               salon_id: _salonId
-//             },
-//             message: LoaderMsgs.auth.LOG_SUCCESS
-//           });
-//         } else {
-//           yield put({
-//             type: AuthActionTypes.AUTHENTICATE_USER_FAILURE,
-//             payload: {},
-//             // message: "Found different user role",
-//             message: STATIC_MSG.toast_messages.ROLE_DIFFER
-//           });
-//         }
-//       }
-//     } else {
-//       // console.log("res else-->",res);
-//       if (res.challengeName && res.challengeParam) {
-//         if (res.challengeName === "NEW_PASSWORD_REQUIRED") {
-//           yield put({
-//             type: AuthActionTypes.AUTHENTICATE_USER_FAILURE_NEW_PASSWORD,
-//             payload: res,
-//             // message: "New password required, Please change the password"
-//             message: STATIC_MSG.toast_messages.NEW_PASSWORD_REQ
-//           });
-//         } else {
-//           yield put({
-//             type: AuthActionTypes.AUTHENTICATE_USER_FAILURE,
-//             payload: {},
-//             message: res.challengeName
-//           });
-//         }
-//       }
-//     }
-//   } catch (err: any) {
-//     console.error("AUTHENTICATION ERROR", err);
-//     yield put({
-//       type: AuthActionTypes.AUTHENTICATE_USER_FAILURE,
-//       payload: err,
-//       message: err.message ? err.message : "Authentication Error"
-//     });
-//   } finally {
-//     yield put({
-//       type: CommonActionTypes.LOADER,
-//       loading: false,
-//       loadingTxt: ""
-//     });
-//   }
-// }
-// export function* AuthenticateUser() {
-//   try {
-//     yield takeLatest(AuthActionTypes.AUTHENTICATE_USER, authenticateUser);
-//   } catch (ex: any) {
-//     yield put({ type: AuthActionTypes.AUTHENTICATE_USER_FAILURE, message: ex });
-//   }
-// }
+export function* authenticateUser(params: any): any {
+  const { formData } = params?.payload;
+  // console.log('PAYLOAD @ Saga Auth function', params.payload);
+  //   yield put({
+  //     type: CommonActionTypes.LOADER,
+  //     loading: true,
+  //     loadingTxt: LoaderMsgs.common.SUB_REQUEST
+  //   });
+  try {
+    const { password, email } = formData;
+    //     const res: any = yield Auth.signUp({
+    //       username: email,
+    //       password,
+    //       attributes: { email }
+    //     });
+    //     console.log("RESPONSE ", res);
+    //     yield put({
+    //       type: AuthActionTypes.REGISTER_USER_SUCCESS,
+    //       payload: { email },
+    //       message: LoaderMsgs.auth.OTP_MSG
+    //     });
+    //   } catch (err: any) {
+    //     console.error("AUTHENTICATION ERROR", err);
+    //     yield put({
+    //       type: AuthActionTypes.REGISTER_USER_FAILURE,
+    //       payload: err,
+    //       message: err.message
+    //     });
+  } finally {
+    // yield put({
+    //   type: CommonActionTypes.LOADER,
+    //   loading: false,
+    //   loadingTxt: ""
+    // });
+  }
+}
+export function* AuthenticateUser() {
+  try {
+    yield takeLatest(AuthActionTypes.AUTHENTICATE_USER, authenticateUser);
+  } catch (ex: any) {
+    yield put({ type: AuthActionTypes.AUTHENTICATE_USER_FAILURE, message: ex });
+  }
+}
 
 // // Register User Saga
 export function* registerUser(params: any): any {

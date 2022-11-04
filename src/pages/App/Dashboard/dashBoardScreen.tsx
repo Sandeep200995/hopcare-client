@@ -10,68 +10,68 @@ function DashboardScreen() {
   return (
     <div className="App">
       <Header></Header>
-      <SideBar/>
+      {/* <SideBar/> */}
       <div className="main-area">
-       <h2>Dashboard area</h2>
+        <h2>Dashboard area</h2>
 
-       <div className="card-area">
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+        <div className="card-area">
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
-        </div>
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+          </div>
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
-        </div>
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+          </div>
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
-        </div>
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+          </div>
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
-        </div>
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+          </div>
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
-        </div>
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+          </div>
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
-        </div>
-        <div className="card-profile">
-            <img src={drImage } alt="doctor" />
+          </div>
+          <div className="card-profile">
+            <img src={drImage} alt="doctor" />
             <div className="card-profile-inner">
               <p>Name</p>
               <p>place</p>
               <p>Contact number</p>
             </div>
+          </div>
         </div>
-       </div>
 
         <button
           onClick={() => {
@@ -81,7 +81,6 @@ function DashboardScreen() {
           Hello
         </button>
       </div>
-
     </div>
   );
 }

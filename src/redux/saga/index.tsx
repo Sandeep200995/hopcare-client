@@ -11,6 +11,7 @@ export function* rootSaga() {
   yield all([
     // fork(CommonSaga.GetCurrentLocation),
     // fork(CommonSaga.DeviceToken),
+    fork(AuthSaga.AuthenticateUser),
     fork(AuthSaga.RegisterUser)
     // fork(AuthSaga.RequireNewPassword),
     // fork(AuthSaga.RegisterUser),
