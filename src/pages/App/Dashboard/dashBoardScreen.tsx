@@ -1,85 +1,132 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../components/page/Header/header";
 import SideBar from "../../../components/sideBar/sideBarScreen";
 import drImage from "../../../images/dr.jpg";
 import "./dashboardscreen.scss";
+import * as CONSTANTS from "../../../constants/dummy";
+import * as COMMON_ACTIONS from "../../../redux/actions/common";
+import * as ClinicActions from "../../../redux/actions/clinic/index";
+import * as CLINIC_ACTION_TYPES from "../../../redux/actions/clinic/types";
+import * as DoctorActions from "../../../redux/actions/doctor/index";
+import * as DOCTOR_ACTION_TYPES from "../../../redux/actions/doctor/types";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function DashboardScreen() {
   const history: any = useNavigate();
+  const dispatch: any = useDispatch();
+  const clinicState = useSelector((state: any) => state.clinicData);
+  const doctorState = useSelector((state: any) => state.doctorData);
+  const [clinicList, setClinicList]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.DASHBOARD_CLINIC_LIST);
+  const [doctorList, setDoctorList]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.DASHBOARD_DOCTORS_LIST);
+
+  useEffect(() => {
+    dispatch(COMMON_ACTIONS.startLoading({}));
+    dispatch(ClinicActions.getAllClinics({ formData: { limit: 20, skip: 0 } }));
+    dispatch(DoctorActions.getAllDoctors({ formData: { limit: 20, skip: 0 } }));
+  }, []);
+
+  useEffect(() => {
+    // console.log("CASE", clinicState);
+    switch (clinicState.case) {
+      case CLINIC_ACTION_TYPES.GET_ALL_CLINICS_SUCCESS:
+        setClinicList(clinicState.dashboardClinicData);
+        dispatch(COMMON_ACTIONS.stopLoading({}));
+        break;
+      case CLINIC_ACTION_TYPES.GET_ALL_CLINICS_FAILURE:
+        // toggleToast({
+        //   ...toast,
+        //   msg: clinicState.message,
+        //   status: !toast.status,
+        //   type: "error"
+        // });
+        dispatch(COMMON_ACTIONS.stopLoading({}));
+        break;
+      case DOCTOR_ACTION_TYPES.GET_ALL_DOCTORS_SUCCESS:
+        setDoctorList(doctorState.dashboardDoctorData);
+        dispatch(COMMON_ACTIONS.stopLoading({}));
+        break;
+      case DOCTOR_ACTION_TYPES.GET_ALL_DOCTORS_FAILURE:
+        // toggleToast({
+        //   ...toast,
+        //   msg: clinicState.message,
+        //   status: !toast.status,
+        //   type: "error"
+        // });
+        dispatch(COMMON_ACTIONS.stopLoading({}));
+        break;
+      default:
+        break;
+    }
+  }, [clinicState]);
+
+  function renderClinics() {
+    return (
+      <>
+        <div className="card-area">
+          {clinicList.list.map((info: any, ind: number) => {
+            const { _id, name, address } = info;
+            return (
+              <div key={`${ind}_${_id}`} className="card-profile">
+                <img src={drImage} alt="doctor" />
+                <div className="card-profile-inner">
+                  <p>{name ? name : " - "}</p>
+                  <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${
+                    address.buildingName ? address.buildingName + "," : ""
+                  } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
+                    address.addressLine2 ? address.addressLine2 + "," : ""
+                  }`}</p>
+                  {/* <p>Contact number</p> */}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
+
+  function renderDoctors() {
+    return (
+      <>
+        <div className="card-area">
+          {doctorList.list.map((info: any, ind: number) => {
+            const { _id, name, address } = info;
+            return (
+              <div key={`${ind}_${_id}`} className="card-profile">
+                <img src={drImage} alt="doctor" />
+                <div className="card-profile-inner">
+                  <p>{name ? name : " - "}</p>
+                  <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${
+                    address.buildingName ? address.buildingName + "," : ""
+                  } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
+                    address.addressLine2 ? address.addressLine2 + "," : ""
+                  }`}</p>
+                  {/* <p>Contact number</p> */}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
   return (
     <div className="App">
       <Header></Header>
-      {/* <SideBar/> */}
       <div className="main-area">
-        <h2>Dashboard area</h2>
-
-        <div className="card-area">
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-          <div className="card-profile">
-            <img src={drImage} alt="doctor" />
-            <div className="card-profile-inner">
-              <p>Name</p>
-              <p>place</p>
-              <p>Contact number</p>
-            </div>
-          </div>
-        </div>
-
-        <button
+        <h2>Popular Clinics in this area</h2>
+        {renderClinics()}
+        <h2>Popular Doctors in this area</h2>
+        {renderDoctors()}
+        {/* <button
           onClick={() => {
             history(`/login`);
           }}
         >
           Hello
-        </button>
+        </button> */}
       </div>
     </div>
   );
