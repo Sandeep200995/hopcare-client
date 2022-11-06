@@ -28,7 +28,6 @@ function DashboardScreen() {
   }, []);
 
   useEffect(() => {
-    // console.log("CASE", clinicState);
     switch (clinicState.case) {
       case CLINIC_ACTION_TYPES.GET_ALL_CLINICS_SUCCESS:
         setClinicList(clinicState.dashboardClinicData);
@@ -43,23 +42,25 @@ function DashboardScreen() {
         // });
         dispatch(COMMON_ACTIONS.stopLoading({}));
         break;
+      default:
+        break;
+    }
+  }, [clinicState]);
+
+  useEffect(() => {
+    console.log("doctorState", doctorState.dashboardDoctorData);
+    switch (doctorState.case) {
       case DOCTOR_ACTION_TYPES.GET_ALL_DOCTORS_SUCCESS:
         setDoctorList(doctorState.dashboardDoctorData);
         dispatch(COMMON_ACTIONS.stopLoading({}));
         break;
       case DOCTOR_ACTION_TYPES.GET_ALL_DOCTORS_FAILURE:
-        // toggleToast({
-        //   ...toast,
-        //   msg: clinicState.message,
-        //   status: !toast.status,
-        //   type: "error"
-        // });
         dispatch(COMMON_ACTIONS.stopLoading({}));
         break;
       default:
         break;
     }
-  }, [clinicState]);
+  }, [doctorState]);
 
   function renderClinics() {
     return (
@@ -77,7 +78,6 @@ function DashboardScreen() {
                   } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
                     address.addressLine2 ? address.addressLine2 + "," : ""
                   }`}</p>
-                  {/* <p>Contact number</p> */}
                 </div>
               </div>
             );
@@ -88,22 +88,18 @@ function DashboardScreen() {
   }
 
   function renderDoctors() {
+    // console.log("doctorList", doctorList);
     return (
       <>
         <div className="card-area">
           {doctorList.list.map((info: any, ind: number) => {
-            const { _id, name, address } = info;
+            const { _id, firstName, lastName, address } = info;
+            // console.log("info-->", info);
             return (
               <div key={`${ind}_${_id}`} className="card-profile">
                 <img src={drImage} alt="doctor" />
                 <div className="card-profile-inner">
-                  <p>{name ? name : " - "}</p>
-                  <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${
-                    address.buildingName ? address.buildingName + "," : ""
-                  } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
-                    address.addressLine2 ? address.addressLine2 + "," : ""
-                  }`}</p>
-                  {/* <p>Contact number</p> */}
+                  <p>{`${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`}</p>
                 </div>
               </div>
             );
@@ -120,13 +116,6 @@ function DashboardScreen() {
         {renderClinics()}
         <h2>Popular Doctors in this area</h2>
         {renderDoctors()}
-        {/* <button
-          onClick={() => {
-            history(`/login`);
-          }}
-        >
-          Hello
-        </button> */}
       </div>
     </div>
   );

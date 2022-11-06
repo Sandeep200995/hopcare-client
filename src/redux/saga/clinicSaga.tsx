@@ -18,7 +18,7 @@ export function* getAllClinics(action: any): Generator<WhatYouYield, WhatYouRetu
     const { formData } = action.payload;
     // console.log("formData", formData);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.getAllClnics, "POST");
-    console.log("Response Clinic list ", response);
+    // console.log("Response Clinic list ", response);
     const { data }: any = response.data || {};
     // console.log("Data ", data);
     if (data) {
