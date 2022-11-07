@@ -6,10 +6,12 @@ import "./login.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
+import { SideBarContext } from "../../../contexts";
 
 function LoginScreen() {
   const history = useNavigate();
   const dispatch = useDispatch();
+  const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const userState = useSelector((state: any) => state.userData);
   const formik = useFormik({
     initialValues: {
@@ -32,51 +34,27 @@ function LoginScreen() {
     },
     onSubmit: async (values) => {
       console.log("values", values);
-      return;
       dispatch(AUTH_ACTIONS.authenticateUser({ formData: values }));
-      try {
-        const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values)
-        };
-        // dispatch(COMMON_ACTIONS.startLoading({}));
-        let response: any = await fetch("http://localhost:4000/api/user/login", requestOptions);
-        response = await response.json();
-        console.log("Response ", response);
-        // dispatch(COMMON_ACTIONS.stopLoading({}));
-        if (response.responseCode === 200) {
-          storage.storeData(storage.keys.TOKEN_CL, response.accessToken);
-          storage.storeData(storage.keys.USER_TYPE, values.userType);
-          history("/");
-          // toggleToast({ ...toast, msg: response.message, status: !toast.status, type: "success" });
-          // setIsAuthenticated(true);
-        } else if (response.responseCode === 202) {
-          // toggleToast({ ...toast, msg: response.message, status: !toast.status, type: "success" });
-          setTimeout(() => {
-            history("/otp", {
-              state: {
-                otp: response.otp ? response.otp.toString() : null,
-                phoneNumber: values.phoneNumber,
-                userType: values.userType
-              }
-            });
-          }, 800);
-        } else {
-          // toggleToast({ ...toast, msg: response.message, status: !toast.status, type: "error" });
-        }
-      } catch (error) {
-        // dispatch(COMMON_ACTIONS.stopLoading({}));
-        // toggleToast({ ...toast, msg: "Failed to send request", status: !toast.status, type: "error" });
-      }
     }
   });
 
   useEffect(() => {
-    console.log("userState", userState);
-
+    // console.log("userState", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
+        history("./register");
+        storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
+        storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+        break;
+      case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
+        history("/otp", {
+          state: {
+            otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
+            phoneNumber: formik.values.phoneNumber,
+            userType: formik.values.userType
+          }
+        });
+        storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
         break;
