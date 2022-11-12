@@ -1,12 +1,14 @@
 import React from "react";
 import "./sidebar.scss";
 import closeIcon from "../../images/close-window-100.png";
-
-function SideBar() {
+interface sideBarProps {
+  onCloseBtnClk?: any;
+}
+function SideBar(props: sideBarProps) {
   return (
     <aside className="side-bar active">
-      <button className="close-icon">
-        <img  src={closeIcon} alt="close" />
+      <button className="close-icon" onClick={props.onCloseBtnClk}>
+        <img src={closeIcon} alt="close" />
       </button>
 
       <div className="side-items">
@@ -20,7 +22,6 @@ function SideBar() {
         <button>What's new</button>
       </div>
     </aside>
-
   );
 }
 

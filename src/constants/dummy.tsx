@@ -70,24 +70,24 @@ export const DEFAULT_DUMMY_DATA = {
   DASHBOARD_DOCTORS_LIST: {
     total: 0,
     list: [
-      {
-        name: "Swastika Hospital",
-        address: "Behind Bunayi Vidyalay, Shahadatpura, Mau ",
-        // img: HospitalImg1,
-        id: 12345
-      },
-      {
-        name: "Fatima Hospital",
-        address: "Imilya, Mau",
-        // img: FatimaHospital,
-        id: 13456
-      },
-      {
-        name: "Prakash Hospital",
-        address: "Sahadatpura, Mau",
-        // img: PrakashHospital,
-        id: 17876
-      }
+      // {
+      //   name: "Swastika Hospital",
+      //   address: "Behind Bunayi Vidyalay, Shahadatpura, Mau ",
+      //   // img: HospitalImg1,
+      //   id: 12345
+      // },
+      // {
+      //   name: "Fatima Hospital",
+      //   address: "Imilya, Mau",
+      //   // img: FatimaHospital,
+      //   id: 13456
+      // },
+      // {
+      //   name: "Prakash Hospital",
+      //   address: "Sahadatpura, Mau",
+      //   // img: PrakashHospital,
+      //   id: 17876
+      // }
     ]
   },
   CLINIC_INFO_FAQ: [

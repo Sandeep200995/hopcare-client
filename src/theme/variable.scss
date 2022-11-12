@@ -1,0 +1,322 @@
+/* bootsic Variables and Theming. For more info, please see:
+http://bootsicframework.com/docs/theming/ */
+
+/** bootstrap CSS Variables **/
+:root {
+    /** primary **/
+    --boots-color-primary: #3880ff;
+    --boots-color-primary-rgb: 56, 128, 255;
+    --boots-color-primary-contrast: #ffffff;
+    --boots-color-primary-contrast-rgb: 255, 255, 255;
+    --boots-color-primary-shade: #3171e0;
+    --boots-color-primary-tint: #4c8dff;
+
+    /** secondary **/
+    --boots-color-secondary: #3dc2ff;
+    --boots-color-secondary-rgb: 61, 194, 255;
+    --boots-color-secondary-contrast: #ffffff;
+    --boots-color-secondary-contrast-rgb: 255, 255, 255;
+    --boots-color-secondary-shade: #36abe0;
+    --boots-color-secondary-tint: #50c8ff;
+
+    /** tertiary **/
+    --boots-color-tertiary: #5260ff;
+    --boots-color-tertiary-rgb: 82, 96, 255;
+    --boots-color-tertiary-contrast: #ffffff;
+    --boots-color-tertiary-contrast-rgb: 255, 255, 255;
+    --boots-color-tertiary-shade: #4854e0;
+    --boots-color-tertiary-tint: #6370ff;
+
+    /** success **/
+    --boots-color-success: #692f99;
+    --boots-color-success-rgb: 45, 211, 111;
+    --boots-color-success-contrast: #ffffff;
+    --boots-color-success-contrast-rgb: 255, 255, 255;
+    --boots-color-success-shade: #28ba62;
+    --boots-color-success-tint: #42d77d;
+
+    /** warning **/
+    --boots-color-warning: #ffc409;
+    --boots-color-warning-rgb: 255, 196, 9;
+    --boots-color-warning-contrast: #000000;
+    --boots-color-warning-contrast-rgb: 0, 0, 0;
+    --boots-color-warning-shade: #e0ac08;
+    --boots-color-warning-tint: #ffca22;
+
+    /** danger **/
+    --boots-color-danger: #eb445a;
+    --boots-color-danger-tint: #ed576b;
+
+    /** dark **/
+    --boots-color-dark: #222428;
+    --boots-color-dark-tint: #383a3e;
+
+    /** medium **/
+    --boots-color-medium: #92949c;
+    --boots-color-medium-shade: #808289;
+    --boots-color-medium-tint: #9d9fa6;
+
+    /** light **/
+    --boots-color-light: #f4f5f8;
+    --boots-color-light-rgb: 244, 245, 248;
+    --boots-color-light-contrast: #000000;
+    --boots-color-light-contrast-rgb: 0, 0, 0;
+    --boots-color-light-shade: #d7d8da;
+    --boots-color-light-tint: #f5f6f9;
+
+    //variables
+    --boots-color-white: #ffffff;
+    --boots-color-whitef5: #f5f5f5;
+    --boots-color-black: #000000;
+
+    --boots-color-default: #d8d8d8;
+    --boots-color-default-active: var(--boots-color-white);
+    --boots-color-default-active-rgb: #{convertToHex(#d8d8d8)};
+    --boots-color-default-backdropColor: #d8d8d8;
+    --boots-color-default-background-rgb: #{convertToHex(#d8d8d8)};
+    --boots-color-default-outline: var(--boots-color-default);
+    --boots-color-default-outlineActive: rgba(#{convertToHex(#d8d8d8)}, 0.3);
+    --boots-color-default-light: #ffe9db;
+    --boots-color-default-header: var(--boots-color-white);
+    --boots-color-default-chart: var(--boots-color-white);
+
+    --boots-color-white-48: rgba(#{convertToHex(#ffffff)}, 0.48);
+
+    --boots-color-box-border: #773232;
+    --app-background: #282e60;
+    --boots-color-pink: #b435f4;
+    --boots-app-background-rgba: rgba(#{convertToHex(#282e60)}, 0.15);
+    --boots-color-pink-rgba: rgba(#{convertToHex(#b435f4)}, 0.49);
+    --boots-color-dark-white-rgba: rgba(#{convertToHex(#ffffff)}, 0.5);
+    --boots-color-black50: rgba(#{convertToHex(#000000)}, 0.5);
+
+    --lightGradient: linear-gradient(to bottom, #e3e9f7 50%, #a8b2cc);
+
+    --boots-color-activated-dark-blue-rgba: rgba(#{convertToHex(#131a27)}, 0.2);
+
+
+    // Background Images
+
+    // --user-images: url("./../assets/images/salonleads-img.png");
+
+    //-------------------------------------------------------------------//
+    /////////////////////            Forms            /////////////////////
+    //-------------------------------------------------------------------//
+    --boots-color-error: #ed5555;
+    --boots-color-success: #692f99;
+    --headerHeight: vwF(57);
+    --headerHeightTablet: vwF(36);
+    --headerFontTitleSize: vwF(24);
+    --headerFontTitleTabletSize: vwF(14);
+    --boots-color-todoBoxShadow: #cecece;
+    --boots-color-tododayBg: #f5f5f5;
+    --boots-color-whiteSmoke: #efefef;
+    --boots-font-family: "Roboto-Light";
+    --PrimaryBold: "Roboto-Bold";
+    --PrimaryRegular: "Roboto-Regular";
+    --PrimaryLight: "Roboto-Light";
+    --PrimarySemiBold: "Roboto-Bold";
+    --PrimaryMedium: "robotomedium";
+    --PrimaryRaleway: "Raleway-Regular";
+    --PrimaryThin: "Roboto-Thin";
+  }
+  $fontPath: "/assets/extraFonts";
+
+  //hex to rgb required for rgba concept
+  @function convertToHex($hex) {
+    @return red($hex), green($hex), blue($hex);
+  }
+
+  // //-------------------------------------------------------------------//
+  // /////////////////////        @FontFace (GV)       /////////////////////
+  // //-------------------------------------------------------------------//
+
+  @font-face {
+    font-family: "Roboto-Bold";
+    src: url("#{$fontPath}/Roboto-Bold.eot");
+    src: url("#{$fontPath}/Roboto-Bold.eot?#iefix") format("embedded-opentype"),
+      url("#{$fontPath}/Roboto-Bold.woff2") format("woff2"), url("#{$fontPath}/Roboto-Bold.woff") format("woff"),
+      url("#{$fontPath}/Roboto-Bold.ttf") format("truetype"),
+      url("#{$fontPath}/Roboto-Bold.svg#Roboto-Bold") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Roboto-Regular";
+    src: url("#{$fontPath}/Roboto-Regular.eot");
+    src: url("#{$fontPath}/Roboto-Regular.eot?#iefix") format("embedded-opentype"),
+      url("#{$fontPath}/Roboto-Regular.woff2") format("woff2"), url("#{$fontPath}/Roboto-Regular.woff") format("woff"),
+      url("#{$fontPath}/Roboto-Regular.ttf") format("truetype"),
+      url("#{$fontPath}/Roboto-Regular.svg#Roboto-Regular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Roboto-Light";
+    src: url("#{$fontPath}/Roboto-Light.eot");
+    src: url("#{$fontPath}/Roboto-Light.eot?#iefix") format("embedded-opentype"),
+      url("#{$fontPath}/Roboto-Light.woff") format("woff"), url("#{$fontPath}/Roboto-Light.ttf") format("truetype"),
+      url("#{$fontPath}/Roboto-Light.svg#Roboto-Light") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Roboto-Thin";
+    src: url("#{$fontPath}/roboto-thin.eot");
+    src: url("#{$fontPath}/roboto-thin.eot?#iefix") format("embedded-opentype"),
+      url("#{$fontPath}/roboto-thin.woff") format("woff"), url("#{$fontPath}/roboto-thin.ttf") format("truetype"),
+      url("#{$fontPath}/roboto-thin.svg#roboto-thin") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "robotomedium";
+    src: url("#{$fontPath}/roboto-medium.eot");
+    src: url("#{$fontPath}/roboto-medium.eot?#iefix") format("embedded-opentype"),
+      url("#{$fontPath}/roboto-medium.woff2") format("woff2"), url("#{$fontPath}/roboto-medium.woff") format("woff"),
+      url("#{$fontPath}/roboto-medium.ttf") format("truetype"),
+      url("#{$fontPath}/roboto-medium.svg#robotomedium") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  // theming defined
+  $themes: (
+    default: default
+  );
+  //-------------------------------------------------------------------//
+  /////////////////////        font-styling         /////////////////////
+  //-------------------------------------------------------------------//
+  /* this property has 8 font size globally */
+  .font8 {
+    font-size: 8px;
+  }
+  .font7 {
+    font-size: 7px;
+  }
+  .font10 {
+    font-size: 10px;
+  }
+  /* this property has 11 font size globally */
+  .font11 {
+    font-size: 11px;
+  }
+  /* this property has 12 font size globally */
+  .font12 {
+    font-size: 12px;
+  }
+  /* this property has 13 font size globally */
+  .font13 {
+    font-size: 13px;
+  }
+  /* this property has 14 font size globally */
+  .font14 {
+    font-size: 14px;
+  }
+  .font15 {
+    font-size: 15px;
+  }
+  .font16 {
+    font-size: 16px;
+  }
+  .font17 {
+    font-size: 17px;
+  }
+  /* this property has 18 font size globally */
+  .font18 {
+    font-size: 18px;
+  }
+  .font19 {
+    font-size: 19px;
+  }
+  /* this property has 20 font size globally */
+  .font20 {
+    font-size: 20px;
+  }
+  /* this property has 22 font size globally */
+  .font22 {
+    font-size: 22px;
+  }
+  /* this property has 24 font size globally */
+  .font24 {
+    line-height: 24px;
+    font-size: 24px;
+  }
+  .font26 {
+    font-size: 26px;
+  }
+
+  .font27 {
+    font-size: 27px;
+  }
+  .font28 {
+    font-size: 28px;
+  }
+  .font30 {
+    font-size: 30px;
+  }
+  .font32 {
+    font-size: 32px;
+  }
+  .font40 {
+    font-size: 40px;
+  }
+  .font49 {
+    font-size: 49px;
+  }
+  .font50 {
+    font-size: 50px;
+  }
+  .medium-font-style {
+    @extend .font18;
+    line-height: 24px;
+  }
+  .lg-text {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .font-regular {
+    font-family: "Lato", sans-serif;
+  }
+  .font-bold {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+  }
+  .font-italic {
+    font-style: italic;
+    display: contents;
+  }
+  .font-underline {
+    text-decoratboots: underline;
+  }
+  .text-indent {
+    text-indent: vwF(6);
+  }
+  .text-case {
+    text-transform: uppercase;
+  }
+
+  .text-capitalize {
+    text-transform: capitalize;
+    line-height: normal;
+  }
+  .fontBold {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+  }
+  .fontRegular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .noWrap {
+    white-space: nowrap;
+  }
+  .margin-bottom-0 {
+    margin-bottom: 0;
+  }
+  .margin-bottom-10 {
+    margin-bottom: 10px;
+  }
