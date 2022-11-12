@@ -55,7 +55,7 @@ export function* AuthenticateUser() {
 }
 
 export function* registerUser(action: any): Generator<WhatYouYield, WhatYouReturn, WhatYouAccept> {
-  // console.log("registerUser SAGA INVOKED ::::", action);
+  console.log("registerUser SAGA INVOKED ::::", action);
   try {
     const { formData } = action.payload;
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.login, "POST");
@@ -72,11 +72,17 @@ export function* registerUser(action: any): Generator<WhatYouYield, WhatYouRetur
         payload: { user_details: user_details },
         message: message
       });
+    } else if (responseCode && responseCode === 201) {
+      yield put({
+        type: AUTH_ACION_TYPES.REGISTER_USER_FAILURE,
+        payload: { user_details: user_details },
+        message: message
+      });
     } else {
       yield put({
         type: AUTH_ACION_TYPES.REGISTER_USER_FAILURE,
         payload: { user_details: user_details },
-        message: "Unable to fetch data "
+        message: "Failed to get response "
       });
     }
   } catch (error: any) {

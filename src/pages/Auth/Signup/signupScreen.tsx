@@ -55,15 +55,15 @@ function SignupScreen() {
   });
 
   useEffect(() => {
-    // console.log("userState", userState);
+    console.log("userState", userState);
     switch (userState.case) {
-      case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
+      case AUTH_ACTIONS_TYPES.REGISTER_USER_SUCCESS:
         setIsAppLoader(false);
         // history("./register");
         // storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         // storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
         break;
-      case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
+      case AUTH_ACTIONS_TYPES.REGISTER_USER_FAILURE:
         setIsAppLoader(false);
         break;
       default:
@@ -105,13 +105,15 @@ function SignupScreen() {
             value={formik.values.password}
           />
           <input
-            type="text"
+            type="password"
             name="cnfPassword"
             placeholder="Confirm Password"
             onChange={formik.handleChange}
             value={formik.values.cnfPassword}
           />
-          <button className="btn-common">Submit</button>
+          <button type="submit" className="btn-common">
+            Submit
+          </button>
         </div>
       </form>
     </div>
