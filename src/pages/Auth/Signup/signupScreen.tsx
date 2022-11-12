@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { storage } from "../../../utills";
 import "./register.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
@@ -11,9 +11,11 @@ import { AppLoaderContext } from "../../../contexts";
 function SignupScreen() {
   const history = useNavigate();
   const dispatch = useDispatch();
+  const { state } = useLocation();
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
+  const from = state ? state.from.pathname : "/";
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -114,6 +116,8 @@ function SignupScreen() {
           <button type="submit" className="btn-common">
             Submit
           </button>
+
+          <p onClick={() => history(from, { replace: true })}>Back to login</p>
         </div>
       </form>
     </div>

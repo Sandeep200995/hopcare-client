@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../../../utills";
-import "./login.scss";
+import "./forgotPassword.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,7 @@ function LoginScreen() {
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
-      password: "",
+      // password: "",
       userType: "consumer"
     },
     validateOnBlur: true,
@@ -28,9 +28,9 @@ function LoginScreen() {
       if (!values.phoneNumber) {
         errors.phoneNumber = "Please enter 10 digit phone number";
       }
-      if (!values.password) {
-        errors.password = "Please enter password";
-      }
+      // if (!values.password) {
+      //   errors.password = "Please enter password";
+      // }
       return errors;
     },
     onSubmit: (values) => {
@@ -42,26 +42,26 @@ function LoginScreen() {
   useEffect(() => {
     // console.log("userState", userState);
     switch (userState.case) {
-      case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
-        setIsAppLoader(false);
-        history("./register");
-        storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
-        storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
-        break;
-      case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
-        setIsAppLoader(false);
-        history("/otp", {
-          state: {
-            otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
-            phoneNumber: formik.values.phoneNumber,
-            userType: formik.values.userType
-          }
-        });
-        storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
-        break;
-      case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
-        setIsAppLoader(false);
-        break;
+      // case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
+      //   setIsAppLoader(false);
+      //   history("./register");
+      //   storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
+      //   storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+      //   break;
+      // case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
+      //   setIsAppLoader(false);
+      //   history("/otp", {
+      //     state: {
+      //       otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
+      //       phoneNumber: formik.values.phoneNumber,
+      //       userType: formik.values.userType
+      //     }
+      //   });
+      //   storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+      //   break;
+      // case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
+      //   setIsAppLoader(false);
+      //   break;
       default:
         break;
     }
@@ -69,7 +69,8 @@ function LoginScreen() {
 
   return (
     <div className="form-area">
-      <h2>Login</h2>
+      <h2>Forgot your password</h2>
+      <h4>Enter your registerd mobile number we will send you a OTP after submit</h4>
       <form onSubmit={formik.handleSubmit} noValidate>
         <div className="form-inner">
           <input
@@ -79,21 +80,15 @@ function LoginScreen() {
             onChange={formik.handleChange}
             value={formik.values.phoneNumber}
           />
-          <input
+          {/* <input
             type="password"
             name="password"
             placeholder="Password"
             onChange={formik.handleChange}
             value={formik.values.password}
-          />
+          /> */}
           <button className="btn-common">Submit</button>
-          <p>
-            New User <span onClick={() => history("./register")}>Register here!</span>{" "}
-          </p>
-          <p>
-            {" "}
-            <span onClick={() => history("./forgotPassword")}>Forgot Password?</span>{" "}
-          </p>
+          <p onClick={() => history("./login")}>Back to login</p>
         </div>
       </form>
     </div>
