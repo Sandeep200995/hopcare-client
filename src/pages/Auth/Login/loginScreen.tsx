@@ -6,12 +6,13 @@ import "./login.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
-import { SideBarContext } from "../../../contexts";
+import { AppLoaderContext } from "../../../contexts";
 
 function LoginScreen() {
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
+  // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
+  const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
   const formik = useFormik({
     initialValues: {
@@ -32,8 +33,8 @@ function LoginScreen() {
       }
       return errors;
     },
-    onSubmit: async (values) => {
-      console.log("values", values);
+    onSubmit: (values) => {
+      setIsAppLoader(true);
       dispatch(AUTH_ACTIONS.authenticateUser({ formData: values }));
     }
   });
@@ -42,11 +43,13 @@ function LoginScreen() {
     // console.log("userState", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
+        setIsAppLoader(false);
         history("./register");
         storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
+        setIsAppLoader(false);
         history("/otp", {
           state: {
             otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
@@ -57,6 +60,7 @@ function LoginScreen() {
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
+        setIsAppLoader(false);
         break;
       default:
         break;
