@@ -78,6 +78,7 @@ function SignupScreen() {
       <h2>Register </h2>
       <form onSubmit={formik.handleSubmit} noValidate>
         <div className="form-inner">
+        <div className="form-input">
           <input
             type="text"
             placeholder="First Name"
@@ -85,6 +86,9 @@ function SignupScreen() {
             onChange={formik.handleChange}
             value={formik.values.firstName}
           />
+          <p className="error-text">error</p>
+          </div>
+          <div className="form-input">
           <input
             type="text"
             placeholder="Last Name"
@@ -92,6 +96,10 @@ function SignupScreen() {
             onChange={formik.handleChange}
             value={formik.values.lastName}
           />
+          <p className="error-text">error</p>
+          </div>
+
+          <div className="form-input">
           <input
             type="text"
             placeholder="Mobile number"
@@ -99,6 +107,10 @@ function SignupScreen() {
             onChange={formik.handleChange}
             value={formik.values.phoneNumber}
           />
+          <p className="error-text">error</p>
+          </div>
+
+          <div className="form-input">
           <input
             type="password"
             name="password"
@@ -106,6 +118,10 @@ function SignupScreen() {
             onChange={formik.handleChange}
             value={formik.values.password}
           />
+          <p className="error-text">error</p>
+          </div>
+
+          <div className="form-input">
           <input
             type="password"
             name="cnfPassword"
@@ -113,11 +129,13 @@ function SignupScreen() {
             onChange={formik.handleChange}
             value={formik.values.cnfPassword}
           />
+          <p className="error-text">error</p>
+          </div>
           <button type="submit" className="btn-common">
             Submit
           </button>
 
-          <p onClick={() => history(from, { replace: true })}>Back to login</p>
+          <button className="btn-underline" onClick={() => history(from, { replace: true })}>Back to login</button>
         </div>
       </form>
     </div>

@@ -1,6 +1,7 @@
 .header {
     height: 7rem;
-    background-color: #fff;
+    background-color: #FAACA8;
+    background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
     font-size: 1.4rem;
 
     display: flex;
@@ -9,14 +10,9 @@
 
     padding: 0 2rem;
 
-    // @media only screen and (max-width: $bp-smallest) {
-    // 	flex-wrap: wrap;
-    // 	height: 11rem;
-    // 	align-content: space-around;
-    // }
-
     .header-logo{
         display: flex;
+        align-items: center;
         p:first-child{
             margin-right: 20px;
         }
@@ -26,6 +22,7 @@
         border: none;
         background-color: transparent;
         padding: 0;
+        cursor: pointer;
 
         img{
             width: 50px;
@@ -33,6 +30,16 @@
 
             @media(max-width:480px) {
                 width: 35px;
+            }
+        }
+    }
+
+    .notification-block{
+        button{
+            border: none;
+            background: transparent;
+            img{
+                width: 2.1rem;
             }
         }
     }

@@ -70,9 +70,10 @@ function LoginScreen() {
   return (
     <div className="form-area">
       <h2>Forgot your password</h2>
-      <h4>Enter your registerd mobile number we will send you a OTP after submit</h4>
+      <h4>Enter your registerd mobile number we will send <br className="mb-nobreak" /> you OTP after submit</h4>
       <form onSubmit={formik.handleSubmit} noValidate>
         <div className="form-inner">
+        <div className="form-input">
           <input
             type="text"
             placeholder="Mobile number"
@@ -80,6 +81,8 @@ function LoginScreen() {
             onChange={formik.handleChange}
             value={formik.values.phoneNumber}
           />
+           <p className="error-text">error</p>
+          </div>
           {/* <input
             type="password"
             name="password"
@@ -88,7 +91,7 @@ function LoginScreen() {
             value={formik.values.password}
           /> */}
           <button className="btn-common">Submit</button>
-          <p onClick={() => history("./login")}>Back to login</p>
+          <button className="btn-underline" onClick={() => history("./login")}>Back to login</button>
         </div>
       </form>
     </div>

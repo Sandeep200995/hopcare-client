@@ -20,12 +20,13 @@ export const AppRouting = (props: ContainerProps) => {
       <div className="main-cont">
         {isSideActive ? <SideBar onCloseBtnClk={() => toggleSidebar(!isSideActive)} /> : null}
         <Routes>
-          <Route path="/" element={<Login />}></Route>
+          {/* <Route path="/" element={<Login />}></Route> */}
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Signup />}></Route>
           <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/otp" element={<OTP />}></Route>
           {/* <Route path="*" element={<Dashboard />} /> */}
+          <Route path="/" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>

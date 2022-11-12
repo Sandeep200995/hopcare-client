@@ -73,49 +73,24 @@ function SignupScreen() {
 
   return (
     <div className="form-area">
-      <h2>Register </h2>
+      <h2>OTP </h2>
       <form onSubmit={formik.handleSubmit} noValidate>
         <div className="form-inner">
+        <div className="form-input">
           <input
-            type="text"
-            placeholder="First Name"
+            type="number"
+            placeholder="OTP"
             name="firstName"
             onChange={formik.handleChange}
             value={formik.values.firstName}
           />
-          <input
-            type="text"
-            placeholder="Last Name"
-            name="lastName"
-            onChange={formik.handleChange}
-            value={formik.values.lastName}
-          />
-          <input
-            type="text"
-            placeholder="Mobile number"
-            name="phoneNumber"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-          <input
-            type="password"
-            name="cnfPassword"
-            placeholder="Confirm Password"
-            onChange={formik.handleChange}
-            value={formik.values.cnfPassword}
-          />
+          <p className="error-text">error</p>
+          </div>
           <button type="submit" className="btn-common">
             Submit
           </button>
 
-          <p onClick={() => history("./login")}>Back to login</p>
+          <button className="btn-underline" onClick={() => history("./login")}>Back to login</button>
         </div>
       </form>
     </div>
