@@ -34,7 +34,7 @@ function LoginScreen() {
       return errors;
     },
     onSubmit: (values) => {
-      setIsAppLoader(true);
+      // setIsAppLoader(true);
       dispatch(AUTH_ACTIONS.authenticateUser({ formData: values }));
     }
   });
@@ -70,28 +70,27 @@ function LoginScreen() {
   return (
     <div className="form-area">
       <h2>Forgot your password</h2>
-      <h4>Enter your registerd mobile number we will send <br className="mb-nobreak" /> you OTP after submit</h4>
+      <h4>
+        Enter your registered mobile number we will send <br className="mb-nobreak" /> you OTP after submit
+      </h4>
       <form onSubmit={formik.handleSubmit} noValidate>
         <div className="form-inner">
-        <div className="form-input">
-          <input
-            type="text"
-            placeholder="Mobile number"
-            name="phoneNumber"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-          />
-           <p className="error-text">error</p>
+          <div className="form-input">
+            <input
+              type="text"
+              placeholder="Mobile number"
+              name="phoneNumber"
+              onChange={formik.handleChange}
+              value={formik.values.phoneNumber}
+            />
+            {formik.errors.phoneNumber && <p className="error-text">{formik.errors.phoneNumber}</p>}
           </div>
-          {/* <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          /> */}
-          <button className="btn-common">Submit</button>
-          <button className="btn-underline" onClick={() => history("./login")}>Back to login</button>
+          <button type="submit" className="btn-common">
+            Submit
+          </button>
+          <button type="button" className="btn-underline" onClick={() => history("./login")}>
+            Back to login
+          </button>
         </div>
       </form>
     </div>

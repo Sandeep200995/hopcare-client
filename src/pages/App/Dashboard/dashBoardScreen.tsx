@@ -10,8 +10,9 @@ import * as ClinicActions from "../../../redux/actions/clinic/index";
 import * as CLINIC_ACTION_TYPES from "../../../redux/actions/clinic/types";
 import * as DoctorActions from "../../../redux/actions/doctor/index";
 import * as DOCTOR_ACTION_TYPES from "../../../redux/actions/doctor/types";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import HowItWorks from "./howItWorks/howItWorks";
+import Footer from "../../../components/footer/footer";
 
 function DashboardScreen() {
   const history: any = useNavigate();
@@ -108,6 +109,10 @@ function DashboardScreen() {
       </>
     );
   }
+
+  function renderHowWework() {
+    return <HowItWorks />;
+  }
   return (
     <div className="App">
       <Header></Header>
@@ -116,7 +121,9 @@ function DashboardScreen() {
         {renderClinics()}
         <h2>Popular Doctors in this area</h2>
         {renderDoctors()}
+        <div className="section-one">{renderHowWework()}</div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
