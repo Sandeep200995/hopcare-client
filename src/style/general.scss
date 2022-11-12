@@ -49,6 +49,8 @@ body {
     font-weight: 600;
     cursor: pointer;
     text-decoration: underline;
+    padding: 0;
+    text-align: left;
     &:hover{
         color: #62666d;
     }

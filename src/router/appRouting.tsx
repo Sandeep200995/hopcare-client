@@ -6,6 +6,8 @@ import { SideBarContext } from "../contexts";
 const Dashboard = React.lazy(() => import("../pages/App/Dashboard/dashBoardScreen"));
 const Login = React.lazy(() => import("../pages/Auth/Login/loginScreen"));
 const Signup = React.lazy(() => import("../pages/Auth/Signup/signupScreen"));
+const ForgotPassword = React.lazy(() => import("../pages/Auth/ForgotPassword/forgotPassword"));
+const OTP = React.lazy(() => import("../pages/Auth/OTP/otpScreen"));
 interface ContainerProps {
   role?: any;
 }
@@ -21,7 +23,9 @@ export const AppRouting = (props: ContainerProps) => {
           <Route path="/" element={<Login />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Signup />}></Route>
-          <Route path="*" element={<Dashboard />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
+          <Route path="/otp" element={<OTP />}></Route>
+          {/* <Route path="*" element={<Dashboard />} /> */}
         </Routes>
       </div>
     </Router>
