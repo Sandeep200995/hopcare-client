@@ -2,7 +2,7 @@
 @import "../../../src/style/general.scss";
 
 .side-bar{
-    position: absolute;
+    position: fixed;
     width: 0;
     // background-color: #5a189a;
     background-color: #FAACA8;
@@ -10,6 +10,7 @@
     height: 100vh;
     top: 0;
     overflow-x: hidden;
+    z-index: 100;
     &.active{
         width: 20rem;
         @media(max-width:480px) {
