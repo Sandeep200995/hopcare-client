@@ -12,7 +12,9 @@ function Header(props: HeaderProps) {
   return (
     <header className="header">
       <div className="header-logo">
-        <button className="hm-icon" onClick={() => toggleSidebar(!isSideActive)}>
+        <button className="hm-icon"
+        onClick={() => toggleSidebar(!isSideActive)}
+        >
           <img src={hmIcon} alt="hm-icon" />
         </button>
         <p>Logo</p>

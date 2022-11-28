@@ -27,11 +27,23 @@ h2{
     border: 1px solid gray;
     border-radius: 7px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
  img{
      max-width: 100%;
 
  }
  .card-profile-inner{
-     padding: 1rem;
+
+    flex: 1;
+ }
+ .card-profile-text-box{
+    padding: 1rem;
+ }
+ .view-details{
+    margin: 10px;
+     .btn-common{
+        width: 100%;
+     }
  }
 }
