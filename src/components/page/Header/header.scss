@@ -10,6 +10,10 @@
 
     padding: 0 2rem;
 
+    @media (max-width: 480px) {
+        height: 5rem;
+    }
+
     .header-logo{
         display: flex;
         align-items: center;
@@ -40,6 +44,9 @@
             background: transparent;
             img{
                 width: 2.1rem;
+                @media (max-width: 480px) {
+                    width: 1.7rem;
+                }
             }
         }
     }

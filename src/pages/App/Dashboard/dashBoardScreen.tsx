@@ -13,6 +13,7 @@ import * as DOCTOR_ACTION_TYPES from "../../../redux/actions/doctor/types";
 import { useDispatch, useSelector } from "react-redux";
 import HowItWorks from "./howItWorks/howItWorks";
 import Footer from "../../../components/footer/footer";
+import Booking from "../../../components/card/booking";
 
 function DashboardScreen() {
   const history: any = useNavigate();
@@ -71,14 +72,19 @@ function DashboardScreen() {
             const { _id, name, address } = info;
             return (
               <div key={`${ind}_${_id}`} className="card-profile">
-                <img src={drImage} alt="doctor" />
-                <div className="card-profile-inner">
-                  <p>{name ? name : " - "}</p>
-                  <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${
-                    address.buildingName ? address.buildingName + "," : ""
-                  } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
-                    address.addressLine2 ? address.addressLine2 + "," : ""
-                  }`}</p>
+                 <div className="card-profile-inner">
+                  <img src={drImage} alt="doctor" />
+                  <div className="card-profile-text-box">
+                    <p>{name ? name : " - "}</p>
+                    <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${
+                      address.buildingName ? address.buildingName + "," : ""
+                    } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
+                      address.addressLine2 ? address.addressLine2 + "," : ""
+                    }`}</p>
+                  </div>
+                </div>
+                <div className="view-details">
+                    <button onClick={() =>history('./profile') } className="btn-common lg">View Details</button>
                 </div>
               </div>
             );
@@ -98,9 +104,14 @@ function DashboardScreen() {
             // console.log("info-->", info);
             return (
               <div key={`${ind}_${_id}`} className="card-profile">
-                <img src={drImage} alt="doctor" />
-                <div className="card-profile-inner">
-                  <p>{`${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`}</p>
+                  <div className="card-profile-inner">
+                    <img src={drImage} alt="doctor" />
+                    <div className="card-profile-text-box">
+                      <p>{`${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`}</p>
+                    </div>
+                  </div>
+                  <div className="view-details">
+                    <button className="btn-common lg">View Details</button>
                 </div>
               </div>
             );
@@ -119,6 +130,7 @@ function DashboardScreen() {
       <div className="main-area">
         <h2>Popular Clinics in this area</h2>
         {renderClinics()}
+        {/* <Booking/> */}
         <h2>Popular Doctors in this area</h2>
         {renderDoctors()}
         <div className="section-one">{renderHowWework()}</div>
