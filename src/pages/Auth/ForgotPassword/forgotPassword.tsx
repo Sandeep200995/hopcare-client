@@ -35,33 +35,26 @@ function LoginScreen() {
     },
     onSubmit: (values) => {
       // setIsAppLoader(true);
-      dispatch(AUTH_ACTIONS.authenticateUser({ formData: values }));
+      dispatch(AUTH_ACTIONS.forgotPassword({ formData: values }));
     }
   });
 
   useEffect(() => {
     // console.log("userState", userState);
     switch (userState.case) {
-      // case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
-      //   setIsAppLoader(false);
-      //   history("./register");
-      //   storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
-      //   storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
-      //   break;
-      // case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
-      //   setIsAppLoader(false);
-      //   history("/otp", {
-      //     state: {
-      //       otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
-      //       phoneNumber: formik.values.phoneNumber,
-      //       userType: formik.values.userType
-      //     }
-      //   });
-      //   storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
-      //   break;
-      // case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
-      //   setIsAppLoader(false);
-      //   break;
+      case AUTH_ACTIONS_TYPES.FORGOT_PASSWORD_SUCCESS:
+        setIsAppLoader(false);
+        history("/otp", {
+          state: {
+            // otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
+            // phoneNumber: formik.values.phoneNumber,
+            // userType: formik.values.userType
+          }
+        });
+        break;
+      case AUTH_ACTIONS_TYPES.FORGOT_PASSWORD_FAILURE:
+        setIsAppLoader(false);
+        break;
       default:
         break;
     }

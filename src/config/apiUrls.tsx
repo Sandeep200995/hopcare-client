@@ -7,6 +7,7 @@ export const BASE_URL_V1 = `${BASE_URL}/api`;
 
 export const API_URLS = {
   login: `/user/login`,
+  forgotPassword: `/user/forgotPassword`,
   getAllClnics: "/hospital",
   getClinicInfoById: "/hospital",
   getDashboardDoctorList: "/doctor",

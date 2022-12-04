@@ -78,64 +78,66 @@ function SignupScreen() {
       <h2>Register </h2>
       <form onSubmit={formik.handleSubmit} noValidate>
         <div className="form-inner">
-        <div className="form-input">
-          <input
-            type="text"
-            placeholder="First Name"
-            name="firstName"
-            onChange={formik.handleChange}
-            value={formik.values.firstName}
-          />
-          <p className="error-text">error</p>
+          <div className="form-input">
+            <input
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              onChange={formik.handleChange}
+              value={formik.values.firstName}
+            />
+            {formik.errors.firstName && <p className="error-text">{formik.errors.firstName}</p>}
           </div>
           <div className="form-input">
-          <input
-            type="text"
-            placeholder="Last Name"
-            name="lastName"
-            onChange={formik.handleChange}
-            value={formik.values.lastName}
-          />
-          <p className="error-text">error</p>
-          </div>
-
-          <div className="form-input">
-          <input
-            type="text"
-            placeholder="Mobile number"
-            name="phoneNumber"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-          />
-          <p className="error-text">error</p>
+            <input
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              onChange={formik.handleChange}
+              value={formik.values.lastName}
+            />
+            {formik.errors.lastName && <p className="error-text">{formik.errors.lastName}</p>}
           </div>
 
           <div className="form-input">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-          <p className="error-text">error</p>
+            <input
+              type="text"
+              placeholder="Mobile number"
+              name="phoneNumber"
+              onChange={formik.handleChange}
+              value={formik.values.phoneNumber}
+            />
+            {formik.errors.phoneNumber && <p className="error-text">{formik.errors.phoneNumber}</p>}
           </div>
 
           <div className="form-input">
-          <input
-            type="password"
-            name="cnfPassword"
-            placeholder="Confirm Password"
-            onChange={formik.handleChange}
-            value={formik.values.cnfPassword}
-          />
-          <p className="error-text">error</p>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            {formik.errors.password && <p className="error-text">{formik.errors.password}</p>}
+          </div>
+
+          <div className="form-input">
+            <input
+              type="password"
+              name="cnfPassword"
+              placeholder="Confirm Password"
+              onChange={formik.handleChange}
+              value={formik.values.cnfPassword}
+            />
+            {formik.errors.cnfPassword && <p className="error-text">{formik.errors.cnfPassword}</p>}
           </div>
           <button type="submit" className="btn-common">
             Submit
           </button>
 
-          <button className="btn-underline" onClick={() => history(from, { replace: true })}>Back to login</button>
+          <button className="btn-underline" onClick={() => history(from, { replace: true })}>
+            Back to login
+          </button>
         </div>
       </form>
     </div>

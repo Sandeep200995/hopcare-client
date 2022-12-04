@@ -16,3 +16,9 @@ export const registerUser = (payload: object) => {
   // console.log("PAYLOAD @ AuthenticateUserAction",payload);
   return { type: AUTH_TYPES.REGISTER_USER, payload };
 };
+
+//3. Forgot Password Action
+export const forgotPassword = (payload: object) => {
+  // console.log("PAYLOAD @ AuthenticateUserAction",payload);
+  return { type: AUTH_TYPES.FORGOT_PASSWORD, payload };
+};

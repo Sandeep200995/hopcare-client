@@ -6,6 +6,7 @@ export function* rootSaga() {
   yield all([
     fork(AuthSaga.AuthenticateUser),
     fork(AuthSaga.RegisterUser),
+    fork(AuthSaga.ForgotPassword),
     fork(clinicSaga.GetAllClinics),
     fork(doctorSaga.GetDashboardDoctorList)
   ]);

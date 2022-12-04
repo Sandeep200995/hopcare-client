@@ -84,20 +84,22 @@ function LoginScreen() {
           </div>
 
           <div className="form-input">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-          {/* <p className="error-text">Please enter password</p> */}
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            {/* <p className="error-text">Please enter password</p> */}
           </div>
-          <button className="btn-common">Submit</button>
-          <button className="btn-underline">
+          <button type="submit" className="btn-common">
+            Submit
+          </button>
+          <button type="button" className="btn-underline">
             New User <span onClick={() => history("./register")}>Register here!</span>{" "}
           </button>
-          <button className="btn-underline">
+          <button type="button" className="btn-underline">
             <span onClick={() => history("./forgotPassword")}>Forgot Password?</span>{" "}
           </button>
         </div>
