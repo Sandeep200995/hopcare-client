@@ -18,7 +18,7 @@ function SideBar(props: sideBarProps) {
         <button>Contact us</button>
         <button>Team</button>
         <button>Overview</button>
-        <button>Chat</button>
+        <button>Chats</button>
         <button>What's new</button>
       </div>
     </aside>
