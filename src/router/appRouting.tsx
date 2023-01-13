@@ -29,7 +29,8 @@ export const AppRouting = (props: ContainerProps) => {
           <Route path="/otp" element={<OTP />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           {/* <Route path="*" element={<Dashboard />} /> */}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Dashboard />} />
+          {/* <Route path="/" element={<Login />} /> */}
         </Routes>
       </div>
     </Router>

@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../components/page/Header/header";
 import SideBar from "../../../components/sideBar/sideBarScreen";
+
 import drImage from "../../../images/dr.jpg";
+import drOne from "../../../assets/dummy/doctor-1.jpg";
+import drTwo from "../../../assets/dummy/doctor-2.jpg";
+import drThree from "../../../assets/dummy/women-dr.webp";
+import verified from "../../../assets/dummy/verified.png";
+import digital from "../../../assets/dummy/digital.png";
+import homeHeroImg from "../../../assets/dummy/homepage-hero.png";
+
 import "./dashboardscreen.scss";
 import * as CONSTANTS from "../../../constants/dummy";
 import * as COMMON_ACTIONS from "../../../redux/actions/common";
@@ -22,6 +30,8 @@ function DashboardScreen() {
   const doctorState = useSelector((state: any) => state.doctorData);
   const [clinicList, setClinicList]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.DASHBOARD_CLINIC_LIST);
   const [doctorList, setDoctorList]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.DASHBOARD_DOCTORS_LIST);
+  const [healthAdvice, setHealthAdvice]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.DASHBOARD_HEALTH_LIST);
+  const [specialities, setSpecialities]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.DASHBOARD_SPECILITY_LIST);
 
   useEffect(() => {
     dispatch(COMMON_ACTIONS.startLoading({}));
@@ -72,19 +82,17 @@ function DashboardScreen() {
             const { _id, name, address } = info;
             return (
               <div key={`${ind}_${_id}`} className="card-profile">
-                 <div className="card-profile-inner">
+                <div className="card-profile-inner">
                   <img src={drImage} alt="doctor" />
                   <div className="card-profile-text-box">
                     <p>{name ? name : " - "}</p>
-                    <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${
-                      address.buildingName ? address.buildingName + "," : ""
-                    } ${address.addressLine1 ? address.addressLine1 + "," : ""}${
-                      address.addressLine2 ? address.addressLine2 + "," : ""
-                    }`}</p>
+                    <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${address.buildingName ? address.buildingName + "," : ""
+                      } ${address.addressLine1 ? address.addressLine1 + "," : ""}${address.addressLine2 ? address.addressLine2 + "," : ""
+                      }`}</p>
                   </div>
                 </div>
                 <div className="view-details">
-                    <button onClick={() =>history('./profile') } className="btn-common lg">View Details</button>
+                  <button onClick={() => history('./profile')} className="btn-common lg">View Details</button>
                 </div>
               </div>
             );
@@ -104,14 +112,14 @@ function DashboardScreen() {
             // console.log("info-->", info);
             return (
               <div key={`${ind}_${_id}`} className="card-profile">
-                  <div className="card-profile-inner">
-                    <img src={drImage} alt="doctor" />
-                    <div className="card-profile-text-box">
-                      <p>{`${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`}</p>
-                    </div>
+                <div className="card-profile-inner">
+                  <img src={drImage} alt="doctor" />
+                  <div className="card-profile-text-box">
+                    <p>{`${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`}</p>
                   </div>
-                  <div className="view-details">
-                    <button className="btn-common lg">View Details</button>
+                </div>
+                <div className="view-details">
+                  <button className="btn-common lg">View Details</button>
                 </div>
               </div>
             );
@@ -121,18 +129,119 @@ function DashboardScreen() {
     );
   }
 
+  function renderHealthAdvice() {
+    return (
+      <div className="health-advice-group">
+        {healthAdvice.list.map((drList: any) => {
+          return (
+            <div className="health-advice">
+
+              <div className="health-img">
+                <img src={drList.img} alt="" />
+              </div>
+              <p>{drList.name}</p>
+              <button className="btn-common">Consult Now</button>
+            </div>
+          )
+
+        })}
+      </div>
+    )
+  }
+
   function renderHowWework() {
     return <HowItWorks />;
   }
+
+  function heroSection() {
+    return (
+      <div className="hero-area-box">
+        <div>
+          <div>
+            <h1>Skip the travel!</h1>
+            <h1>Take Online Doctor Consultation</h1>
+            <p className="start-here">Private consultation + Audio call <span></span> Starts here at just ₹599</p>
+          </div>
+          <div className="doctor-hero">
+            <img src={drOne} alt="doctor" />
+            <img src={drTwo} alt="doctor" />
+            <img src={drThree} alt="doctor" />
+            <p>99+ Doctors are online <span className="online"></span></p>
+          </div>
+          <div>
+            <button className="btn-grad">Consult Now</button>
+          </div>
+          <div className="icons-verify">
+            <p>
+              <img src={verified} alt="verified" />
+              Verified Doctors
+            </p>
+            <p>
+              <img src={digital} alt="digital" />
+              Digital Prescription
+            </p>
+            <p>
+              <i></i>
+              Free followup
+            </p>
+
+          </div>
+        </div>
+
+
+        <div className="hero-img">
+          <img src={homeHeroImg} alt="hero" />
+        </div>
+
+      </div>
+    )
+  }
+
+  function renderSpecialist() {
+    return (
+      <div className="spec-outer-area">
+      <div className="spec-area">
+        {specialities.list.map((spList: any) => {
+          return (
+            <div className="spec-inner">
+              <div className="spec-img-group">
+              <figure>
+                <img src={spList.img} alt="specelist" />
+              </figure>
+              <h5>{spList.name}</h5>
+              <p>₹{spList.price}</p>
+              </div>
+              <div>
+                <button className="btn-common">Consult Now</button>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      </div>
+    )
+  }
+
+
   return (
     <div className="App">
       <Header></Header>
+      <div className="hero-area">
+        {heroSection()}
+      </div>
       <div className="main-area">
+      <h2>25+ Specialities</h2>
+        {renderSpecialist()}
+
         <h2>Popular Clinics in this area</h2>
         {renderClinics()}
+
         {/* <Booking/> */}
         <h2>Popular Doctors in this area</h2>
         {renderDoctors()}
+        <h2>Health Advice</h2>
+        {renderHealthAdvice()}
+
         <div className="section-one">{renderHowWework()}</div>
       </div>
       <Footer></Footer>
