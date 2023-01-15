@@ -3,10 +3,11 @@ import "./sidebar.scss";
 import closeIcon from "../../images/close-window-100.png";
 interface sideBarProps {
   onCloseBtnClk?: any;
+  onSideBarActive?:any;
 }
 function SideBar(props: sideBarProps) {
   return (
-    <aside className="side-bar active">
+    <aside className={`${props.onSideBarActive ? "side-bar active" : "side-bar "}`}>
       <button className="close-icon" onClick={props.onCloseBtnClk}>
         <img src={closeIcon} alt="close" />
       </button>
