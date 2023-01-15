@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import SideBar from "../components/sideBar/sideBarScreen";
 import { SideBarContext } from "../contexts";
-import ProfileScreen from "../pages/App/Profile/profileScreen";
 
 const Dashboard = React.lazy(() => import("../pages/App/Dashboard/dashBoardScreen"));
 const Login = React.lazy(() => import("../pages/Auth/Login/loginScreen"));

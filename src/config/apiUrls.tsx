@@ -1,8 +1,8 @@
 // export const BASE_URL = "https://care-hope.herokuapp.com";
 // export const BASE_URL = "https://care-hope-server.herokuapp.com";
-export const BASE_URL = "https://hope-care-server.herokuapp.com";
+// export const BASE_URL = "https://hope-care-server.herokuapp.com";
 
-// export const BASE_URL = "http://localhost:4000";
+export const BASE_URL = "http://localhost:4000";
 export const BASE_URL_V1 = `${BASE_URL}/api`;
 
 export const API_URLS = {
