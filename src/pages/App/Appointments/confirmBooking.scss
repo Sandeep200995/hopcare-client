@@ -1,0 +1,101 @@
+@import "../../../style/general.scss";
+
+.confirm-booking-area{
+    background-color: #F5F8FA;
+    height: 100vh;
+    padding-top: 2rem;
+}
+
+.confirm-booking-box{
+    max-width: 60rem;
+    margin: 0 auto;
+    // background-color: #FAACA8;
+    // background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+    background-color: #f2eefe;
+    padding: 3rem;
+    border-radius: 1rem;
+
+    .clinic-name{
+        margin: 0;
+        padding: 0.5rem 0;
+        font-family: var(--PrimaryBold);
+        font-size: 1.5rem;
+    }
+    .fam-med{
+        margin: 0;
+        padding: 0.5rem 0;
+        font-family: var(--PrimarySemiBold);
+        font-size: 1.1rem;
+    }
+
+    .icon-text-group{
+        display: flex;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        p{
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border: 1px solid #c9baf7;
+            border-radius: 9rem;
+            font-size: 0.8rem;
+        }
+        img{
+            width: 0.8rem;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.hosp-img{
+    display: flex;
+    justify-content: center;
+    img{
+        width: 10rem;
+    }
+}
+
+.booking-details{
+   background-color: #F5F8FA;
+   padding:1rem;
+   border-radius: 1rem;
+
+   img{
+       width: 4rem;
+   }
+   h2{
+       margin: 0;
+       padding: 1rem 0;
+   }
+   .appo-confrm{
+       border: none;
+       display: inline-block;
+       padding: 0.5rem 1rem;
+       color: #313131;
+       background-color: #bea8ff;
+       font-family: var(--PrimaryRegular);
+   }
+   .time-details{
+       padding-top: 1rem;
+       h4,h5,p{
+           margin: 0;
+       }
+
+       h4{
+        color: #270491;
+        font-size: 1rem;
+       }
+       p{
+           font-size: 0.8rem;
+       }
+
+
+   }
+}
+
+.details-icons{
+    padding:1rem 0;
+    p:not-last-child(){
+        padding-bottom: 1rem;
+    }
+}
