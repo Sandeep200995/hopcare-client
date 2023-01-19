@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import HowItWorks from "./howItWorks/howItWorks";
 import Footer from "../../../components/footer/footer";
 import Booking from "../../../components/card/booking";
+import ModalConfirm from "../../../components/modal/modalConfirm";
 
 function DashboardScreen() {
   const history: any = useNavigate();
@@ -263,6 +264,7 @@ function DashboardScreen() {
       <div className="hero-area">
         {heroSection()}
       </div>
+      {/* <ModalConfirm /> */}
       <div className="main-area">
         <h2>25+ Specialities</h2>
         {renderSpecialist()}

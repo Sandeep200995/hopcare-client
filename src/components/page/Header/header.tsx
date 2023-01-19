@@ -31,16 +31,18 @@ function Header(props: HeaderProps) {
         <p>Logo</p>
       </div>
       <div className="notification-user-login">
-      {/* <div className="user-profile">
-        <img src={userIcon} alt="user-icon" />
-      </div> */}
-      <div className="login-signup">
-        <button>Login/Signup <br/> <span>( Patient )</span></button>
-      </div>
+
       <div className="notification-block">
         <button>
           <img src={notification} alt="notification" />
         </button>
+      </div>
+
+       {/* <div className="user-profile">
+        <img src={userIcon} alt="user-icon" />
+      </div> */}
+      <div className="login-signup">
+        <button>Login/Signup <br/> <span>( Patient )</span></button>
       </div>
 
       </div>

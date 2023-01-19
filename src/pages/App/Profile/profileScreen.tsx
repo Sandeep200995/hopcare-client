@@ -15,7 +15,7 @@ function ProfileScreen() {
 	return (
 		<>
 			<div>
-				<div className="btn-back-area">
+				<div>
 					<button onClick={() => history('/')} className="btn-back">&larr;</button>
 				</div>
 
