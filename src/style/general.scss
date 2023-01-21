@@ -35,8 +35,9 @@ body {
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 40rem;
     padding: 10px;
+    transition: all 0.5s;
     &:hover{
         background-color: #8d24ae;
     }
@@ -83,6 +84,68 @@ body {
 	text-decoration: none;
 }
 
+.btn {
+  display: inline-block;
+  // background-color: #5ec576;
+  background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  transition: all 0.3s linear;
+
+  @media (max-width: 450px) {
+    padding: 0.7rem 2rem;
+    font-size: 0.8rem;
+  }
+  &:hover{
+    background-image: linear-gradient(19deg, #FAACA8 20%, #DDD6F3 100%);
+  }
+}
+
+
+.edit-btn{
+  border: 2px solid #FAACA8;
+  background-color: transparent;
+  padding: 0.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .3s;
+  @media (max-width: 480px) {
+    padding: 0.1rem;
+  }
+
+  img{
+    width: 1.5rem;
+    margin-top: 2px;
+  }
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+
+
+.btn-back{
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-family: var(--PrimaryMedium);
+  cursor: pointer;
+  background-color: #8d24ae;
+  width: 4rem;
+  border-radius: 10rem;
+  color: #fff;
+  margin: 1rem;
+
+}
+
+.btn-back-area{
+	// margin: 1rem;
+}
+
 
 //scroll
 
@@ -92,6 +155,7 @@ body {
 
 
 //Login,register form
+
 
 .form-area{
     height: 100vh;
@@ -387,6 +451,165 @@ input[type="radio"] {
 // input:-internal-autofill-selected {
 //   background-color: transparent;
 // }
+
+
+// Highlight
+
+.highlight{
+position: relative;
+margin-left: 0.5rem;
+  &::before{
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.7;
+    transform: scale(1.07, 1.05) skewX(-15deg);
+    // background-image: linear-gradient(to top left, #39b385, #9be15d);
+    background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+  }
+  &.error{
+    // color: white;
+    &::before{
+      background-color: #f33f3f;
+      background-image: none;
+      // background-image: linear-gradient(19deg, #ff2216 0%, #ee172c 100%);
+
+    }
+  }
+}
+
+
+  /* MODAL WINDOW */
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60rem;
+    background-color: #f3f3f3;
+    padding: 2rem 7rem;
+    box-shadow: 0 1rem 2rem rgba(105, 105, 105, 0.3);
+    z-index: 1000;
+    transition: all 0.5s;
+
+    @media (max-width: 450px) {
+      padding: 2rem 1rem 1rem;
+      // padding-bottom: 1rem;
+    }
+    &.confrim{
+      .modal__header {
+        margin-bottom: 0;
+        white-space: nowrap;
+      }
+      .green{
+        background-color: green;
+        height: 1rem;
+        width: 100%;
+        position: absolute;
+        top: -1rem;
+        left: 0;
+      }
+      .error-tag{
+        background-color: #f33f3f;
+        height: 1rem;
+        width: 100%;
+        position: absolute;
+        top: -1rem;
+        left: 0;
+      }
+      .btn--close-modal {
+        right: 1rem;
+        top: -0.5rem;
+        @media (max-width: 450px) {
+          right: 0.5rem;
+          top: -0.5rem;
+        }
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e4e4e4d3;
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    transition: all 0.5s;
+  }
+
+  .modal__header {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    @media (max-width: 450px) {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .modal__form {
+    margin: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .modal__form label {
+    font-size: 1rem;
+    font-weight: 500;
+    @media (max-width: 450px) {
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+  }
+
+  .modal__form input {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    @media (max-width: 450px) {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  .modal__form button {
+    grid-column: 1 / span 2;
+    justify-self: center;
+    margin-top: 1rem;
+  }
+
+  .btn--close-modal {
+    font-family: inherit;
+    color: inherit;
+    position: absolute;
+    top: 0.5rem;
+    right: 2rem;
+    font-size: 3rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    @media (max-width: 450px) {
+      top: 0;
+      right: 0.2rem;
+      font-size: 2rem;
+    }
+  }
+
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
 
 
 

@@ -35,6 +35,10 @@
             img{
                 transform: rotate(90deg);
                 scale: 1.05;
+                @media(max-width:480px) {
+                    transform: rotate(0);
+                    scale: 1;
+                }
             }
 
         }

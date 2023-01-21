@@ -10,6 +10,9 @@ import drThree from "../../../assets/dummy/women-dr.webp";
 import verified from "../../../assets/dummy/verified.png";
 import digital from "../../../assets/dummy/digital.png";
 import homeHeroImg from "../../../assets/dummy/homepage-hero.png";
+import naini from "../../../assets/dummy/naini.jpeg";
+import comboDr from "../../../assets/dummy/comofordoctor.jpeg";
+import downloadApp from "../../../assets/dummy/download_app.jpeg";
 
 import "./dashboardscreen.scss";
 import * as CONSTANTS from "../../../constants/dummy";
@@ -22,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import HowItWorks from "./howItWorks/howItWorks";
 import Footer from "../../../components/footer/footer";
 import Booking from "../../../components/card/booking";
+import ModalConfirm from "../../../components/modal/modalConfirm";
 
 function DashboardScreen() {
   const history: any = useNavigate();
@@ -92,7 +96,10 @@ function DashboardScreen() {
                   </div>
                 </div>
                 <div className="view-details">
-                  <button onClick={() => history('./profile')} className="btn-common lg">View Details</button>
+                  <button
+                    // onClick={() => history('./profile')}
+                    onClick={() => history('./appointment-confirm')}
+                    className="btn-common lg">View Details</button>
                 </div>
               </div>
             );
@@ -200,24 +207,52 @@ function DashboardScreen() {
   function renderSpecialist() {
     return (
       <div className="spec-outer-area">
-      <div className="spec-area">
-        {specialities.list.map((spList: any) => {
-          return (
-            <div className="spec-inner">
-              <div className="spec-img-group">
-              <figure>
-                <img src={spList.img} alt="specelist" />
-              </figure>
-              <h5>{spList.name}</h5>
-              <p>₹{spList.price}</p>
+        <div className="spec-area">
+          {specialities.list.map((spList: any) => {
+            return (
+              <div className="spec-inner">
+                <div className="spec-img-group">
+                  <figure>
+                    <img src={spList.img} alt="specelist" />
+                  </figure>
+                  <h5>{spList.name}</h5>
+                  <p>₹{spList.price}</p>
+                </div>
+                <div>
+                  <button className="btn-common">Consult Now</button>
+                </div>
               </div>
-              <div>
-                <button className="btn-common">Consult Now</button>
-              </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
+    )
+  }
+
+  function renderServiceArea() {
+    return (
+      <div className="service-details">
+      <div className="service-box">
+        <h4>Naini- Patient Medical Account</h4>
+        <img src={naini} alt="naini" />
+        <p>Naini is the name of patient personal medical account where patient can manage appointment for OPD Consultation in clinic/hospital. Patients can download our app for better experience</p>
+        <button className="btn-common">Free Registration</button>
+      </div>
+
+      <div className="service-box">
+        <h4>Como- Doctor|Clinic|Hospital</h4>
+        <img src={comboDr} alt="doctor combo" />
+        <p>Como is an online trustable software for doctors, clinics and hospitals. This digital tool help doctors, clinics and hospital to enhance online presence, manage online patients,consult and appointments.</p>
+        <button className="btn-common">Free Listing</button>
+      </div>
+
+      <div className="service-box">
+        <h4>Free Medical App</h4>
+        <img src={downloadApp} alt="download our app" />
+        <p>Best medical app for online consult in eOPD and online appointment for OPD in clinic. You can search doctor, clinic, hospital and services to book doctors.</p>
+        <button className="btn-common">Download the App </button>
+      </div>
+
       </div>
     )
   }
@@ -229,8 +264,9 @@ function DashboardScreen() {
       <div className="hero-area">
         {heroSection()}
       </div>
+      {/* <ModalConfirm /> */}
       <div className="main-area">
-      <h2>25+ Specialities</h2>
+        <h2>25+ Specialities</h2>
         {renderSpecialist()}
 
         <h2>Popular Clinics in this area</h2>
@@ -242,8 +278,17 @@ function DashboardScreen() {
         <h2>Health Advice</h2>
         {renderHealthAdvice()}
 
+      </div>
+
+      <div className="service-main-area">
+        <h2>Our Top Services for Patients and Medical Service Providers</h2>
+        {renderServiceArea()}
+      </div>
+
+      <div className="main-area">
         <div className="section-one">{renderHowWework()}</div>
       </div>
+
       <Footer></Footer>
     </div>
   );

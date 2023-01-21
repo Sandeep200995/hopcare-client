@@ -52,3 +52,40 @@
         }
     }
 }
+
+.notification-user-login{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    @media (max-width: 480px) {
+        gap: 1rem;
+    }
+}
+
+.user-profile{
+    img{
+    width: 2.4rem;
+    }
+}
+
+.login-signup{
+
+    button{
+        background-color: #fff;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.5s;
+        font-size: 0.9rem;
+
+        &:hover{
+            border: 1px solid #a3a3a3;
+            background-color: #fae9e8;
+        }
+        @media (max-width: 480px) {
+            padding: 0.5rem 0.9rem;
+            font-size: 0.7rem;
+        }
+    }
+}

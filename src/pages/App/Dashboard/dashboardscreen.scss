@@ -1,4 +1,4 @@
-
+@import "../../../style/general.scss";
 .main-area{
 padding: 0 2rem;
 @media (max-width: 700px) {
@@ -88,6 +88,10 @@ h2{
     img{
         max-width: 5rem;
 
+    }
+    .btn-common{
+        padding: 0 1.5rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -267,6 +271,68 @@ h2{
 
     .btn-common{
         font-size: 0.8rem;
-        height: 2rem;
+        padding: 0 1rem;
     }
+}
+
+
+//Service area
+
+.service-main-area{
+    background-color: #f2e8f687;
+    margin: 4rem 0;
+    padding: 4rem 2rem;
+
+    h2{
+        font-size: 1.5rem;
+        padding-bottom: 2rem;
+        @media (max-width: 700px) {
+            font-size: 1rem;
+        }
+    }
+}
+
+.service-details{
+    display: flex;
+    gap: 4rem;
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
+
+    .service-box{
+        width: 33.33%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:space-between;
+
+        @media (max-width: 700px) {
+            width: 100%;
+        }
+
+        h4{
+            font-size: 1.2rem;
+            color:#3f3f3f;
+            @media (max-width: 700px) {
+                font-size: 0.9rem;
+            }
+        }
+        p{
+            font-size: 1rem;
+            color: #474747;
+            @media (max-width: 700px) {
+                font-size: 0.8rem;
+            }
+        }
+
+        img{
+            width: 100%;
+        }
+
+        .btn-common{
+            margin-top: 2rem;
+            padding: 0 2rem;
+        }
+    }
+
 }

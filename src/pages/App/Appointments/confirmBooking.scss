@@ -1,0 +1,171 @@
+@import "../../../style/general.scss";
+
+.confirm-booking-area{
+    background-color: #F5F8FA;
+    padding: 2rem 0;
+    padding-top: 0;
+    @media (max-width: 480px) {
+        height: 100vh;
+    }
+}
+
+.confirm-booking-box{
+    max-width: 60rem;
+    margin: 0 auto;
+    background-color: #f2eefe;
+    padding: 3rem;
+    border-radius: 1rem;
+
+    @media (max-width: 480px) {
+        max-width: 18rem;
+        padding: 1.5rem;
+    }
+    .clinic-name{
+        margin: 0;
+        padding: 0.5rem 0;
+        font-family: var(--PrimaryBold);
+        font-size: 1.5rem;
+        @media (max-width: 480px) {
+            font-size: 1rem;
+            padding-bottom: 0;
+        }
+    }
+    .fam-med{
+        margin: 0;
+        padding: 0.5rem 0;
+        font-family: var(--PrimarySemiBold);
+        font-size: 1.1rem;
+        @media (max-width: 480px) {
+            font-size: 0.9rem;
+        }
+    }
+
+    .icon-text-group{
+        display: flex;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        @media (max-width: 480px) {
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        p{
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border: 1px solid #c9baf7;
+            border-radius: 9rem;
+            font-size: 0.8rem;
+            @media (max-width: 480px) {
+                padding: 0.4rem;
+                font-size: 0.6rem;
+            }
+        }
+        img{
+            width: 0.8rem;
+            margin-right: 0.5rem;
+            @media (max-width: 480px) {
+                margin-right: 0.3rem;
+            }
+        }
+    }
+}
+
+.hosp-img{
+    display: flex;
+    justify-content: center;
+    img{
+        width: 10rem;
+        @media (max-width: 480px) {
+            width: 6rem;
+        }
+    }
+}
+
+.booking-details{
+   background-color: #F5F8FA;
+   padding:1rem;
+   border-radius: 1rem;
+   position: relative;
+
+   img{
+       width: 4rem;
+       @media (max-width: 480px) {
+           width: 3rem;
+       }
+   }
+   h2{
+       margin: 0;
+       padding: 1rem 0;
+       font-size: 1rem;
+   }
+   .appo-confrm{
+       border: none;
+       display: inline-block;
+       padding: 0.5rem 1rem;
+       color: #313131;
+       background-color: #e7e0fe;
+       font-family: var(--PrimaryRegular);
+       font-size: 0.9rem;
+   }
+   .time-details{
+       padding-top: 1rem;
+       h4,h5,p{
+           margin: 0;
+       }
+
+       h4{
+        color: #270491;
+        font-size: 1rem;
+       }
+       p{
+           font-size: 0.8rem;
+       }
+   }
+   .edit-btn{
+       position: absolute;
+       right: 1rem;
+       top: 1rem;
+       img{
+           width: 1.5rem;
+           @media (max-width: 480px) {
+               width: 1rem;
+           }
+       }
+   }
+}
+
+.details-icons{
+    padding:1rem 0;
+    p:not(:last-child){
+        padding-bottom: 1rem;
+    }
+    img{
+        width: 1rem;
+    }
+    h5{
+        display: flex;
+        align-items: center;
+        font-size: 0.8rem;
+        img{
+            margin-right: 0.2rem;
+        }
+    }
+    .text-without-icon{
+        padding-left: 1.2rem;
+        padding-bottom: 0.5rem;
+    }
+    p{
+        display: flex;
+        align-items: flex-start;
+        img{
+            margin-right: 0.2rem;
+        }
+    }
+}
+
+.submit-area{
+    display: flex;
+    justify-content: center;
+}

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import SideBar from "../components/sideBar/sideBarScreen";
 import { SideBarContext } from "../contexts";
+import AppointmentConfirmScreen from "../pages/App/Appointments/appointmentConfirmScreen";
+import ProfileScreen from "../pages/App/Profile/profileScreen";
 
 const Dashboard = React.lazy(() => import("../pages/App/Dashboard/dashBoardScreen"));
 const Login = React.lazy(() => import("../pages/Auth/Login/loginScreen"));
@@ -28,6 +30,8 @@ export const AppRouting = (props: ContainerProps) => {
           <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/otp" element={<OTP />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/appointment-confirm" element={<AppointmentConfirmScreen />}></Route>
+
           {/* <Route path="*" element={<Dashboard />} /> */}
           <Route path="/" element={<Dashboard />} />
           {/* <Route path="/" element={<Login />} /> */}
