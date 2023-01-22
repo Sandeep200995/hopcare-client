@@ -9,37 +9,27 @@ export default function networkCall(variables?: any, method?: string, apiMethod?
   var init =
     apiMethod == "GET"
       ? {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": token ? token : ""
-          }
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": token ? token : ""
         }
+      }
       : {
-          method: apiMethod,
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": token ? token : ""
-          },
-          body: JSON.stringify(variables)
-        };
-  // console.log("--->", BASE_URL_V1 + method, init);
+        method: apiMethod,
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": token ? token : ""
+        },
+        body: JSON.stringify(variables)
+      };
+  console.log("--->", BASE_URL_V1 + method, init);
   return fetch(BASE_URL_V1 + method, init)
-    .then((res: any) =>
-      res.json().then((data: any) => {
-        var apiData: any = {
-          status: res.status,
-          data: data
-        };
-        return apiData;
-      })
-    )
+    .then((res: any) => res.json().then((data: any) => {
+      return { status: res.status, data: data };
+    }))
     .catch((err) => {
       console.log("err" + JSON.stringify(err));
-      var apiData: any = {
-        status: 900,
-        data: "Please check your internet connection."
-      };
-      return apiData;
+      return { status: 900, data: "Please check your internet connection." };
     });
 }

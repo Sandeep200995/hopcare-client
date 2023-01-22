@@ -12,6 +12,7 @@ export function* authenticateUser(action: any): Generator<WhatYouYield, WhatYouR
   try {
     const { formData } = action.payload;
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.login, "POST");
+    console.log("Response ",response);
     const { responseCode, message }: any = response.data || {};
     let user_details: any = JSON.parse(JSON.stringify(initialState.userData.userDetails));
     user_details.phoneNumber = formData.phoneNumber;
@@ -64,7 +65,10 @@ export function* RegisterUser() {
 export function* forgotPassword(action: any): Generator<WhatYouYield, WhatYouReturn, WhatYouAccept> {
   try {
     const { formData } = action.payload;
+    console.log("formData",formData,"API_ENDPOINTS.API_URLS.forgotPassword",API_ENDPOINTS.API_URLS.forgotPassword);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.forgotPassword, "POST");
+    console.log("Response ",response);
+
     const { responseCode, message }: any = response.data || {};
     let user_details: any = JSON.parse(JSON.stringify(initialState.userData.userDetails));
     user_details.phoneNumber = formData.phoneNumber;
@@ -78,6 +82,7 @@ export function* forgotPassword(action: any): Generator<WhatYouYield, WhatYouRet
       yield put({ type: AUTH_ACION_TYPES.REGISTER_USER_FAILURE, payload: { user_details: user_details }, message: "Failed to get response" });
     }
   } catch (error: any) {
+    console.log("error:::",error);
     const message: any = error?.error;
     yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { error: message }, message: "Unable to fetch data" });
   }

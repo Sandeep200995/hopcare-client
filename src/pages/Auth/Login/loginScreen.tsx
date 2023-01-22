@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams, redirect } from "react-router-dom";
 import { storage } from "../../../utills";
 import "./login.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppLoaderContext } from "../../../contexts";
 
 function LoginScreen() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
@@ -44,13 +44,14 @@ function LoginScreen() {
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
         setIsAppLoader(false);
-        history("./register");
+        navigate("./register", { replace: true });
         storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
         setIsAppLoader(false);
-        history("/otp", {
+        navigate("/otp", {
+          replace: true,
           state: {
             otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
             phoneNumber: formik.values.phoneNumber,
@@ -66,6 +67,8 @@ function LoginScreen() {
         break;
     }
   }, [userState.case]);
+
+
 
   return (
     <div className="form-area">
@@ -97,10 +100,10 @@ function LoginScreen() {
             Submit
           </button>
           <button type="button" className="btn-underline">
-            New User <span onClick={() => history("./register")}>Register here!</span>{" "}
+            New User <span onClick={() => navigate("./register", { replace: true })}>Register here!</span>{" "}
           </button>
           <button type="button" className="btn-underline">
-            <span onClick={() => history("./forgotPassword")}>Forgot Password?</span>{" "}
+            <span onClick={() => navigate("/forgotPassword", { replace: true })}>Forgot Password?</span>{" "}
           </button>
         </div>
       </form>

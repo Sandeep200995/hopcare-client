@@ -3,6 +3,7 @@ import "./sidebar.scss";
 import closeIcon from "../../images/close-window-100.png";
 import { AuthContext } from "../../contexts";
 import * as CONSTANTS from "../../constants/dummy";
+import { useNavigate } from "react-router-dom";
 
 interface sideBarProps {
   onCloseBtnClk?: any;
@@ -10,6 +11,7 @@ interface sideBarProps {
 }
 
 function SideBar(props: sideBarProps) {
+  const history = useNavigate();
   const { isAuthenticated } = React.useContext(AuthContext);
   const [options, setOptions]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.LOGGED);
 
@@ -30,7 +32,7 @@ function SideBar(props: sideBarProps) {
       <div className="side-items">
         {
           options.length ? options.map((opt: any, ind: number) => {
-            return (<button key={`${ind}_${opt.name}`}>{opt.name}</button>)
+            return (<button onClick={() => history(opt.path, { replace: true })} key={`${ind}_${opt.name}`}>{opt.name}</button>)
           }) : null
         }
       </div>

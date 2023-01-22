@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { storage } from "../../../utills";
 import "./forgotPassword.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
@@ -9,15 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppLoaderContext } from "../../../contexts";
 
 function LoginScreen() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
-      // password: "",
       userType: "consumer"
     },
     validateOnBlur: true,
@@ -25,7 +25,7 @@ function LoginScreen() {
     // validationSchema: validationSchema,
     validate: (values) => {
       let errors: any = {};
-      if (!values.phoneNumber) {
+      if (!values.phoneNumber || values.phoneNumber.length  !== 10) {
         errors.phoneNumber = "Please enter 10 digit phone number";
       }
       // if (!values.password) {
@@ -40,15 +40,17 @@ function LoginScreen() {
   });
 
   useEffect(() => {
-    // console.log("userState", userState);
+    console.log("userState", userState);
+    // console.log("Location",location);
+
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.FORGOT_PASSWORD_SUCCESS:
         setIsAppLoader(false);
-        history("/otp", {
+        navigate("/otp", {
           state: {
-            // otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
-            // phoneNumber: formik.values.phoneNumber,
-            // userType: formik.values.userType
+            otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
+            phoneNumber: formik.values.phoneNumber,
+            userType: formik.values.userType
           }
         });
         break;
@@ -59,6 +61,7 @@ function LoginScreen() {
         break;
     }
   }, [userState.case]);
+
 
   return (
     <div className="form-area">
@@ -81,7 +84,7 @@ function LoginScreen() {
           <button type="submit" className="btn-common">
             Submit
           </button>
-          <button type="button" className="btn-underline" onClick={() => history("./login")}>
+          <button type="button" className="btn-underline" onClick={() => navigate("/login", { replace: true })}>
             Back to login
           </button>
         </div>
