@@ -5,6 +5,7 @@ import hmIcon from "../../../images/hm-menu.svg";
 import { SideBarContext } from "../../../contexts";
 import notification from "../../../assets/dummy/notification.png";
 import userIcon from "../../../assets/dummy/user-icon.png";
+import { useNavigate } from "react-router-dom";
 
 
 interface HeaderProps {
@@ -13,6 +14,7 @@ interface HeaderProps {
 function Header(props: HeaderProps) {
   const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
 
+  const history: any = useNavigate();
   // function renderProfile() {
   //   return(
   //     <div className="user-profile">
@@ -20,6 +22,9 @@ function Header(props: HeaderProps) {
   //     </div>
   //   )
   // }
+
+  function handleLoginClk() { history('./login'); }
+
   return (
     <header className="header">
       <div className="header-logo">
@@ -42,7 +47,7 @@ function Header(props: HeaderProps) {
         <img src={userIcon} alt="user-icon" />
       </div> */}
       <div className="login-signup">
-        <button>Login/Signup <br/> <span>( Patient )</span></button>
+        <button onClick={handleLoginClk}>Login <br/> <span>( Patient )</span></button>
       </div>
 
       </div>

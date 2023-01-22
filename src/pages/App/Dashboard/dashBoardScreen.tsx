@@ -64,7 +64,7 @@ function DashboardScreen() {
   }, [clinicState]);
 
   useEffect(() => {
-    console.log("doctorState", doctorState.dashboardDoctorData);
+    // console.log("doctorState", doctorState.dashboardDoctorData);
     switch (doctorState.case) {
       case DOCTOR_ACTION_TYPES.GET_ALL_DOCTORS_SUCCESS:
         setDoctorList(doctorState.dashboardDoctorData);
@@ -139,10 +139,9 @@ function DashboardScreen() {
   function renderHealthAdvice() {
     return (
       <div className="health-advice-group">
-        {healthAdvice.list.map((drList: any) => {
+        {healthAdvice.list.map((drList: any, ind: number) => {
           return (
-            <div className="health-advice">
-
+            <div className="health-advice" key={`${ind}_`}>
               <div className="health-img">
                 <img src={drList.img} alt="" />
               </div>
@@ -208,9 +207,9 @@ function DashboardScreen() {
     return (
       <div className="spec-outer-area">
         <div className="spec-area">
-          {specialities.list.map((spList: any) => {
+          {specialities.list.map((spList: any, spInd: number) => {
             return (
-              <div className="spec-inner">
+              <div className="spec-inner" key={`${spInd}`}>
                 <div className="spec-img-group">
                   <figure>
                     <img src={spList.img} alt="specelist" />
@@ -232,26 +231,26 @@ function DashboardScreen() {
   function renderServiceArea() {
     return (
       <div className="service-details">
-      <div className="service-box">
-        <h4>Naini- Patient Medical Account</h4>
-        <img src={naini} alt="naini" />
-        <p>Naini is the name of patient personal medical account where patient can manage appointment for OPD Consultation in clinic/hospital. Patients can download our app for better experience</p>
-        <button className="btn-common">Free Registration</button>
-      </div>
+        <div className="service-box">
+          <h4>Naini- Patient Medical Account</h4>
+          <img src={naini} alt="naini" />
+          <p>Naini is the name of patient personal medical account where patient can manage appointment for OPD Consultation in clinic/hospital. Patients can download our app for better experience</p>
+          <button className="btn-common">Free Registration</button>
+        </div>
 
-      <div className="service-box">
-        <h4>Como- Doctor|Clinic|Hospital</h4>
-        <img src={comboDr} alt="doctor combo" />
-        <p>Como is an online trustable software for doctors, clinics and hospitals. This digital tool help doctors, clinics and hospital to enhance online presence, manage online patients,consult and appointments.</p>
-        <button className="btn-common">Free Listing</button>
-      </div>
+        <div className="service-box">
+          <h4>Como- Doctor|Clinic|Hospital</h4>
+          <img src={comboDr} alt="doctor combo" />
+          <p>Como is an online trustable software for doctors, clinics and hospitals. This digital tool help doctors, clinics and hospital to enhance online presence, manage online patients,consult and appointments.</p>
+          <button className="btn-common">Free Listing</button>
+        </div>
 
-      <div className="service-box">
-        <h4>Free Medical App</h4>
-        <img src={downloadApp} alt="download our app" />
-        <p>Best medical app for online consult in eOPD and online appointment for OPD in clinic. You can search doctor, clinic, hospital and services to book doctors.</p>
-        <button className="btn-common">Download the App </button>
-      </div>
+        <div className="service-box">
+          <h4>Free Medical App</h4>
+          <img src={downloadApp} alt="download our app" />
+          <p>Best medical app for online consult in eOPD and online appointment for OPD in clinic. You can search doctor, clinic, hospital and services to book doctors.</p>
+          <button className="btn-common">Download the App </button>
+        </div>
 
       </div>
     )
@@ -268,18 +267,14 @@ function DashboardScreen() {
       <div className="main-area">
         <h2>25+ Specialities</h2>
         {renderSpecialist()}
-
         <h2>Popular Clinics in this area</h2>
         {renderClinics()}
-
         {/* <Booking/> */}
         <h2>Popular Doctors in this area</h2>
         {renderDoctors()}
         <h2>Health Advice</h2>
         {renderHealthAdvice()}
-
       </div>
-
       <div className="service-main-area">
         <h2>Our Top Services for Patients and Medical Service Providers</h2>
         {renderServiceArea()}

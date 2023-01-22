@@ -1,11 +1,19 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./App.css";
 import { AppRouting } from "./router/appRouting";
-import { AppLoaderContext } from "./contexts";
+import { AppLoaderContext, AuthContext } from "./contexts";
 import loader from "../src/assets/dummy/loader-spinner.svg";
 
 function App() {
   const { isAppLoader } = React.useContext(AppLoaderContext);
+  // const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
+
+  // useEffect(() => {
+    // setTimeout(() => {
+    //   setIsAuthenticated(true);
+    // }, 10000);
+  // }, [])
+
   return (
     <>
       {/* <ToastContainer /> */}

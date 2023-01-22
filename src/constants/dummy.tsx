@@ -27,6 +27,18 @@ import Urology from "../assets/dummy/top-speciality-kidney.svg";
 
 
 export const DEFAULT_DUMMY_DATA = {
+  SIDEBAR_OPTIONS: {
+    LOGGED: [
+      { name: "Dashboard", path: "./" },
+      { name: "My Appointments", path: "./appointments" },
+      { name: "About us", path: "./aboutUs" },
+      { name: "Logout", path: "./" },
+    ],
+    WITHOUT_LOGGED: [
+      { name: "Dashboard", path: "./" },
+      { name: "About us", path: "./aboutUs" },
+    ],
+  },
   DASHBOARD_CLINIC_LIST: {
     total: 0,
     list: [
