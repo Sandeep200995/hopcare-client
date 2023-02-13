@@ -12,3 +12,7 @@ export const REGISTER_USER_FAILURE = "REGISTER_USER_FAILURE"; // for login failu
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD"; // for login
 export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS"; // for login success
 export const FORGOT_PASSWORD_FAILURE = "FORGOT_PASSWORD_FAILURE"; // for login failure
+
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD"; // for login
+export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS"; // for login success
+export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE"; // for login failure

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Header from "../../../components/page/Header/header";
 import SideBar from "../../../components/sideBar/sideBarScreen";
 
@@ -50,12 +51,7 @@ function DashboardScreen() {
         dispatch(COMMON_ACTIONS.stopLoading({}));
         break;
       case CLINIC_ACTION_TYPES.GET_ALL_CLINICS_FAILURE:
-        // toggleToast({
-        //   ...toast,
-        //   msg: clinicState.message,
-        //   status: !toast.status,
-        //   type: "error"
-        // });
+        toast(clinicState.message);
         dispatch(COMMON_ACTIONS.stopLoading({}));
         break;
       default:

@@ -7,6 +7,7 @@ export function* rootSaga() {
     fork(AuthSaga.AuthenticateUser),
     fork(AuthSaga.RegisterUser),
     fork(AuthSaga.ForgotPassword),
+    fork(AuthSaga.ChangePassword),
     fork(clinicSaga.GetAllClinics),
     fork(doctorSaga.GetDashboardDoctorList)
   ]);

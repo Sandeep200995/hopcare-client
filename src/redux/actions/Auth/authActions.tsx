@@ -22,3 +22,9 @@ export const forgotPassword = (payload: object) => {
   // console.log("PAYLOAD @ AuthenticateUserAction",payload);
   return { type: AUTH_TYPES.FORGOT_PASSWORD, payload };
 };
+
+//4. Change Password Action
+export const changePassword = (payload: object) => {
+  // console.log("PAYLOAD @ AuthenticateUserAction",payload);
+  return { type: AUTH_TYPES.CHANGE_PASSWORD, payload };
+};

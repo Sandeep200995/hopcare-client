@@ -14,10 +14,18 @@ export const AuthReducer = (state = initialState.userData, action: Action) => {
   // console.log("AUTH @REDUCER ==>", action);
   switch (action.type) {
     case AUTH_TYPES.AUTHENTICATE_USER_SUCCESS:
+      // case AUTH_TYPES.FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
         case: action.type,
         userDetails: action.payload.user_details ? action.payload.user_details : initialState.userData,
+        message: action.message ? action.message : ""
+      };
+    case AUTH_TYPES.FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        case: action.type,
+        userDetails: action.payload ? {...action.payload} : initialState.userData,
         message: action.message ? action.message : ""
       };
     default:

@@ -1,5 +1,7 @@
 import React, { Suspense, useEffect } from "react";
-import "./App.css";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import "./App.css";
 import { AppRouting } from "./router/appRouting";
 import { AppLoaderContext, AuthContext } from "./contexts";
 import loader from "../src/assets/dummy/loader-spinner.svg";
@@ -14,9 +16,14 @@ function App() {
     // }, 10000);
   // }, [])
 
+  useEffect(() => {
+    // toast("Wow so easy!");
+  }, [])
+
+
   return (
     <>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       {isAppLoader && (
         <div className="loader">
           <img src={loader} alt="loader" />

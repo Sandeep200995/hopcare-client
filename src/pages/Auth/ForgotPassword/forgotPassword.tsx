@@ -7,6 +7,7 @@ import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
 import { AppLoaderContext } from "../../../contexts";
+import { toast } from "react-toastify";
 
 function LoginScreen() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ function LoginScreen() {
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.FORGOT_PASSWORD_SUCCESS:
         setIsAppLoader(false);
-        navigate("/otp", {
+        navigate("/newPassword", {
           state: {
             otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
             phoneNumber: formik.values.phoneNumber,
@@ -56,6 +57,7 @@ function LoginScreen() {
         break;
       case AUTH_ACTIONS_TYPES.FORGOT_PASSWORD_FAILURE:
         setIsAppLoader(false);
+        toast(userState.message,{position:"top-center"});
         break;
       default:
         break;
