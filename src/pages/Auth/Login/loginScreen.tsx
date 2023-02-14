@@ -7,6 +7,7 @@ import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
 import { AppLoaderContext } from "../../../contexts";
+import { toast } from "react-toastify";
 
 function LoginScreen() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function LoginScreen() {
   });
 
   useEffect(() => {
-    // console.log("userState", userState);
+    console.log("userState", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
         setIsAppLoader(false);
@@ -62,6 +63,7 @@ function LoginScreen() {
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
         setIsAppLoader(false);
+        toast(userState.message,{position:"top-center"});
         break;
       default:
         break;

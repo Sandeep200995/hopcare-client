@@ -12,7 +12,7 @@ export function* authenticateUser(action: any): Generator<WhatYouYield, WhatYouR
   try {
     const { formData } = action.payload;
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.login, "POST");
-    console.log("Response ",response);
+    console.log("Response ", response);
     const { responseCode, message }: any = response.data || {};
     let user_details: any = JSON.parse(JSON.stringify(initialState.userData.userDetails));
     user_details.phoneNumber = formData.phoneNumber;
@@ -24,11 +24,11 @@ export function* authenticateUser(action: any): Generator<WhatYouYield, WhatYouR
       user_details.OTP = response.data.OTP;
       yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_NOT_VERIFIED, payload: { user_details: user_details }, message: message });
     } else {
-      yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { user_details: user_details }, message: "Unable to fetch data" });
+      yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { user_details: user_details }, message: message ? message : "Failed to send request" });
     }
   } catch (error: any) {
     const message: any = error?.error;
-    yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { error: message }, message: "Unable to fetch data" });
+    yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { error: message }, message: message ? message : "Failed to send request" });
   }
 }
 
@@ -50,11 +50,11 @@ export function* registerUser(action: any): Generator<WhatYouYield, WhatYouRetur
     } else if (responseCode && responseCode === 201) {
       yield put({ type: AUTH_ACION_TYPES.REGISTER_USER_FAILURE, payload: { user_details: user_details }, message: message });
     } else {
-      yield put({ type: AUTH_ACION_TYPES.REGISTER_USER_FAILURE, payload: { user_details: user_details }, message: "Failed to get response" });
+      yield put({ type: AUTH_ACION_TYPES.REGISTER_USER_FAILURE, payload: { user_details: user_details }, message:message ? message : "Failed to get response" });
     }
   } catch (error: any) {
     const message: any = error?.error;
-    yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { error: message }, message: "Unable to fetch data" });
+    yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_FAILURE, payload: { error: message }, message:message ? message : "Unable to fetch data" });
   }
 }
 
@@ -68,12 +68,12 @@ export function* forgotPassword(action: any): Generator<WhatYouYield, WhatYouRet
     // console.log("formData", formData, "API_ENDPOINTS.API_URLS.forgotPassword", API_ENDPOINTS.API_URLS.forgotPassword);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.forgotPassword, "POST");
     console.log("Response ", response);
-    const { status ,data}: any = response || {};
+    const { status, data }: any = response || {};
     let user_details: any = JSON.parse(JSON.stringify(initialState.userData.userDetails));
     user_details.phoneNumber = formData.phoneNumber;
     user_details.userType = formData.userType;
     user_details.otp = data.otp;
-    console.log("user_details",user_details);
+    console.log("user_details", user_details);
 
     if (status && status === 200) {
       // user_details.accessToken = response.data.accessToken;
@@ -99,7 +99,7 @@ export function* changePassword(action: any): Generator<WhatYouYield, WhatYouRet
     // console.log("formData", formData, "API_ENDPOINTS.API_URLS.forgotPassword", API_ENDPOINTS.API_URLS.forgotPassword);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.changePassword, "POST");
     console.log("Response ", response);
-    const { status ,data}: any = response || {};
+    const { status, data }: any = response || {};
     // let user_details: any = JSON.parse(JSON.stringify(initialState.userData.userDetails));
     // user_details.phoneNumber = formData.phoneNumber;
     // user_details.userType = formData.userType;
@@ -115,7 +115,7 @@ export function* changePassword(action: any): Generator<WhatYouYield, WhatYouRet
   } catch (error: any) {
     console.log("error:::", error);
     const message: any = error?.error;
-    yield put({ type: AUTH_ACION_TYPES.CHANGE_PASSWORD_FAILURE, payload: { error: message }, message: "Unable to fetch data" });
+    yield put({ type: AUTH_ACION_TYPES.CHANGE_PASSWORD_FAILURE, payload: { error: message }, message:message ? message : "Unable to fetch data" });
   }
 }
 
