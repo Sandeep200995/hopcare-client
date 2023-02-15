@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.69bcd99a.css",
-    "main.js": "/static/js/main.da5d6e73.js",
+    "main.js": "/static/js/main.daf558d6.js",
     "static/css/754.4a541ed5.chunk.css": "/static/css/754.4a541ed5.chunk.css",
     "static/js/754.e4449f2f.chunk.js": "/static/js/754.e4449f2f.chunk.js",
     "static/css/98.fe24dac3.chunk.css": "/static/css/98.fe24dac3.chunk.css",
-    "static/js/98.ad7583d6.chunk.js": "/static/js/98.ad7583d6.chunk.js",
+    "static/js/98.4e115bd7.chunk.js": "/static/js/98.4e115bd7.chunk.js",
     "static/css/602.57719fbc.chunk.css": "/static/css/602.57719fbc.chunk.css",
     "static/js/602.af247b13.chunk.js": "/static/js/602.af247b13.chunk.js",
     "static/css/832.57719fbc.chunk.css": "/static/css/832.57719fbc.chunk.css",
@@ -68,8 +68,8 @@
     "static/media/top-speciality-dermatologist.svg": "/static/media/top-speciality-dermatologist.1790bf946b644fe7fb6344b8aa77f1e6.svg",
     "static/media/doctor-logo.svg": "/static/media/doctor-logo.05ecc62d1080c254d4138916ebc7926d.svg",
     "static/media/hospital.svg": "/static/media/hospital.1157e6453705c58778d804e79e79d332.svg",
-    "static/media/contact-book.svg": "/static/media/contact-book.c3dace66bece48a8798a5b138139812e.svg",
     "index.html": "/index.html",
+    "static/media/contact-book.svg": "/static/media/contact-book.c3dace66bece48a8798a5b138139812e.svg",
     "static/media/loader-spinner.svg": "/static/media/loader-spinner.3b24a6b94b2631f4d565d76f4f7f18d6.svg",
     "static/media/edit.svg": "/static/media/edit.b7ca0374d7028ff49708e057e4b8254f.svg",
     "static/media/star.svg": "/static/media/star.701bd693ab62dfbc6bc856056e1f6d07.svg",
@@ -77,11 +77,11 @@
     "static/media/hm-menu.svg": "/static/media/hm-menu.60159947bf4c31289013260e06d760e1.svg",
     "static/media/location.svg": "/static/media/location.33629894089286badf4646bf9a788272.svg",
     "main.69bcd99a.css.map": "/static/css/main.69bcd99a.css.map",
-    "main.da5d6e73.js.map": "/static/js/main.da5d6e73.js.map",
+    "main.daf558d6.js.map": "/static/js/main.daf558d6.js.map",
     "754.4a541ed5.chunk.css.map": "/static/css/754.4a541ed5.chunk.css.map",
     "754.e4449f2f.chunk.js.map": "/static/js/754.e4449f2f.chunk.js.map",
     "98.fe24dac3.chunk.css.map": "/static/css/98.fe24dac3.chunk.css.map",
-    "98.ad7583d6.chunk.js.map": "/static/js/98.ad7583d6.chunk.js.map",
+    "98.4e115bd7.chunk.js.map": "/static/js/98.4e115bd7.chunk.js.map",
     "602.57719fbc.chunk.css.map": "/static/css/602.57719fbc.chunk.css.map",
     "602.af247b13.chunk.js.map": "/static/js/602.af247b13.chunk.js.map",
     "832.57719fbc.chunk.css.map": "/static/css/832.57719fbc.chunk.css.map",
@@ -97,6 +97,6 @@
   },
   "entrypoints": [
     "static/css/main.69bcd99a.css",
-    "static/js/main.da5d6e73.js"
+    "static/js/main.daf558d6.js"
   ]
 }
