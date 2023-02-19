@@ -3,6 +3,7 @@ import "./header.scss";
 import { AuthContext } from "../../../contexts";
 
 import hmIcon from "../../../images/hm-menu.svg";
+import backIcon from "../../../images/back-button.svg";
 import { SideBarContext } from "../../../contexts";
 import notification from "../../../assets/dummy/notification.png";
 import userIcon from "../../../assets/dummy/user-icon.png";
@@ -11,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   onClkHamBurger?: any;
+  addLeftBackBtn?:boolean;
+  backIconClk?:any;
 }
 function Header(props: HeaderProps) {
   const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
@@ -22,20 +25,24 @@ function Header(props: HeaderProps) {
   return (
     <header className="header">
       <div className="header-logo">
-        <button className="hm-icon"
-        onClick={() => toggleSidebar(!isSideActive)}
-        >
-          <img src={hmIcon} alt="hm-icon" />
-        </button>
+        {props.addLeftBackBtn ?
+          <button className="hm-icon" onClick={props.backIconClk}>
+            <img src={backIcon} alt="hm-icon" />
+          </button>
+          :
+          <button className="hm-icon" onClick={() => toggleSidebar(!isSideActive)}>
+            <img src={hmIcon} alt="hm-icon" />
+          </button>
+        }
         <p>Logo</p>
       </div>
       <div className="notification-user-login">
 
-      <div className="notification-block">
-        <button>
-          <img src={notification} alt="notification" />
-        </button>
-      </div>
+        {props.addLeftBackBtn ? null : <div className="notification-block">
+          <button>
+            <img src={notification} alt="notification" />
+          </button>
+        </div>}
 
         {
           isAuthenticated ? <div className="user-profile">

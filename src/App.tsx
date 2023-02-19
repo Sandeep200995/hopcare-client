@@ -24,7 +24,7 @@ function App() {
     let token = await storage.getData(storage.keys.TOKEN_CL);
     let userType = await storage.getData(storage.keys.USER_TYPE);
     // let userId = await storage.getData(storage.keys.USER_ID);
-    // console.log("Fetching Users jeys ",token ,"-=-=-=", userId ,"-=-=-=", userType);
+    console.log("Fetching Users jeys ",token  ,"-=-=-=", userType);
     if (token && userType) {
       console.log("User data found");
       console.log("fetching user details..");
