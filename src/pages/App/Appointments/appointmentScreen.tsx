@@ -7,7 +7,7 @@ import * as CLINIC_ACTION_TYPES from "../../../redux/actions/clinic/types";
 
 
 function AppointmentScreen() {
-  const history: any = useNavigate();
+  const navigate: any = useNavigate();
   const dispatch: any = useDispatch();
   const [selAppTab, setAppointTab]: any = useState({ type: "upcoming" });
   const [allAppointmentTypes]: any = useState([{ type: "upcoming", name: "Upcoming" }, { type: "today", name: "Today" }, { type: "past", name: "Past" }])
@@ -37,9 +37,11 @@ function AppointmentScreen() {
 
   return (
     <div className="App">
-      <Header addLeftBackBtn ></Header>
-      {renderTabs()}
-      {renderAppointments()}
+      <Header addLeftBackBtn backIconClk={()=> navigate("/", { replace: true })}></Header>
+      {/* {renderTabs()}
+      {renderAppointments()} */}
+      <div>Work in progress!!!</div>
+      <div>Please try after sometime</div>
     </div>
   );
 }
