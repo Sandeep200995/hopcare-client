@@ -1,5 +1,6 @@
 import React from "react";
 import "./header.scss";
+import { AuthContext } from "../../../contexts";
 
 import hmIcon from "../../../images/hm-menu.svg";
 import { SideBarContext } from "../../../contexts";
@@ -13,16 +14,9 @@ interface HeaderProps {
 }
 function Header(props: HeaderProps) {
   const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
+  const { isAuthenticated } = React.useContext(AuthContext);
 
   const history: any = useNavigate();
-  // function renderProfile() {
-  //   return(
-  //     <div className="user-profile">
-  //       <img src={userIcon} alt="user-icon" />
-  //     </div>
-  //   )
-  // }
-
   function handleLoginClk() { history('./login'); }
 
   return (
@@ -43,12 +37,15 @@ function Header(props: HeaderProps) {
         </button>
       </div>
 
-       {/* <div className="user-profile">
-        <img src={userIcon} alt="user-icon" />
-      </div> */}
-      <div className="login-signup">
-        <button onClick={handleLoginClk}>Login <br/> <span>( Patient )</span></button>
-      </div>
+        {
+          isAuthenticated ? <div className="user-profile">
+            <img src={userIcon} alt="user-icon" />
+          </div>
+            :
+            <div className="login-signup">
+              <button onClick={handleLoginClk}>Login <br /> <span>( Patient )</span></button>
+            </div>
+        }
 
       </div>
     </header>

@@ -21,13 +21,28 @@ export const AuthReducer = (state = initialState.userData, action: Action) => {
         userDetails: action.payload.user_details ? action.payload.user_details : initialState.userData,
         message: action.message ? action.message : ""
       };
+    case AUTH_TYPES.REGISTER_USER_SUCCESS:
+      // case AUTH_TYPES.FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        case: action.type,
+        userDetails: action.payload.user_details ? action.payload.user_details : initialState.userData,
+        message: action.message ? action.message : ""
+      };
     case AUTH_TYPES.FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
         case: action.type,
-        userDetails: action.payload ? {...action.payload} : initialState.userData,
+        userDetails: action.payload ? { ...action.payload } : initialState.userData,
         message: action.message ? action.message : ""
       };
+      case AUTH_TYPES.GET_USER_INFO_SUCCESS:
+        return {
+          ...state,
+          case: action.type,
+          userDetails: action.payload.user_details ? action.payload.user_details : initialState.userData,
+          message: action.message ? action.message : ""
+        };
     default:
       return {
         ...state,

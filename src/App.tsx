@@ -5,16 +5,29 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AppRouting } from "./router/appRouting";
 import { AppLoaderContext, AuthContext } from "./contexts";
 import loader from "../src/assets/dummy/loader-spinner.svg";
+import { storage } from "./utills";
 
 function App() {
-  const { isAppLoader } = React.useContext(AppLoaderContext);
-  // const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
+  const { isAppLoader,setIsAppLoader } = React.useContext(AppLoaderContext);
+  const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
 
-  // useEffect(() => {
-    // setTimeout(() => {
-    //   setIsAuthenticated(true);
-    // }, 10000);
-  // }, [])
+  useEffect(() => {
+    fetchPersistUserData();
+  }, [])
+
+  async function fetchPersistUserData() {
+    setIsAppLoader(true);
+    let token = await storage.getData(storage.keys.TOKEN_CL);
+    if (token) {
+      console.log("User data found...");
+      setIsAuthenticated(true);
+      setIsAppLoader(false);
+    } else {
+      console.log("No User data found...");
+      setIsAuthenticated(false);
+      setIsAppLoader(false);
+    }
+  }
 
   useEffect(() => {
     // toast("Wow so easy!");

@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { storage } from "../../../utills";
 import "./register.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
@@ -9,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppLoaderContext } from "../../../contexts";
 
 function SignupScreen() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
@@ -18,6 +19,7 @@ function SignupScreen() {
   const from = state ? state.from.pathname : "/";
   const formik = useFormik({
     initialValues: {
+      dialNumber: "+91",
       firstName: "",
       lastName: "",
       phoneNumber: "",
@@ -51,22 +53,35 @@ function SignupScreen() {
       return errors;
     },
     onSubmit: (values) => {
+      // console.log("Values ",values);
+      let reqData = JSON.parse(JSON.stringify(values));
+      delete reqData.cnfPassword;
+      // console.log("reqData",reqData);
       setIsAppLoader(true);
-      dispatch(AUTH_ACTIONS.registerUser({ formData: values }));
+      dispatch(AUTH_ACTIONS.registerUser({ formData: reqData }));
     }
   });
 
   useEffect(() => {
-    console.log("userState", userState);
+    // console.log("USER STATE @ REGISTER PAGE :", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.REGISTER_USER_SUCCESS:
         setIsAppLoader(false);
-        // history("./register");
-        // storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
-        // storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+        toast(userState.message, { position: "top-center" });
+        // navigate("./otp", { replace: true });
+        navigate("/otp", {
+          state: {
+            otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
+            phoneNumber: formik.values.phoneNumber,
+            userType: formik.values.userType,
+            password:formik.values.password
+          },
+          replace: true
+        });
         break;
       case AUTH_ACTIONS_TYPES.REGISTER_USER_FAILURE:
         setIsAppLoader(false);
+        toast(userState.message, { position: "top-center" });
         break;
       default:
         break;
@@ -104,6 +119,7 @@ function SignupScreen() {
               type="text"
               placeholder="Mobile number"
               name="phoneNumber"
+              maxLength={10}
               onChange={formik.handleChange}
               value={formik.values.phoneNumber}
             />
@@ -135,7 +151,7 @@ function SignupScreen() {
             Submit
           </button>
 
-          <button className="btn-underline" onClick={() => history(from, { replace: true })}>
+          <button type="button" className="btn-underline" onClick={() => navigate("/login", { replace: true })}>
             Back to login
           </button>
         </div>

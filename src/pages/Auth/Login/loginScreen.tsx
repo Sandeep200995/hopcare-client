@@ -6,13 +6,14 @@ import "./login.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
-import { AppLoaderContext } from "../../../contexts";
+import { AppLoaderContext ,AuthContext} from "../../../contexts";
 import { toast } from "react-toastify";
 
 function LoginScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
+  const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
   const formik = useFormik({
@@ -45,9 +46,10 @@ function LoginScreen() {
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
         setIsAppLoader(false);
-        navigate("./register", { replace: true });
+        navigate("/", { replace: true });
         storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+        setIsAuthenticated(true);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
         setIsAppLoader(false);
@@ -56,7 +58,8 @@ function LoginScreen() {
           state: {
             otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
             phoneNumber: formik.values.phoneNumber,
-            userType: formik.values.userType
+            userType: formik.values.userType,
+            password: formik.values.password,
           }
         });
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
@@ -82,6 +85,7 @@ function LoginScreen() {
               type="text"
               placeholder="Mobile number"
               name="phoneNumber"
+              maxLength={10}
               onChange={formik.handleChange}
               value={formik.values.phoneNumber}
             />
@@ -102,7 +106,7 @@ function LoginScreen() {
             Submit
           </button>
           <button type="button" className="btn-underline">
-            New User <span onClick={() => navigate("./register", { replace: true })}>Register here!</span>{" "}
+            New User <span onClick={() =>navigate("/register", { replace: true })}>Register here!</span>{" "}
           </button>
           <button type="button" className="btn-underline">
             <span onClick={() => navigate("/forgotPassword", { replace: true })}>Forgot Password?</span>{" "}

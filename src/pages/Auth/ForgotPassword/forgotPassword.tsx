@@ -41,7 +41,7 @@ function LoginScreen() {
   });
 
   useEffect(() => {
-    console.log("userState", userState);
+    // console.log("userState", userState);
     // console.log("Location",location);
 
     switch (userState.case) {
@@ -78,6 +78,7 @@ function LoginScreen() {
               type="text"
               placeholder="Mobile number"
               name="phoneNumber"
+              maxLength={10}
               onChange={formik.handleChange}
               value={formik.values.phoneNumber}
             />

@@ -1,13 +1,17 @@
 // export const BASE_URL = "https://care-hope.herokuapp.com";
 // export const BASE_URL = "https://care-hope-server.herokuapp.com";
 // export const BASE_URL = "https://hope-care-server.herokuapp.com";
-export const BASE_URL = "http://35.154.195.52:4000"
+export const BASE_URL_STAGING = "http://35.154.195.52:4000";
+export const BASE_URL_LOCAL = "http://localhost:4000";
 
 // export const BASE_URL = "http://localhost:4000";
-export const BASE_URL_V1 = `${BASE_URL}/api`;
+export const BASE_URL_V1 = `${BASE_URL_LOCAL}/api`;
 
 export const API_URLS = {
   login: `/user/login`,
+  register:`/user/register`,
+  verify:`/user/verifyOTP`,
+  fetchUserInfo:`/user/profileDetails`,
   forgotPassword: `/user/forgotPassword`,
   changePassword: `/user/changePassword`,
   getAllClnics: "/hospital",

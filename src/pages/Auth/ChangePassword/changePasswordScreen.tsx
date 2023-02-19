@@ -44,13 +44,17 @@ function SignupScreen() {
       return errors;
     },
     onSubmit: (values) => {
-
-
+      console.log("values :",values);
       setIsAppLoader(true);
       let reqData = {
-        values
+        "phoneNumber": values.phoneNumber,
+        "userType": values.userType,
+        "otp": values.otp,
+        "password": values.newPassword
       }
-      dispatch(AUTH_ACTIONS.registerUser({ formData: values }));
+      console.log("reqData", reqData);
+      // return
+      dispatch(AUTH_ACTIONS.changePassword({ formData: reqData }));
     }
   });
 
@@ -79,10 +83,10 @@ function SignupScreen() {
    }
   }, [location])
 
-  useEffect(() => {
-   console.log("Values::",formik.values);
+  // useEffect(() => {
+  //  console.log("Values::",formik.values);
 
-  }, [formik.values])
+  // }, [formik.values])
 
 
 
@@ -96,6 +100,7 @@ function SignupScreen() {
               type="number"
               placeholder="OTP"
               name="otp"
+              maxLength={4}
               onChange={formik.handleChange}
               value={formik.values.otp}
             />

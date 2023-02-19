@@ -16,3 +16,7 @@ export const FORGOT_PASSWORD_FAILURE = "FORGOT_PASSWORD_FAILURE"; // for login f
 export const CHANGE_PASSWORD = "CHANGE_PASSWORD"; // for login
 export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS"; // for login success
 export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE"; // for login failure
+
+export const GET_USER_INFO = "GET_USER_INFO"; // for login
+export const GET_USER_INFO_SUCCESS = "GET_USER_INFO_SUCCESS"; // for login success
+export const GET_USER_INFO_FAILURE = "GET_USER_INFO_FAILURE"; // for login failure

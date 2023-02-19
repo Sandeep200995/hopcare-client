@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./sidebar.scss";
 import closeIcon from "../../images/close-window-100.png";
 import { AuthContext } from "../../contexts";
+import { storage } from "../../utills";
 import * as CONSTANTS from "../../constants/dummy";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +13,7 @@ interface sideBarProps {
 
 function SideBar(props: sideBarProps) {
   const history = useNavigate();
-  const { isAuthenticated } = React.useContext(AuthContext);
+  const { isAuthenticated ,setIsAuthenticated} = React.useContext(AuthContext);
   const [options, setOptions]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.LOGGED);
 
   useEffect(() => {
@@ -24,6 +25,21 @@ function SideBar(props: sideBarProps) {
     }
   }, [isAuthenticated])
 
+  async function handleClkSideBarOpt(side_item: any) {
+    console.log("side_item-->", side_item);
+    if (side_item.name === "Logout") {
+      let clearStore = await storage.clear();
+      console.log("clearStore resp ", clearStore);
+      props.onCloseBtnClk();
+      history("/", { replace: true });
+      setIsAuthenticated(false);
+    } else {
+      history(side_item.path, { replace: true });
+      props.onCloseBtnClk();
+    }
+
+  }
+
   return (
     <aside className={`${props.onSideBarActive ? "side-bar active" : "side-bar "}`}>
       <button className="close-icon" onClick={props.onCloseBtnClk}>
@@ -32,7 +48,7 @@ function SideBar(props: sideBarProps) {
       <div className="side-items">
         {
           options.length ? options.map((opt: any, ind: number) => {
-            return (<button onClick={() => history(opt.path, { replace: true })} key={`${ind}_${opt.name}`}>{opt.name}</button>)
+            return (<button onClick={()=>handleClkSideBarOpt(opt)} key={`${ind}_${opt.name}`}>{opt.name}</button>)
           }) : null
         }
       </div>

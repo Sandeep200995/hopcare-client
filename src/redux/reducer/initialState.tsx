@@ -13,8 +13,9 @@ export const userData = {
     appVersion: null,
     storeVersion: null,
     accessToken: null,
-    OTP: null,
-    userType: "consumer"
+    otp: null,
+    userType: "consumer",
+    userId:null
   },
   // profileImgKey:null,
   // currentLocation: { coords: { lat: 27.7878, lng: 77.7257657 } }

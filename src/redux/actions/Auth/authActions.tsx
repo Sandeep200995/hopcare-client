@@ -28,3 +28,9 @@ export const changePassword = (payload: object) => {
   // console.log("PAYLOAD @ AuthenticateUserAction",payload);
   return { type: AUTH_TYPES.CHANGE_PASSWORD, payload };
 };
+
+//5. Change Password Action
+export const fetchUserDetails = (payload: object) => {
+  // console.log("PAYLOAD @ AuthenticateUserAction",payload);
+  return { type: AUTH_TYPES.GET_USER_INFO, payload };
+};
