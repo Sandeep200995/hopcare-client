@@ -4,6 +4,7 @@
 const keys = {
   // AUTHENTICATED: "@authenticated",
   // CREDENTIALS: "@credentials",
+  USER_ID:"@userId",
   TOKEN_CL: "@token",
   USER_TYPE: "@userType"
   // USER: "@user",

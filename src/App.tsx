@@ -4,13 +4,17 @@ import 'react-toastify/dist/ReactToastify.css';
 // import "./App.css";
 import { AppRouting } from "./router/appRouting";
 import { AppLoaderContext, AuthContext } from "./contexts";
-import loader from "../src/assets/dummy/loader-spinner.svg";
 import { storage } from "./utills";
+import { useDispatch } from "react-redux";
+import loader from "../src/assets/dummy/loader-spinner.svg";
+import * as AUTH_ACTIONS from "./redux/actions/Auth/authActions";
+import * as AUTH_ACTIONS_TYPES from "./redux/actions/Auth/types";
+
 
 function App() {
   const { isAppLoader,setIsAppLoader } = React.useContext(AppLoaderContext);
   const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchPersistUserData();
   }, [])
@@ -18,8 +22,13 @@ function App() {
   async function fetchPersistUserData() {
     setIsAppLoader(true);
     let token = await storage.getData(storage.keys.TOKEN_CL);
-    if (token) {
-      console.log("User data found...");
+    let userType = await storage.getData(storage.keys.USER_TYPE);
+    // let userId = await storage.getData(storage.keys.USER_ID);
+    // console.log("Fetching Users jeys ",token ,"-=-=-=", userId ,"-=-=-=", userType);
+    if (token && userType) {
+      console.log("User data found");
+      console.log("fetching user details..");
+      dispatch(AUTH_ACTIONS.fetchUserDetails({ formData: { userType: userType, userId: null }, token: token }));
       setIsAuthenticated(true);
       setIsAppLoader(false);
     } else {
@@ -32,7 +41,6 @@ function App() {
   useEffect(() => {
     // toast("Wow so easy!");
   }, [])
-
 
   return (
     <>

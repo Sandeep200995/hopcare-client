@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
 function LoginScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
-  const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
+  const { setIsAuthenticated } = React.useContext(AuthContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
   const formik = useFormik({
@@ -42,13 +41,14 @@ function LoginScreen() {
   });
 
   useEffect(() => {
-    console.log("userState", userState);
+    // console.log("userState", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
         setIsAppLoader(false);
         navigate("/", { replace: true });
         storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+        // storage.storeData(storage.keys.USER_ID, userState.userDetails.userId);
         setIsAuthenticated(true);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:

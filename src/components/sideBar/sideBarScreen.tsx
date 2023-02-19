@@ -26,7 +26,7 @@ function SideBar(props: sideBarProps) {
   }, [isAuthenticated])
 
   async function handleClkSideBarOpt(side_item: any) {
-    console.log("side_item-->", side_item);
+    // console.log("side_item-->", side_item);
     if (side_item.name === "Logout") {
       let clearStore = await storage.clear();
       console.log("clearStore resp ", clearStore);

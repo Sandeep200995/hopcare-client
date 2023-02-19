@@ -7,13 +7,14 @@ import * as AUTH_API from "../../../redux/saga/auth-saga";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
-import { AppLoaderContext } from "../../../contexts";
+import { AppLoaderContext, AuthContext } from "../../../contexts";
 import { toast } from "react-toastify";
 
 function SignupScreen() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const { setIsAuthenticated } = React.useContext(AuthContext);
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
@@ -45,14 +46,18 @@ function SignupScreen() {
         let resp: any = await AUTH_API.verifyUserByOTP(req);
         console.log("response on OTP :::", resp);
         setIsAppLoader(false);
-        navigateAndFetchUserDetails(resp.data);
-        // if (resp.data && resp.status === 200 && resp.data.message) {
-        //   // toast(resp.data.message, { position: "top-center" });
-        //   navigateAndFetchUserDetails(resp.data);
-        // } else if (resp.data && resp.data.message) {
-        //   toast(userState.message, { position: "top-center" });
-        // }
-
+        if (resp.data && resp.status === 200 && resp.data.message) {
+          toast(resp.data.message, { position: "top-center" });
+          storage.storeData(storage.keys.TOKEN_CL, resp.data.accessToken);
+          storage.storeData(storage.keys.USER_TYPE, resp.data.userType);
+          // storage.storeData(storage.keys.USER_ID, resp.data.userId);
+          setIsAuthenticated(true);
+          navigateAndFetchUserDetails(resp.data);
+          navigate("/", { replace: true });
+          setIsAppLoader(false);
+        } else if (resp.data && resp.data.message) {
+          toast(userState.message, { position: "top-center" });
+        }
       } catch (error: any) {
         setIsAppLoader(false);
         toast(userState.message, { position: "top-center" });

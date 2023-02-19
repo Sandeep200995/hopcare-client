@@ -49,6 +49,7 @@ export function* authenticateUser(action: any): Generator<WhatYouYield, WhatYouR
     user_details.userType = formData.userType;
     if (responseCode && responseCode === 200) {
       user_details.accessToken = response.data.accessToken;
+      user_details.userId = response.data.userId;
       yield put({ type: AUTH_ACION_TYPES.AUTHENTICATE_USER_SUCCESS, payload: { user_details: user_details }, message: message });
     } else if (responseCode && responseCode === 202) {
       user_details.otp = response.data.otp;
@@ -173,17 +174,13 @@ export async function verifyUserByOTP(formData: any) {
 export function* fetchUserInfo(action: any): Generator<WhatYouYield, WhatYouReturn, WhatYouAccept> {
   try {
     const { formData ,token} = action.payload;
-    console.log("--->",action.payload);
-
+    // console.log("--->",action.payload);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.fetchUserInfo, "POST",token);
-    console.log("fetchUserInfo response",response);
-    const { status, message }: any = response.data || {};
+    // console.log("fetchUserInfo response",response);
+    const { status, message, }: any = response.data || {};
     let user_details: any = JSON.parse(JSON.stringify(initialState.userData.userDetails));
-    user_details.phoneNumber = formData.phoneNumber;
-    user_details.userType = formData.userType;
-    user_details.otp = response.data.otp;
     if (status && status === 200) {
-      // user_details.accessToken = response.data.accessToken;
+      user_details = response.data.userDetails;
       yield put({ type: AUTH_ACION_TYPES.GET_USER_INFO_SUCCESS, payload: { user_details: user_details }, message: message });
     } else if (status && status === 201) {
       yield put({ type: AUTH_ACION_TYPES.GET_USER_INFO_FAILURE, payload: { user_details: user_details }, message: message });
