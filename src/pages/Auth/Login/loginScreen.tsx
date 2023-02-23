@@ -41,6 +41,11 @@ function LoginScreen() {
   });
 
   useEffect(() => {
+
+  }, [])
+
+
+  useEffect(() => {
     // console.log("userState", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:

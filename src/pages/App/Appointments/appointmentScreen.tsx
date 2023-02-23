@@ -25,6 +25,7 @@ function AppointmentScreen() {
   }, [allAppointmentTypes, selAppTab])
 
   const renderAppointments = useCallback(() => {
+    // let appointments = [{""}]
     return (
       <div className='booking-tab'>
         {allAppointmentTypes.map((appInfo: any, ind: number) => {

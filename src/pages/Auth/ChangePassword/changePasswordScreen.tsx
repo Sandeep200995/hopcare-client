@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { storage } from "../../../utills";
 import "./changePassword.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
@@ -17,13 +16,7 @@ function SignupScreen() {
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
   const formik = useFormik({
-    initialValues: {
-      phoneNumber: "",
-      newPassword: "",
-      cnfPassword: "",
-      userType: "consumer",
-      otp: ""
-    },
+    initialValues: {phoneNumber: "",newPassword: "",cnfPassword: "",userType: "consumer",otp: ""},
     validateOnBlur: true,
     validateOnChange: false,
     // validationSchema: validationSchema,
@@ -44,26 +37,25 @@ function SignupScreen() {
       return errors;
     },
     onSubmit: (values) => {
-      console.log("values :",values);
+      // console.log("values :",values);
       setIsAppLoader(true);
       let reqData = {
         "phoneNumber": values.phoneNumber,
         "userType": values.userType,
-        "otp": values.otp,
+        "otp": values.otp.toString(),
         "password": values.newPassword
       }
-      console.log("reqData", reqData);
+      // console.log("reqData", reqData);
       // return
       dispatch(AUTH_ACTIONS.changePassword({ formData: reqData }));
     }
   });
 
   useEffect(() => {
-    // console.log("userState", userState);
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.CHANGE_PASSWORD_SUCCESS:
         setIsAppLoader(false);
-        navigate("./login", { replace: true });
+        navigate("/login", { replace: true });
         toast(userState.message);
         break;
       case AUTH_ACTIONS_TYPES.CHANGE_PASSWORD_FAILURE:
@@ -76,7 +68,6 @@ function SignupScreen() {
   }, [userState.case]);
 
   useEffect(() => {
-    // console.log("location",location.state);
    if(location && location.state && location.state.otp){
     formik.setFieldValue('otp',location.state.otp);
     formik.setFieldValue('phoneNumber',location.state.phoneNumber);
