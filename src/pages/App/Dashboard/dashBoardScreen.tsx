@@ -93,8 +93,10 @@ function DashboardScreen() {
                 </div>
                 <div className="view-details">
                   <button
-                    // onClick={() => history('./profile')}
-                    onClick={() => history('./appointment-confirm')}
+                    onClick={() =>
+                      //  history(`./clinic/${_id}`)
+                      history(`./clinic/${_id}`, { state: { _id: _id }, replace: true })
+                    }
                     className="btn-common lg">View Details</button>
                 </div>
               </div>

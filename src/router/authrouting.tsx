@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
-const Profile = React.lazy(() => import("../pages/App/Profile/profileScreen"));
+const Profile = React.lazy(() => import("../pages/App/Clinic/clinicProfileScreen"));
 const Appointments = React.lazy(() => import("../pages/App/Appointments/appointmentScreen"));
 
 interface ContainerProps {

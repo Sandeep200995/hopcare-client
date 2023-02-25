@@ -1,26 +1,53 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-import "./profileScreen.scss";
+import "./clinicProfileScreen.scss";
 
 import drImage from "../../../images/dr.jpg";
 import starIcon from "../../../assets/dummy/star.svg";
 import Certi from "../../../assets/dummy/certificate.png";
 import UserIcon from "../../../assets/dummy/user.svg";
-
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { getClinicDetailsById } from "../../../redux/saga/clinicSaga";
 
 function ProfileScreen() {
 	const history: any = useNavigate();
+	const location: any = useLocation();
+	const params: any = useParams();
+	const [clinicinfo, setClinicInfo]: any = useState({ _id: null });
 	const [modalToggle, setModalToggle] = useState(false);
-	return (
-		<>
-			<div>
-				<div>
-					<button onClick={() => history('/')} className="btn-back">&larr;</button>
-				</div>
 
-				{/* <header className="App-header">    </header> */}
 
+	useEffect(() => {
+		// console.log("params", params);
+		getClinicDetails();
+	}, [params])
+
+	const getClinicDetails = useCallback(async () => {
+		// console.log("params", params);
+		if (params && params.id) {
+			try {
+				let resp: any = await getClinicDetailsById({ formData: { clinicId: params.id } });
+				console.log("resp @ page ", resp.data);
+				if (resp) {
+					setClinicInfo(resp.data.data ? resp.data.data : { _id: null });
+
+				} else {
+					toast(resp.data.message)
+				}
+			} catch (error: any) {
+				let msg: any = error.message ? error.message : "Failed to fetch details"
+				toast(msg, { position: "top-center" });
+			}
+		}
+	}, [params])
+
+
+	const renderClinicBasicinfo = useCallback(() => {
+		console.log("info", clinicinfo);
+		const { name } = clinicinfo;
+		if (clinicinfo._id) {
+			return (
 				<div className='dr-details-page'>
 					<div className='dr-details-inner'>
 						<div className="dr-img-box">
@@ -30,13 +57,13 @@ function ProfileScreen() {
 							<div className='dr-name-details'>
 								<div>
 									<h2>
-										DR XYZ
+										{name ? name : ""}
 										{/* {`Dr ${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`} <span>(Dentist)</span> */}
 									</h2>
 									{/* <p className='dr-icon-tag'>
-										<img src={ToothImg} alt='tooth-doctor' />
-										Tooth specialist
-									</p> */}
+									<img src={ToothImg} alt='tooth-doctor' />
+									Tooth specialist
+								</p> */}
 								</div>
 								{/* <p className='price'>₹290/day</p> */}
 							</div>
@@ -120,7 +147,7 @@ function ProfileScreen() {
 								<div className='btn-call-book'>
 									<p>2. Prakash Hospital</p>
 									<button
-									onClick={()=>setModalToggle(!modalToggle)}
+										onClick={() => setModalToggle(!modalToggle)}
 										// onClick={() => history('./appointment-confirm')}
 										// onClick={() => toggleAppointmentForm(!appontmentForm)}
 
@@ -161,12 +188,21 @@ function ProfileScreen() {
 						</div>
 					</div>
 				</div>
+			);
+		}
+	}, [clinicinfo])
 
+	return (
+		<>
+			<div>
+				<div>
+					<button onClick={() => history('/')} className="btn-back">&larr;</button>
+				</div>
+				{/* <header className="App-header">    </header> */}
+				{renderClinicBasicinfo()}
 			</div>
-
-
 			<div onClick={() => setModalToggle(!modalToggle)} className={modalToggle ? "overlay" : "overlay hidden"}></div>
-			<div className={modalToggle ? "modal" :"modal hidden"}>
+			<div className={modalToggle ? "modal" : "modal hidden"}>
 				<button onClick={() => setModalToggle(!modalToggle)} className="btn--close-modal">&times;</button>
 				<h2 className="modal__header">
 					Book your <span className="highlight">appointment</span>
@@ -191,8 +227,6 @@ function ProfileScreen() {
 					<button className="btn">Confirm &rarr;</button>
 				</form>
 			</div>
-
-
 		</>
 	);
 }

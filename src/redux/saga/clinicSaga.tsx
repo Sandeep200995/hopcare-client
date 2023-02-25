@@ -52,32 +52,28 @@ export function* GetAllClinics() {
 export async function getClinicDetailsById(params: any) {
   // console.log("Params ", params);
   try {
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-        //  "auth-token": _token
-      }
-    };
-    // dispatch(COMMON_ACTIONS.startLoading({}));
-    let response = await fetch(`${API_URLS.getClinicInfoById}/${params.formData.clinicId}`, requestOptions);
-    response = await response.json();
+    const response: any = await networkCall({}, `${API_URLS.getClinicInfoById}/${params.formData.clinicId}`, "GET");
     // console.log("Response ", response);
-    // dispatch(COMMON_ACTIONS.stopLoading({}));
-    return {
-      status: response.status,
-      // data: response.data ? response.data : {},
-      message: "Successfully fetched"
-    };
+    if (response && response.status && response.status === 200 && response.data) {
+      return {
+        status: response.status,
+        data: response.data ? response.data : {},
+        message: "Successfully fetched"
+      };
+    } else {
+      return {
+        status: response.status,
+        data: response.data ? response.data : {},
+        message: "Failed to retrive data"
+      };
+    }
+
   } catch (error) {
-    // console.log("Error details api", error);
     return {
       status: 400,
-      data: {},
+      data: error,
       message: "Failed to fetch details"
     };
-    // dispatch(COMMON_ACTIONS.stopLoading({}));
-    // toggleToast({ ...toast, msg: "Failed to fetch details", status: !toast.status, type: "error" });
   }
   // const { }
   // try {
