@@ -36,7 +36,12 @@ export const DEFAULT_DUMMY_DATA = {
     ],
     WITHOUT_LOGGED: [
       { name: "Dashboard", path: "./" },
+      { name: "Book Appointment", path: "./appointment" },
+      { name: "Phone Consultation", path: "./consultation" },
+      { name: "Health articles", path: "./articles" },
       { name: "About us", path: "./aboutUs" },
+      { name: "Contact us", path: "./contactUs" },
+      { name: "Help", path: "./help" },
     ],
   },
   DASHBOARD_CLINIC_LIST: {

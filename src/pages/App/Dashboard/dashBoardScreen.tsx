@@ -162,8 +162,8 @@ function DashboardScreen() {
       <div className="hero-area-box">
         <div>
           <div>
-            <h1>Skip the travel!</h1>
-            <h1>Take Online Doctor Consultation</h1>
+            <h1>No More be in Queue</h1>
+            <h1>Direct Appointment..</h1>
             <p className="start-here">Private consultation + Audio call <span></span> Starts here at just ₹599</p>
           </div>
           <div className="doctor-hero">
@@ -172,9 +172,14 @@ function DashboardScreen() {
             <img src={drThree} alt="doctor" />
             <p>99+ Doctors are online <span className="online"></span></p>
           </div>
-          <div>
+          <div className="flex">
             <button className="btn-grad">Consult Now</button>
+            <button className="btn-grad margin-left-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>Location</button>
           </div>
+
           <div className="icons-verify">
             <p>
               <img src={verified} alt="verified" />
@@ -190,6 +195,13 @@ function DashboardScreen() {
             </p>
 
           </div>
+
+          <div className="hassle-free-tag">
+              <p># Hassle - Free environment</p>
+              <p>Phone- in Appointment</p>
+          </div>
+
+
         </div>
 
 
@@ -213,7 +225,7 @@ function DashboardScreen() {
                     <img src={spList.img} alt="specelist" />
                   </figure>
                   <h5>{spList.name}</h5>
-                  <p>₹{spList.price}</p>
+                  {/* <p>₹{spList.price}</p> */}
                 </div>
                 <div>
                   <button className="btn-common">Consult Now</button>
@@ -263,7 +275,7 @@ function DashboardScreen() {
       </div>
       {/* <ModalConfirm /> */}
       <div className="main-area">
-        <h2>25+ Specialities</h2>
+        <h2>Specialities</h2>
         {renderSpecialist()}
         <h2>Popular Clinics in this area</h2>
         {renderClinics()}

@@ -110,12 +110,21 @@ function LoginScreen() {
           <button type="submit" className="btn-common">
             Submit
           </button>
+
           <button type="button" className="btn-underline">
-            New User <span onClick={() =>navigate("/register", { replace: true })}>Register here!</span>{" "}
+            {/* New User?  */}
+            <span onClick={() =>navigate("/register", { replace: true })}>Register here!</span>{" "}
           </button>
+          <div className="flex justify-space-between">
           <button type="button" className="btn-underline">
-            <span onClick={() => navigate("/forgotPassword", { replace: true })}>Forgot Password?</span>{" "}
-          </button>
+              Back
+            </button>
+            <button type="button" className="btn-underline">
+              <span onClick={() => navigate("/forgotPassword", { replace: true })}>Forgot Password?</span>{" "}
+            </button>
+
+          </div>
+
         </div>
       </form>
     </div>

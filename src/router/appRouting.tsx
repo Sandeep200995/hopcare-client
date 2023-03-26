@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import SideBar from "../components/sideBar/sideBarScreen";
 import { AuthContext, SideBarContext } from "../contexts";
+import AboutUs from "../pages/App/AboutUs/aboutUs";
 import AppointmentConfirmScreen from "../pages/App/Appointments/appointmentConfirmScreen";
+import HealthArticles from "../pages/App/Articles/healthArticles";
 import ProfileScreen from "../pages/App/Clinic/clinicProfileScreen";
+import BookConsultation from "../pages/App/Consultation/bookConsultation";
+import ContactUs from "../pages/App/ContactUs/contactUs";
+import Help from "../pages/App/Help/help";
 
 const Dashboard = React.lazy(() => import("../pages/App/Dashboard/dashBoardScreen"));
 const Login = React.lazy(() => import("../pages/Auth/Login/loginScreen"));
@@ -36,6 +41,11 @@ export const AppRouting = (props: ContainerProps) => {
               <Route path="/clinic/:id" element={<ClinicProfile />}></Route>
               <Route path="/appointments" element={<Appointments />}></Route>
               <Route path="/appointment-confirm" element={<AppointmentConfirmScreen />}></Route>
+              <Route path="/consultation" element={<BookConsultation />}></Route>
+              <Route path="/articles" element={<HealthArticles />}></Route>
+              <Route path="/aboutus" element={<AboutUs />}></Route>
+              <Route path="/contactus" element={<ContactUs />}></Route>
+              <Route path="/help" element={<Help />}></Route>
             </>
             : null
           }

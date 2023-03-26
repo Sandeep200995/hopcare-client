@@ -74,8 +74,14 @@ body {
 	color: white;
 	box-shadow: 0 0 20px #eee;
 	border-radius: 10px;
-	display: block;
+	display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
+
+  svg{
+    width: 20px;
+  }
 }
 
 .btn-grad:hover {
@@ -447,6 +453,33 @@ input[type="radio"] {
   box-sizing: border-box;
   outline: none;
   @extend .font14;
+
+  &.with-border-00{
+    border: 1px solid #9d31ef;
+    width: 250px;
+    height: 45px;
+
+
+  }
+}
+
+.header-search{
+  position: relative;
+
+  @media (max-width: 480px) {
+    position: absolute;
+    top: 90px;
+    z-index: 100;
+  }
+
+  svg{
+    width: 25px;
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #9d31ef;
+  }
+
 }
 // input:-internal-autofill-selected {
 //   background-color: transparent;
