@@ -116,7 +116,7 @@ function DashboardScreen() {
             const { _id, firstName, lastName, address } = info;
             // console.log("info-->", info);
             return (
-              <div key={`${ind}_${_id}`} className="card-profile">
+              <div key={`${ind}_${_id}`} className="card-profile" onClick={(ev: any) => console.log("ev", ev)}>
                 <div className="card-profile-inner">
                   <img src={drImage} alt="doctor" />
                   <div className="card-profile-text-box">
@@ -243,12 +243,12 @@ function DashboardScreen() {
           <button className="btn-common">Free Listing</button>
         </div>
 
-        <div className="service-box">
+        {/* <div className="service-box">
           <h4>Free Medical App</h4>
           <img src={downloadApp} alt="download our app" />
           <p>Best medical app for online consult in eOPD and online appointment for OPD in clinic. You can search doctor, clinic, hospital and services to book doctors.</p>
           <button className="btn-common">Download the App </button>
-        </div>
+        </div> */}
 
       </div>
     )

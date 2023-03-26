@@ -18,30 +18,18 @@ export function* getAllClinics(action: any): Generator<WhatYouYield, WhatYouRetu
     const { formData } = action.payload;
     // console.log("formData", formData);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.getAllClnics, "POST");
-    // console.log("Response Clinic list ", response);
+    console.log("Response Clinic list ", response);
     const { data }: any = response.data || {};
     // console.log("Data ", data);
     if (data) {
-      yield put({
-        type: GET_ALL_CLINICS_SUCCESS,
-        payload: data,
-        message: "Successfully fetched"
-      });
+      yield put({ type: GET_ALL_CLINICS_SUCCESS, payload: data, message: "Successfully fetched" });
     } else {
-      yield put({
-        type: GET_ALL_CLINICS_FAILURE,
-        payload: {},
-        message: "Unable to fetch data "
-      });
+      yield put({ type: GET_ALL_CLINICS_FAILURE, payload: {}, message: "Unable to fetch data " });
     }
   } catch (error: any) {
     const message: any = error?.error;
     // showErrorToast(message);
-    yield put({
-      type: GET_ALL_CLINICS_FAILURE,
-      payload: { error: message },
-      message: "Unable to fetch data "
-    });
+    yield put({ type: GET_ALL_CLINICS_FAILURE, payload: { error: message }, message: "Unable to fetch data " });
   }
 }
 
