@@ -9,17 +9,33 @@ import footerLogo from "../../assets/dummy/doctor-logo.svg";
 const Footer = () => {
   return (
     <>
-      <div className="footer-logo">
-        <img className="footer-img" src={footerLogo} alt="footer-logo" />
-        {/* <ul>
-          <li><ion-icon name="logo-twitter"></ion-icon></li>
-          <li><ion-icon name="logo-facebook"></ion-icon></li>
-          <li><ion-icon name="logo-instagram"></ion-icon></li>
-        </ul> */}
-        <p>
-          Copyright &copy; <span className="year">2027</span> by Dr practo Inc.All right reserved
-        </p>
-      </div>
+
+    <footer>
+        <div className="footer-area footer-list">
+            <div>
+               <p>HOPCare</p>
+            </div>
+
+                <ul>
+                    <li>Members</li> |
+                    <li>Updates</li> |
+                    <li>Events</li> |
+                    <li>About</li>
+                </ul>
+
+
+        </div>
+        <p className="copy-right">II - Copyright © 2020. All rights reserved.       </p>
+
+        <div className="footer-logo-icons">
+            <img className="foot-logo" src="https://img.icons8.com/color/512/facebook-new.png" alt="fb" />
+            <img className="foot-logo" src="https://img.icons8.com/fluency/512/instagram-new.png" alt="insta" />
+            <img className="foot-logo" src="https://img.icons8.com/color/512/linkedin.png" alt="linkedin" />
+            <img className="foot-logo" src="https://img.icons8.com/color/512/twitter.png" alt="twitter" />
+        </div>
+
+
+    </footer>
     </>
   );
 };
