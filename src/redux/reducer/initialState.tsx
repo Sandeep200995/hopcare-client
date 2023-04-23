@@ -15,7 +15,7 @@ export const userData = {
     accessToken: null,
     otp: null,
     userType: "consumer",
-    userId:null
+    userId: null,
   },
   // profileImgKey:null,
   // currentLocation: { coords: { lat: 27.7878, lng: 77.7257657 } }
@@ -54,5 +54,15 @@ export const doctorData = {
   dashboardDoctorData: {
     list: [],
     total: 0
+  }
+};
+
+export const appointmentData = {
+  loading: false,
+  loadingtxt: "",
+  userAppointments: {
+    list: [],
+    total: 0,
+    skip: 0
   }
 };

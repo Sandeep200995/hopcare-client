@@ -235,13 +235,12 @@ function ProfileScreen() {
 
 
 	function handleAppointmentCallbacks(callBacks: any) {
-		console.log("callBacks", callBacks);
+		console.log("callBacks @ Doctor profile Screen ", callBacks);
 		if (callBacks && callBacks.type === "toggleModal") {
 			toggleAppointmentForm(callBacks.state);
 		} else if (callBacks && callBacks.type === "appointmentFormSubmit") {
 			console.log("callBacks data ", callBacks.data);
-			// return
-			submitAppointData(callBacks.data);
+			// submitAppointData(callBacks.data);
 			toggleAppointmentForm(callBacks.state);
 		}
 	}

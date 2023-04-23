@@ -34,31 +34,31 @@ export default function AppointmentModal(modalProps: modalProps) {
         validateOnBlur: false,
         // validationSchema
         validate: (values) => {
-            console.log("validate ", values);
+            // console.log("validate ", values);
             const errors: any = {};
             if (!values.ptFirstName) {
-                errors.ptFirstName = "Please enter first name";
+                errors.ptFirstName = "*Please enter first name";
             }
             if (!values.ptPhoneNumber) {
-                errors.ptPhoneNumber = "Please enter phone number";
+                errors.ptPhoneNumber = "*Please enter phone number";
             }
             if (!values.appointmentDate) {
-                errors.appointmentDate = "Please enter appointment date";
+                errors.appointmentDate = "*Please enter appointment date";
             }
             if (!values.ptAge) {
-                errors.ptAge = "Please enter age";
+                errors.ptAge = "*Please enter age";
             }
             if (!values.ptGender) {
-                errors.ptGender = "Please select patient gender";
+                errors.ptGender = "*Please select patient gender";
             }
             if (!values.ptAddress) {
-                errors.ptAddress = "Please select patient address";
+                errors.ptAddress = "*Please select patient address";
             }
             console.log("Form Errors ", errors);
             return errors;
         },
         onSubmit: (values) => {
-            console.log("Values ", values);
+            // console.log("Values ", values);
             //   handleSubmit(values);
             handleSubmit();
         }

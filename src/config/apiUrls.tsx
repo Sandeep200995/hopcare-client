@@ -14,6 +14,7 @@ export const API_URLS = {
   getAllClnics: "/hospital",
   getClinicInfoById:"/hospital",
   getDashboardDoctorList: "/doctor",
+  getAllAppointmentsByPatient: "/appointment",
   getDocInfoById: "/doctor",
   reserveAppointment:"/appointment/reserveAppointment",
   currencyRate: "https://api.currencyfreaks.com/latest?apikey=2b3eb37922e24d388c9c4ae3c2e22b7b&symbols="
