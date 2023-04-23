@@ -6,6 +6,7 @@ import { GET_ALL_CLINICS, GET_ALL_CLINICS_SUCCESS, GET_ALL_CLINICS_FAILURE } fro
 import { API_URLS } from "../../config/apiUrls";
 import networkCall from "../../config/apiRequest";
 import * as API_ENDPOINTS from "../../config/apiUrls";
+import * as CONSTANTS from '../../constants/dummy';
 // import { showSuccessToast, showErrorToast, storage } from '../../utils';
 
 type WhatYouYield = any;
@@ -18,11 +19,20 @@ export function* getAllClinics(action: any): Generator<WhatYouYield, WhatYouRetu
     const { formData } = action.payload;
     // console.log("formData", formData);
     const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.getAllClnics, "POST");
-    console.log("Response Clinic list ", response);
+    // console.log("Response Clinic list ", response);
     const { data }: any = response.data || {};
-    // console.log("Data ", data);
-    if (data) {
-      yield put({ type: GET_ALL_CLINICS_SUCCESS, payload: data, message: "Successfully fetched" });
+    let _data = JSON.parse(JSON.stringify(data));
+    if (_data) {
+      for (let i = 0; i < data.list.length; i++) {
+        const clData = data.list[i];
+        // console.log("clData", clData);
+        let isImgThere = CONSTANTS.DEFAULT_DUMMY_DATA.CLINIC_IMGS.findIndex((clD: any) => clD.name === clData.name);
+        if (isImgThere !== -1) {
+          _data.list[i].profilePic = CONSTANTS.DEFAULT_DUMMY_DATA.CLINIC_IMGS[isImgThere].profilePic;
+          _data.list[i].logo = CONSTANTS.DEFAULT_DUMMY_DATA.CLINIC_IMGS[isImgThere].logo;
+        }
+      }
+      yield put({ type: GET_ALL_CLINICS_SUCCESS, payload: _data, message: "Successfully fetched" });
     } else {
       yield put({ type: GET_ALL_CLINICS_FAILURE, payload: {}, message: "Unable to fetch data " });
     }
@@ -41,11 +51,18 @@ export async function getClinicDetailsById(params: any) {
   // console.log("Params ", params);
   try {
     const response: any = await networkCall({}, `${API_URLS.getClinicInfoById}/${params.formData.clinicId}`, "GET");
-    // console.log("Response ", response);
+    console.log("Response ", response);
     if (response && response.status && response.status === 200 && response.data) {
+    let _data = response.data ? response.data : {};
+    // debugger
+    let isImgThere = CONSTANTS.DEFAULT_DUMMY_DATA.CLINIC_IMGS.findIndex((clD: any) => clD._id === _data.data._id);
+    if (isImgThere !== -1) {
+      _data.data.profilePic = CONSTANTS.DEFAULT_DUMMY_DATA.CLINIC_IMGS[isImgThere].profilePic;
+      _data.data.logo = CONSTANTS.DEFAULT_DUMMY_DATA.CLINIC_IMGS[isImgThere].logo;
+    }
       return {
         status: response.status,
-        data: response.data ? response.data : {},
+        data: _data,
         message: "Successfully fetched"
       };
     } else {
@@ -82,4 +99,35 @@ export async function getClinicDetailsById(params: any) {
   // }
 }
 
-// export default clinicSaga;
+
+export async function createAppointment(params: any) {
+  // console.log("Params ", params);
+  try {
+    const response: any = await networkCall(params.formData, `${API_URLS.reserveAppointment}`, "POST");
+    // console.log("Response @ SAga ", response);
+    if (response && response.status && response.status === 200 && response.data) {
+    let _data = response.data ? response.data : {};
+      return {
+        status: response.status,
+        data: _data,
+        message: "Successfully fetched"
+      };
+    } else {
+      return {
+        status: response.status,
+        data: response.data ? response.data : {},
+        message: "Failed to retrieve data"
+      };
+    }
+
+  } catch (error) {
+    return {
+      status: 400,
+      data: error,
+      message: "Failed to fetch details"
+    };
+  }
+
+}
+
+

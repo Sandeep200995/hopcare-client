@@ -17,6 +17,7 @@ const ForgotPassword = React.lazy(() => import("../pages/Auth/ForgotPassword/for
 const OTP = React.lazy(() => import("../pages/Auth/OTP/otpScreen"));
 const ChangePassword = React.lazy(() => import("../pages/Auth/ChangePassword/changePasswordScreen"));
 const ClinicProfile = React.lazy(() => import("../pages/App/Clinic/clinicProfileScreen"));
+const DoctorProfile = React.lazy(() => import("../pages/App/Doctor/doctorProfileScreen"));
 const Appointments = React.lazy(() => import("../pages/App/Appointments/appointmentScreen"));
 interface ContainerProps {
   role?: any;
@@ -38,17 +39,18 @@ export const AppRouting = (props: ContainerProps) => {
           <Route path="/newPassword" element={<ChangePassword />}></Route>
           {isAuthenticated ?
             <>
-              <Route path="/clinic/:id" element={<ClinicProfile />}></Route>
               <Route path="/appointments" element={<Appointments />}></Route>
               <Route path="/appointment-confirm" element={<AppointmentConfirmScreen />}></Route>
-              <Route path="/consultation" element={<BookConsultation />}></Route>
-              <Route path="/articles" element={<HealthArticles />}></Route>
-              <Route path="/aboutus" element={<AboutUs />}></Route>
-              <Route path="/contactus" element={<ContactUs />}></Route>
-              <Route path="/help" element={<Help />}></Route>
             </>
             : null
           }
+          <Route path="/consultation" element={<BookConsultation />}></Route>
+          <Route path="/articles" element={<HealthArticles />}></Route>
+          <Route path="/aboutus" element={<AboutUs />}></Route>
+          <Route path="/contactus" element={<ContactUs />}></Route>
+          <Route path="/help" element={<Help />}></Route>
+          <Route path="/clinic/:id" element={<ClinicProfile />}></Route>
+          <Route path="/doctor/:id" element={<DoctorProfile />}></Route>
           <Route path="/" element={<Dashboard />} />
         </Routes>
       </div>

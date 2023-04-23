@@ -1,41 +1,62 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import "./clinicProfileScreen.scss";
+import "./doctorProfileScreen.scss";
 
 import drImage from "../../../images/dr.jpg";
 import starIcon from "../../../assets/dummy/star.svg";
 import Certi from "../../../assets/dummy/certificate.png";
 import UserIcon from "../../../assets/dummy/user.svg";
-import { toast } from "react-toastify";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+// import * as CONSTANTS from '../../../constants/dummy';
+import * as ClinicAPIS from '../../../redux/saga/clinicSaga';
+
+import { getDoctorDetailsById } from "../../../redux/saga/doctorSaga";
 import { getClinicDetailsById } from "../../../redux/saga/clinicSaga";
-import * as CONSTANTS from '../../../constants/dummy';
+import { AppLoaderContext } from "../../../contexts";
+import AppointmentModal from "../../../components/modal/appointmentModal";
+import { useSelector } from "react-redux";
+
+
 
 function ProfileScreen() {
 	const history: any = useNavigate();
-	const location: any = useLocation();
+	// const location: any = useLocation();
+	const navigate = useNavigate();
 	const params: any = useParams();
-	const [clinicinfo, setClinicInfo]: any = useState({ _id: null });
-	const [modalToggle, setModalToggle] = useState(false);
+	const userState:any = useSelector((state:any)=>state.userData);
+	const {setIsAppLoader } = useContext(AppLoaderContext);
+	const [doctorinfo, setDoctorInfo]: any = useState({ _id: null ,hospitalListDetails:[]});
+	const [appontmentForm, toggleAppointmentForm] = useState(false);
+	const [appointmentFormData, setAppointmentFormData]: any = useState({ clinicId: null });
 
-
-	useEffect(() => {
-		// console.log("params", params);
-		getClinicDetails();
-	}, [params])
+	useEffect(() => { getClinicDetails(); }, [params])
 
 	const getClinicDetails = useCallback(async () => {
-		// console.log("params", params);
 		if (params && params.id) {
 			try {
-				let resp: any = await getClinicDetailsById({ formData: { clinicId: params.id } });
-				// console.log("resp @ page ", resp.data);
-				if (resp) {
-					setClinicInfo(resp.data.data ? resp.data.data : { _id: null });
+				let resp: any = await getDoctorDetailsById({ formData: { doctorId: params.id } });
+				if (resp && resp.data && resp.data.data && resp.data.data.hospitals.length > 0) {
+					let hospitalInfoList: any = [];
+					for (let i = 0; i < resp.data.data.hospitals.length; i++) {
+						hospitalInfoList.push(await getClinicDetailsById({ formData: { clinicId: resp.data.data.hospitals[i] } }))
+					}
+					let respList: any = await Promise.all(hospitalInfoList);
+					let clinicDetailList:any = [];
+					for (let j = 0; j < respList.length; j++) {
+						clinicDetailList.push(respList[j].data.data ? respList[j].data.data : {})
+					}
+					if (respList) {
+						setDoctorInfo(resp.data.data ? { ...resp.data.data, hospitalListDetails: clinicDetailList } : { _id: null });
+					}
+					setIsAppLoader(false);
 				} else {
-					toast(resp.data.message)
+					setDoctorInfo(resp.data.data ? resp.data.data : { _id: null });
+					setIsAppLoader(false);
+					toast(resp.data.message, { position: "top-center" });
 				}
 			} catch (error: any) {
+				setIsAppLoader(false);
 				let msg: any = error.message ? error.message : "Failed to fetch details"
 				toast(msg, { position: "top-center" });
 			}
@@ -43,10 +64,9 @@ function ProfileScreen() {
 	}, [params])
 
 
-	const renderClinicBasicinfo = useCallback(() => {
-		// console.log("info", clinicinfo);
-		const { name ,profilePic} = clinicinfo;
-		if (clinicinfo._id) {
+	const renderDoctorinfo = useCallback(() => {
+		const { firstName, lastName, profilePic, degree, departments,hospitalListDetails } = doctorinfo;
+		if (doctorinfo._id) {
 			return (
 				<div className='dr-details-page'>
 					<div className='dr-details-inner'>
@@ -57,8 +77,7 @@ function ProfileScreen() {
 							<div className='dr-name-details'>
 								<div>
 									<h2>
-										{name ? name : ""}
-										{/* {`Dr ${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`} <span>(Dentist)</span> */}
+										{`Dr ${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`} {degree && degree.length > 0 ? <span>{degree.join(",")}</span> : null}
 									</h2>
 									{/* <p className='dr-icon-tag'>
 									<img src={ToothImg} alt='tooth-doctor' />
@@ -83,27 +102,50 @@ function ProfileScreen() {
 								</p>
 							</div>
 
-							<div className='dr-description'>
+							{departments.length > 0 ? <div className='dr-description'>
 								<h5>Description</h5>
 								<p>
 									{/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Inventore, enim! Ullam explicabo voluptates incidunt mollitia
 									dolorem maiores praesentium rerum, enim adipisci
 									exercitationem culpa id. Libero eos dicta sapiente mollitia. */}
-									{CONSTANTS.DEFAULT_DUMMY_DATA.CLNIC_INFO_DESCRIPTION}
+									{/* {CONSTANTS.DEFAULT_DUMMY_DATA.CLNIC_INFO_DESCRIPTION} */}
+									{`${departments.join(",")}`}
 								</p>
-							</div>
+							</div> : null}
+
+							<p>
+								<h5>Appointment Fee</h5>
+								<p>₹ 200 /- </p>
+							</p>
+
 							<div className='dr-availibility'>
 								<h5>Available at Clinics</h5>
-								{[].map((clinic, cId) => {
-									// const {} = clinic;
+								{hospitalListDetails && hospitalListDetails.length > 0 && hospitalListDetails.map((clinic: any, cId: number) => {
+									const {name} = clinic;
+									// console.log("clinic",clinic);
 									return (
 										<>
 											<div className='btn-call-book'>
-												<p>1. Fatima Hospital</p>
+												<p>{`${cId+1}. ${name}`}</p>
 												{/* <button className='btn-grad'>Call for appointment</button> */}
 												<button
-													// onClick={() => toggleAppointmentForm(!appontmentForm)}
+													onClick={() => {
+														console.log("userState", userState);
+														if (userState && userState.userDetails && userState.userDetails._id) {
+															setAppointmentFormData({clinicId:clinic._id});
+															toggleAppointmentForm(!appontmentForm)
+														} else {
+															navigate("/login", {
+																replace: true, state: {
+																	data: {
+																		pathName: `./doctor/${params.id}`,
+																		stateData: { _id: params.id }
+																	}
+																}
+															})
+														}
+													}}
 													className='btn-grad'>
 													Book for appointment
 												</button>
@@ -143,8 +185,8 @@ function ProfileScreen() {
 									)
 								})
 								}
-								<div className='btn-call-book'>
-									<p>2. Prakash Hospital</p>
+								{/* <div className='btn-call-book'>
+									<p>2. Sharda Narayan hospital</p>
 									<button
 										onClick={() => setModalToggle(!modalToggle)}
 										// onClick={() => history('./appointment-confirm')}
@@ -182,14 +224,47 @@ function ProfileScreen() {
 											<p className='font9'>2-5 PM</p>
 										</div>
 									</div>
-								</div>
+								</div> */}
 							</div>
 						</div>
 					</div>
 				</div>
 			);
 		}
-	}, [clinicinfo])
+	}, [doctorinfo])
+
+
+	function handleAppointmentCallbacks(callBacks: any) {
+		console.log("callBacks", callBacks);
+		if (callBacks && callBacks.type === "toggleModal") {
+			toggleAppointmentForm(callBacks.state);
+		} else if (callBacks && callBacks.type === "appointmentFormSubmit") {
+			console.log("callBacks data ", callBacks.data);
+			// return
+			submitAppointData(callBacks.data);
+			toggleAppointmentForm(callBacks.state);
+		}
+	}
+
+
+	async function submitAppointData(formData: any) {
+		try {
+			let response: any = await ClinicAPIS.createAppointment({ formData: { ...formData.formValue, clinicId: appointmentFormData.clinicId } });
+			// console.log("response @ Page ", response);
+			let msg = "Something is wrong";
+			if (response && response.status === 200) {
+				console.log("A");
+				msg = response.data.message ? response.data.message : "Appointment Created";
+			} else if (response && response.status === 401 && response.data && response.data.message) {
+				msg = response.data.message;
+			}
+			toast(msg, { position: "top-center" });
+		} catch (error: any) {
+			console.log("error", error);
+			let msg = 'Failed to send request';
+			toast(msg, { position: "top-center" });
+		}
+	}
 
 	return (
 		<>
@@ -198,10 +273,12 @@ function ProfileScreen() {
 					<button onClick={() => history('/')} className="btn-back">&larr;</button>
 				</div>
 				{/* <header className="App-header">    </header> */}
-				{renderClinicBasicinfo()}
+				{renderDoctorinfo()}
 			</div>
-			<div onClick={() => setModalToggle(!modalToggle)} className={modalToggle ? "overlay" : "overlay hidden"}></div>
-			<div className={modalToggle ? "modal" : "modal hidden"}>
+			<AppointmentModal visible={appontmentForm} callback={handleAppointmentCallbacks} />
+			<div onClick={() => toggleAppointmentForm(!appontmentForm)} className={appontmentForm ? "overlay" : "overlay hidden"}></div>
+
+			{/* <div className={modalToggle ? "modal" : "modal hidden"}>
 				<button onClick={() => setModalToggle(!modalToggle)} className="btn--close-modal">&times;</button>
 				<h2 className="modal__header">
 					Book your <span className="highlight">appointment</span>
@@ -225,7 +302,7 @@ function ProfileScreen() {
 					<input type="date" />
 					<button className="btn">Confirm &rarr;</button>
 				</form>
-			</div>
+			</div> */}
 		</>
 	);
 }

@@ -79,11 +79,11 @@ function DashboardScreen() {
       <>
         <div className="card-area">
           {clinicList.list.map((info: any, ind: number) => {
-            const { _id, name, address } = info;
+            const { _id, name, address, profilePic } = info;
             return (
               <div key={`${ind}_${_id}`} className="card-profile">
                 <div className="card-profile-inner">
-                  <img src={drImage} alt="doctor" />
+                  <img src={profilePic ? profilePic : drImage} alt={`clinic_${_id}`} />
                   <div className="card-profile-text-box">
                     <p>{name ? name : " - "}</p>
                     <p>{`${address.buildingNo ? address.buildingNo + "," : ""}${address.buildingName ? address.buildingName + "," : ""
@@ -113,18 +113,21 @@ function DashboardScreen() {
       <>
         <div className="card-area">
           {doctorList.list.map((info: any, ind: number) => {
-            const { _id, firstName, lastName, address } = info;
+            const { _id, firstName, lastName, address, profilePic } = info;
             // console.log("info-->", info);
             return (
               <div key={`${ind}_${_id}`} className="card-profile" onClick={(ev: any) => console.log("ev", ev)}>
                 <div className="card-profile-inner">
-                  <img src={drImage} alt="doctor" />
+                  <img src={profilePic ? profilePic : drImage} alt={`doctor${_id}`} />
                   <div className="card-profile-text-box">
                     <p>{`${firstName ? firstName : " - "} ${lastName ? lastName : " - "}`}</p>
                   </div>
                 </div>
                 <div className="view-details">
-                  <button className="btn-common lg">View Details</button>
+                  <button onClick={() =>
+                    //  history(`./clinic/${_id}`)
+                    history(`./doctor/${_id}`, { state: { _id: _id }, replace: true })
+                  } className="btn-common lg">View Details</button>
                 </div>
               </div>
             );

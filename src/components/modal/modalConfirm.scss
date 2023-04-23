@@ -1,0 +1,15 @@
+.error-text {
+    // color: var(--ion-color-error);
+    color: "red";
+    // @extend .font10;
+    // font-family: var(--PrimaryRegular);
+    // width: 100%;
+    // text-align: left;
+    // display: block;
+    // height: auto;
+
+    &.error-block {
+        // position: absolute;
+        // top: 100%;
+    }
+}

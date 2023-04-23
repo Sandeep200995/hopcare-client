@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 function LoginScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params: any = useParams();
+  const locationParams: any = useLocation();
   const { setIsAuthenticated } = React.useContext(AuthContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
@@ -41,8 +43,10 @@ function LoginScreen() {
   });
 
   useEffect(() => {
+    console.log("params",locationParams);
 
-  }, [])
+   }, [locationParams])
+
 
 
   useEffect(() => {
@@ -50,7 +54,11 @@ function LoginScreen() {
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
         setIsAppLoader(false);
-        navigate("/", { replace: true });
+        if (locationParams) {
+          navigate(`${locationParams.state.pathName}`, { state: locationParams.state.stateData, replace: true })
+        } else {
+          navigate("/", { replace: true });
+        }
         storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
         // storage.storeData(storage.keys.USER_ID, userState.userDetails.userId);

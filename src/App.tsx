@@ -24,15 +24,15 @@ function App() {
     let token = await storage.getData(storage.keys.TOKEN_CL);
     let userType = await storage.getData(storage.keys.USER_TYPE);
     // let userId = await storage.getData(storage.keys.USER_ID);
-    console.log("Fetching Users jeys ",token  ,"-=-=-=", userType);
+    // console.log("Fetching Users keys ",token  ,"-=-=-=", userType);
     if (token && userType) {
-      console.log("User data found");
-      console.log("fetching user details..");
+      console.log("User token found");
+      // console.log("fetching user details..");
       dispatch(AUTH_ACTIONS.fetchUserDetails({ formData: { userType: userType, userId: null }, token: token }));
       setIsAuthenticated(true);
       setIsAppLoader(false);
     } else {
-      console.log("No User data found...");
+      console.log("No User token found...");
       setIsAuthenticated(false);
       setIsAppLoader(false);
     }

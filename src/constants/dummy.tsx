@@ -25,6 +25,15 @@ import Stomach from "../assets/dummy/top-speciality-stomach.svg";
 import Ped from "../assets/dummy/top-speciality-pediatric.svg";
 import Urology from "../assets/dummy/top-speciality-kidney.svg";
 
+import Sharda_Narayan_Logo from "../assets/dummy/hospitals/sharda-Narayan-logo.png";
+import Sharda_Narayan_IMG from "../assets/dummy/hospitals/sharda-narayan-clinic .png";
+
+import Sanjay_Singh from "../assets/dummy/doctors/Sanjay_Singh.png";
+import Ekika_Singh from "../assets/dummy/doctors/Ekika_Singh.png";
+import Madhulika_Singh from "../assets/dummy/doctors/Madhulika_Singh.png";
+import Sujit_SIngh from "../assets/dummy/doctors/Sujit_SIngh.png";
+
+
 
 export const DEFAULT_DUMMY_DATA = {
   SIDEBAR_OPTIONS: {
@@ -107,40 +116,40 @@ export const DEFAULT_DUMMY_DATA = {
     total: 0,
     list: [
       {
-        img:Gynaecology,
+        img: Gynaecology,
         name: "Gynaecology",
         price: 499,
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
       },
       {
-        img:Sexology,
+        img: Sexology,
         name: "Sexology",
         price: 399,
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
       },
       {
-        img:GeneralPhysician,
+        img: GeneralPhysician,
         name: "General Physician",
         price: 799,
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
       },
       {
-        img:Derma,
+        img: Derma,
         name: "Dermatology",
         price: 899,
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
       },
       {
-        img:Psychiatry,
+        img: Psychiatry,
         name: "Psychiatry",
         price: 1099,
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
       },
       {
-        img:Stomach,
+        img: Stomach,
         name: "Stomach and digestion",
         price: 1099,
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
       },
     ]
   },
@@ -173,47 +182,47 @@ export const DEFAULT_DUMMY_DATA = {
     list: [
       {
         name: "Fever Problem",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: FeverProblem
       },
       {
         name: "Breasthlessness",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: Breathless
       },
       {
         name: "Stomach Pain",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: StomachPain
       },
       {
         name: "Gyane Problem",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: gyaneProblem
       },
       {
         name: "Dental Problem",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: Dental
       },
       {
         name: "Cough and Cold",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: CoughandCold
       },
       {
         name: "Children Health Care",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: childrenHealth
       },
       {
         name: "Bone Problem",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: BoneProblem
       },
       {
         name: "Skin Problem",
-        id:Math.floor(Math.random() *1000),
+        id: Math.floor(Math.random() * 1000),
         img: SkinProblem
       },
     ]
@@ -256,5 +265,22 @@ export const DEFAULT_DUMMY_DATA = {
         ]
       }
     ]
-  }
+  },
+
+  CLINIC_IMGS: [
+    {
+      name: "Sharda Narayan",
+      profilePic: Sharda_Narayan_IMG,
+      logo: Sharda_Narayan_Logo,
+      _id: "64207e7c9feb0fbb85f9a549"
+    }
+  ],
+  DOCTOR_IMGS: [
+    {
+      _id: "640c0b5d398127816cee07e7",
+      profilePic: Sanjay_Singh,
+    }
+  ],
+  CLNIC_INFO_DESCRIPTION: "Book appointments with minimum wait-time & verified doctor details"
+
 };
