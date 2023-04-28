@@ -132,19 +132,19 @@ function ProfileScreen() {
 												<button
 													onClick={() => {
 														console.log("userState", userState);
-														if (userState && userState.userDetails && userState.userDetails._id) {
-															setAppointmentFormData({clinicId:clinic._id});
+														// if (userState && userState.userDetails && userState.userDetails._id) {
+														// 	setAppointmentFormData({clinicId:clinic._id});
 															toggleAppointmentForm(!appontmentForm)
-														} else {
-															navigate("/login", {
-																replace: true, state: {
-																	data: {
-																		pathName: `./doctor/${params.id}`,
-																		stateData: { _id: params.id }
-																	}
-																}
-															})
-														}
+														// } else {
+														// 	navigate("/login", {
+														// 		replace: true, state: {
+														// 			data: {
+														// 				pathName: `./doctor/${params.id}`,
+														// 				stateData: { _id: params.id }
+														// 			}
+														// 		}
+														// 	})
+														// }
 													}}
 													className='btn-grad'>
 													Book for appointment

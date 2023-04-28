@@ -147,6 +147,14 @@ function SignupScreen() {
             />
             {formik.errors.cnfPassword && <p className="error-text">{formik.errors.cnfPassword}</p>}
           </div>
+          <p>
+            <select name="ptGender" value={formik.values.userType} id="pt_Gender" onChange={formik.handleChange}>
+              <option value="">Select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+            {formik.touched.userType && formik.errors.userType && <p className='error-text'>{formik.errors.userType}</p>}
+          </p>
           <button type="submit" className="btn-common">
             Submit
           </button>

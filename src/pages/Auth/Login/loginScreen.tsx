@@ -102,7 +102,7 @@ function LoginScreen() {
               onChange={formik.handleChange}
               value={formik.values.phoneNumber}
             />
-            {/* <p className="error-text">Please enter phone numer</p> */}
+            <p className="error-text">Please enter phone numer</p>
           </div>
 
           <div className="form-input">
@@ -115,6 +115,14 @@ function LoginScreen() {
             />
             {/* <p className="error-text">Please enter password</p> */}
           </div>
+          <p>
+            <select name="ptGender" value={formik.values.userType} id="pt_Gender" onChange={formik.handleChange}>
+              <option value="">Select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+            {formik.touched.userType && formik.errors.userType && <p className='error-text'>{formik.errors.userType}</p>}
+          </p>
           <button type="submit" className="btn-common">
             Submit
           </button>
