@@ -17,7 +17,20 @@ function AppointmentScreen() {
   const appointmentState = useSelector((state: any) => state.appointmentData);
   const [selAppTab, setAppointTab]: any = useState({ type: "upcoming" });
   const [allAppointmentTypes]: any = useState([{ type: "upcoming", name: "Upcoming" }, { type: "today", name: "Today" }, { type: "past", name: "Past" }])
-  const [appointmentData, setAppointmentData]: any = useState({ list: [], total: 0, skip: 0 });
+  const [appointmentData, setAppointmentData]: any = useState({ list: [
+    {
+      appointmentDate: "18-07-2023",
+      clinicId: "hsbahjd",
+      ptAge: "23",
+      ptFirstName: "Sandeep",
+      ptGender: "M",
+      ptLastName: "Singh",
+      ptPaymentMode: "Cash",
+      ptPaymentStatus: "Pending",
+      ptPhoneNumber: "7618815004",
+      _id: "shfajhdgsajhdjhsa"
+    }
+  ], total: 0, skip: 0 });
 
   useEffect(() => {
     dispatch(COMMON_ACTIONS.startLoading({}));

@@ -37,6 +37,7 @@ export const AppRouting = (props: ContainerProps) => {
           <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/otp" element={<OTP />}></Route>
           <Route path="/newPassword" element={<ChangePassword />}></Route>
+          <Route path="/appointments" element={<Appointments />}></Route>
           {isAuthenticated ?
             <>
               <Route path="/appointments" element={<Appointments />}></Route>
