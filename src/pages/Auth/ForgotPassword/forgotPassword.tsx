@@ -16,6 +16,11 @@ function LoginScreen() {
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
+  const [userTypes]: any = useState([
+    { "name": "Select", "value": "" },
+    { "name": "User", "value": "consumer" },
+    { "name": "Hospital", "value": "clinic" },
+  ]);
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
@@ -26,12 +31,15 @@ function LoginScreen() {
     // validationSchema: validationSchema,
     validate: (values) => {
       let errors: any = {};
-      if (!values.phoneNumber || values.phoneNumber.length  !== 10) {
+      if (!values.phoneNumber || values.phoneNumber.length !== 10) {
         errors.phoneNumber = "Please enter 10 digit phone number";
       }
       // if (!values.password) {
       //   errors.password = "Please enter password";
       // }
+      if (!values.userType) {
+        errors.userType = "Please select type of user";
+      }
       return errors;
     },
     onSubmit: (values) => {
@@ -57,7 +65,7 @@ function LoginScreen() {
         break;
       case AUTH_ACTIONS_TYPES.FORGOT_PASSWORD_FAILURE:
         setIsAppLoader(false);
-        toast(userState.message,{position:"top-center"});
+        toast(userState.message, { position: "top-center" });
         break;
       default:
         break;
@@ -84,6 +92,14 @@ function LoginScreen() {
             />
             {formik.errors.phoneNumber && <p className="error-text">{formik.errors.phoneNumber}</p>}
           </div>
+          <p>
+            <select name="userType" value={formik.values.userType} id="userType" onChange={formik.handleChange}>
+              {userTypes.map((userType: any, userInd: number) => {
+                return (<option key={`_${userInd}`} value={userType.value}>{userType.name}</option>);
+              })}
+            </select>
+            {formik.touched.userType && formik.errors.userType && <p className='error-text'>{formik.errors.userType}</p>}
+          </p>
           <button type="submit" className="btn-common">
             Submit
           </button>

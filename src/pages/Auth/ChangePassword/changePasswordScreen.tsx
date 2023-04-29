@@ -71,6 +71,7 @@ function SignupScreen() {
    if(location && location.state && location.state.otp){
     formik.setFieldValue('otp',location.state.otp);
     formik.setFieldValue('phoneNumber',location.state.phoneNumber);
+    formik.setFieldValue('userType',location.state.userType);
    }
   }, [location])
 

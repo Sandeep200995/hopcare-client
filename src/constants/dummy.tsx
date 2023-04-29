@@ -43,6 +43,11 @@ export const DEFAULT_DUMMY_DATA = {
       { name: "About us", path: "./aboutUs" },
       { name: "Logout", path: "./" },
     ],
+    LOGGED_CLNIC: [
+      { name: "My Appointments", path: "./clinic_appointments" },
+      { name: "About us", path: "./aboutUs" },
+      { name: "Logout", path: "./" },
+    ],
     WITHOUT_LOGGED: [
       { name: "Dashboard", path: "./" },
       { name: "Book Appointment", path: "./appointment" },

@@ -19,6 +19,7 @@ const ChangePassword = React.lazy(() => import("../pages/Auth/ChangePassword/cha
 const ClinicProfile = React.lazy(() => import("../pages/App/Clinic/clinicProfileScreen"));
 const DoctorProfile = React.lazy(() => import("../pages/App/Doctor/doctorProfileScreen"));
 const Appointments = React.lazy(() => import("../pages/App/Appointments/appointmentScreen"));
+const ClinicAppointments = React.lazy(() => import("../pages/App/Appointments/clinic/clinicAppointments"));
 interface ContainerProps {
   role?: any;
 }
@@ -45,6 +46,7 @@ export const AppRouting = (props: ContainerProps) => {
             </>
             : null
           }
+          <Route path="/clinic_appointments" element={<ClinicAppointments />}></Route>
           <Route path="/consultation" element={<BookConsultation />}></Route>
           <Route path="/articles" element={<HealthArticles />}></Route>
           <Route path="/aboutus" element={<AboutUs />}></Route>

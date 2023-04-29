@@ -21,12 +21,19 @@ function App() {
 
   async function fetchPersistUserData() {
     setIsAppLoader(true);
-    let token = await storage.getData(storage.keys.TOKEN_CL);
+    let token = null;
     let userType = await storage.getData(storage.keys.USER_TYPE);
+    if (userType && userType === "consumer") {
+      token = await storage.getData(storage.keys.TOKEN_CL);
+    } else if (userType && userType === "hospital") {
+      token = await storage.getData(storage.keys.TOKEN_CL);
+    }
+    console.log("token",token);
+    console.log("userType",userType);
     // let userId = await storage.getData(storage.keys.USER_ID);
     // console.log("Fetching Users keys ",token  ,"-=-=-=", userType);
     if (token && userType) {
-      console.log("User token found");
+      // console.log("User token found");
       // console.log("fetching user details..");
       dispatch(AUTH_ACTIONS.fetchUserDetails({ formData: { userType: userType, userId: null }, token: token }));
       setIsAuthenticated(true);
@@ -38,9 +45,9 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    // toast("Wow so easy!");
-  }, [])
+  // useEffect(() => {
+  //   toast("Wow so easy!");
+  // }, [])
 
   return (
     <>

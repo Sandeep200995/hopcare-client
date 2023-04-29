@@ -11,7 +11,7 @@ interface Action {
 
 //Reducer
 export const AppointmentReducer = (state = initialState.appointmentData, action: Action) => {
-    console.log("APPOINTMENT @REDUCER ==>", action);
+    // console.log("APPOINTMENT @REDUCER ==>", action);
     switch (action.type) {
         case APPOINTMENT_TYPES.GET_ALL_APPOINTMENTS_SUCCESS:
             return {

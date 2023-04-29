@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { storage } from "../../../utills";
@@ -15,6 +15,11 @@ function SignupScreen() {
   const { state } = useLocation();
   // const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
+  const [userTypes]: any = useState([
+    { "name": "Select", "value": "" },
+    { "name": "User", "value": "consumer" },
+    { "name": "Hospital", "value": "clinic" },
+  ]);
   const userState = useSelector((state: any) => state.userData);
   const from = state ? state.from.pathname : "/";
   const formik = useFormik({
@@ -74,7 +79,7 @@ function SignupScreen() {
             otp: userState.userDetails.otp ? userState.userDetails.otp.toString() : null,
             phoneNumber: formik.values.phoneNumber,
             userType: formik.values.userType,
-            password:formik.values.password
+            password: formik.values.password
           },
           replace: true
         });
@@ -101,7 +106,7 @@ function SignupScreen() {
               onChange={formik.handleChange}
               value={formik.values.firstName}
             />
-            {formik.errors.firstName && <p className="error-text">{formik.errors.firstName}</p>}
+            {formik.touched.firstName && formik.errors.firstName && <p className="error-text">{formik.errors.firstName}</p>}
           </div>
           <div className="form-input">
             <input
@@ -111,7 +116,7 @@ function SignupScreen() {
               onChange={formik.handleChange}
               value={formik.values.lastName}
             />
-            {formik.errors.lastName && <p className="error-text">{formik.errors.lastName}</p>}
+            {formik.touched.lastName && formik.errors.lastName && <p className="error-text">{formik.errors.lastName}</p>}
           </div>
 
           <div className="form-input">
@@ -123,7 +128,7 @@ function SignupScreen() {
               onChange={formik.handleChange}
               value={formik.values.phoneNumber}
             />
-            {formik.errors.phoneNumber && <p className="error-text">{formik.errors.phoneNumber}</p>}
+            {formik.touched.phoneNumber && formik.errors.phoneNumber && <p className="error-text">{formik.errors.phoneNumber}</p>}
           </div>
 
           <div className="form-input">
@@ -134,7 +139,7 @@ function SignupScreen() {
               onChange={formik.handleChange}
               value={formik.values.password}
             />
-            {formik.errors.password && <p className="error-text">{formik.errors.password}</p>}
+            {formik.touched.password && formik.errors.password && <p className="error-text">{formik.errors.password}</p>}
           </div>
 
           <div className="form-input">
@@ -145,23 +150,18 @@ function SignupScreen() {
               onChange={formik.handleChange}
               value={formik.values.cnfPassword}
             />
-            {formik.errors.cnfPassword && <p className="error-text">{formik.errors.cnfPassword}</p>}
+            {formik.touched.cnfPassword && formik.errors.cnfPassword && <p className="error-text">{formik.errors.cnfPassword}</p>}
           </div>
           <p>
-            <select name="ptGender" value={formik.values.userType} id="pt_Gender" onChange={formik.handleChange}>
-              <option value="">Select</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
+            <select name="userType" value={formik.values.userType} id="userType" onChange={formik.handleChange}>
+              {userTypes.map((userType: any, userInd: number) => {
+                return (<option key={`_${userInd}`} value={userType.value}>{userType.name}</option>);
+              })}
             </select>
             {formik.touched.userType && formik.errors.userType && <p className='error-text'>{formik.errors.userType}</p>}
           </p>
-          <button type="submit" className="btn-common">
-            Submit
-          </button>
-
-          <button type="button" className="btn-underline" onClick={() => navigate("/login", { replace: true })}>
-            Back to login
-          </button>
+          <button type="submit" className="btn-common">Submit</button>
+          <button type="button" className="btn-underline" onClick={() => navigate("/login", { replace: true })}>Back to login</button>
         </div>
       </form>
     </div>

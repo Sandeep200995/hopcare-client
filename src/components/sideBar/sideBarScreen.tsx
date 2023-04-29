@@ -5,6 +5,7 @@ import { AuthContext } from "../../contexts";
 import { storage } from "../../utills";
 import * as CONSTANTS from "../../constants/dummy";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 interface sideBarProps {
   onCloseBtnClk?: any;
@@ -14,16 +15,33 @@ interface sideBarProps {
 function SideBar(props: sideBarProps) {
   const history = useNavigate();
   const { isAuthenticated ,setIsAuthenticated} = React.useContext(AuthContext);
+  const [userType,setUserType]:any = useState("consumer");
+  // const userState = useSelector((state: any) => state.userData);
   const [options, setOptions]: any = useState(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.LOGGED);
 
   useEffect(() => {
     // console.log("@Side bar isAuthenticated-->", isAuthenticated);
+    // console.log("userState",userState);
     if (isAuthenticated) {
-      setOptions(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.LOGGED);
+      if (userType === "clinic") { setOptions(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.LOGGED_CLNIC); }
+      else { setOptions(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.LOGGED); }
     } else {
       setOptions(CONSTANTS.DEFAULT_DUMMY_DATA.SIDEBAR_OPTIONS.WITHOUT_LOGGED);
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, userType])
+
+  useEffect(() => {
+    async function fetchUserType() {
+      try {
+        let _userType = await storage.getData(storage.keys.USER_TYPE);
+        if (_userType) { setUserType(_userType); }
+      } catch (err) {
+        console.log("Failed to fetch user Type in side menu", err);
+      }
+    }
+    fetchUserType();
+  }, [])
+
 
   async function handleClkSideBarOpt(side_item: any) {
     // console.log("side_item-->", side_item);
@@ -37,7 +55,6 @@ function SideBar(props: sideBarProps) {
       history(side_item.path, { replace: true });
       props.onCloseBtnClk();
     }
-
   }
 
   return (

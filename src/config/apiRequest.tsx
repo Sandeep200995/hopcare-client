@@ -28,6 +28,7 @@ export default async function networkCall(variables?: any, method?: string, apiM
   console.log("--->", BASE_URL_V1 + method, init);
   return fetch(BASE_URL_V1 + method, init)
     .then((res: any) => res.json().then((data: any) => {
+      console.log("Response ",data);
       return { status: res.status, data: data };
     }))
     .catch((err: any) => {

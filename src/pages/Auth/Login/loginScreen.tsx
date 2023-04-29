@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams, redirect } from "react-router-dom";
 import { storage } from "../../../utills";
 import "./login.scss";
 import * as AUTH_ACTIONS from "../../../redux/actions/Auth/authActions";
 import * as AUTH_ACTIONS_TYPES from "../../../redux/actions/Auth/types";
 import { useDispatch, useSelector } from "react-redux";
-import { AppLoaderContext ,AuthContext} from "../../../contexts";
+import { AppLoaderContext, AuthContext } from "../../../contexts";
 import { toast } from "react-toastify";
 
 function LoginScreen() {
@@ -17,6 +17,11 @@ function LoginScreen() {
   const { setIsAuthenticated } = React.useContext(AuthContext);
   const { setIsAppLoader } = React.useContext(AppLoaderContext);
   const userState = useSelector((state: any) => state.userData);
+  const [userTypes]: any = useState([
+    { "name": "Select", "value": "" },
+    { "name": "User", "value": "consumer" },
+    { "name": "Hospital", "value": "clinic" },
+  ]);
   const formik = useFormik({
     initialValues: {
       phoneNumber: "",
@@ -34,6 +39,9 @@ function LoginScreen() {
       if (!values.password) {
         errors.password = "Please enter password";
       }
+      if (!values.userType) {
+        errors.userType = "Please select type of user";
+      }
       return errors;
     },
     onSubmit: (values) => {
@@ -43,21 +51,20 @@ function LoginScreen() {
   });
 
   useEffect(() => {
-    console.log("params",locationParams);
-
-   }, [locationParams])
-
-
-
-  useEffect(() => {
     // console.log("userState", userState);
+    console.log("formik.values",formik.values);
+
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
         setIsAppLoader(false);
-        if (locationParams) {
+        if (locationParams && locationParams.state && locationParams.state.pathName) {
           navigate(`${locationParams.state.pathName}`, { state: locationParams.state.stateData, replace: true })
         } else {
-          navigate("/", { replace: true });
+          if (formik.values && formik.values.userType === "clinic") {
+            navigate("/clinic_appointments", { replace: true });
+          } else {
+            navigate("/", { replace: true });
+          }
         }
         storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
         storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
@@ -79,7 +86,7 @@ function LoginScreen() {
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_FAILURE:
         setIsAppLoader(false);
-        toast(userState.message,{position:"top-center"});
+        toast(userState.message, { position: "top-center" });
         break;
       default:
         break;
@@ -102,9 +109,8 @@ function LoginScreen() {
               onChange={formik.handleChange}
               value={formik.values.phoneNumber}
             />
-            <p className="error-text">Please enter phone numer</p>
+            {formik.touched.phoneNumber && formik.errors.phoneNumber && <p className="error-text">{formik.errors.phoneNumber}</p>}
           </div>
-
           <div className="form-input">
             <input
               type="password"
@@ -113,34 +119,26 @@ function LoginScreen() {
               onChange={formik.handleChange}
               value={formik.values.password}
             />
-            {/* <p className="error-text">Please enter password</p> */}
+            {formik.touched.password && formik.errors.password && <p className="error-text">{formik.errors.password}</p>}
           </div>
           <p>
-            <select name="ptGender" value={formik.values.userType} id="pt_Gender" onChange={formik.handleChange}>
-              <option value="">Select</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
+            <select name="userType" value={formik.values.userType} id="userType" onChange={formik.handleChange}>
+              {userTypes.map((userType: any, userInd: number) => {
+                return (<option key={`_${userInd}`} value={userType.value}>{userType.name}</option>);
+              })}
             </select>
             {formik.touched.userType && formik.errors.userType && <p className='error-text'>{formik.errors.userType}</p>}
           </p>
-          <button type="submit" className="btn-common">
-            Submit
-          </button>
-
+          <button type="submit" className="btn-common">Submit</button>
           <button type="button" className="btn-underline">
-            {/* New User?  */}
-            <span onClick={() =>navigate("/register", { replace: true })}>Register here!</span>{" "}
+            <span onClick={() => navigate("/register", { replace: true })}>Register here!</span>{" "}
           </button>
           <div className="flex justify-space-between">
-          <button type="button" className="btn-underline">
-              Back
-            </button>
+            <button type="button" className="btn-underline">Back</button>
             <button type="button" className="btn-underline">
               <span onClick={() => navigate("/forgotPassword", { replace: true })}>Forgot Password?</span>{" "}
             </button>
-
           </div>
-
         </div>
       </form>
     </div>
