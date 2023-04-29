@@ -121,14 +121,14 @@ function LoginScreen() {
             />
             {formik.touched.password && formik.errors.password && <p className="error-text">{formik.errors.password}</p>}
           </div>
-          <p>
+          <div className="select-option-dropdown">
             <select name="userType" value={formik.values.userType} id="userType" onChange={formik.handleChange}>
               {userTypes.map((userType: any, userInd: number) => {
                 return (<option key={`_${userInd}`} value={userType.value}>{userType.name}</option>);
               })}
             </select>
             {formik.touched.userType && formik.errors.userType && <p className='error-text'>{formik.errors.userType}</p>}
-          </p>
+          </div>
           <button type="submit" className="btn-common">Submit</button>
           <button type="button" className="btn-underline">
             <span onClick={() => navigate("/register", { replace: true })}>Register here!</span>{" "}
