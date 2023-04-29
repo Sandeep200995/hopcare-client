@@ -494,6 +494,8 @@ input[type="radio"] {
     position: absolute;
     top: 90px;
     z-index: 100;
+    left: 0;
+    transform: translateX(25%);
   }
 
   svg{
