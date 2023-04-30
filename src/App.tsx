@@ -13,7 +13,7 @@ import * as AUTH_ACTIONS_TYPES from "./redux/actions/Auth/types";
 
 function App() {
   const { isAppLoader, setIsAppLoader } = React.useContext(AppLoaderContext);
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext);
+  const { setIsAuthenticated } = React.useContext(AuthContext);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchPersistUserData();
@@ -23,7 +23,11 @@ function App() {
     setIsAppLoader(true);
     let token = null;
     let userType = await storage.getData(storage.keys.USER_TYPE);
-    // console.log("userType", userType);
+    if (!userType) {
+      let resp = await storage.storeData(storage.keys.USER_TYPE, "consumer");
+      console.log("No saved usertype found saving consumer as default.");
+
+    }
     if (userType && userType === "consumer") {
       token = await storage.getData(storage.keys.TOKEN_CL);
     } else if (userType && userType === "clinic") {

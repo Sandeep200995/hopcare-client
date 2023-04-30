@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import SideBar from "../components/sideBar/sideBarScreen";
 import { AuthContext, SideBarContext } from "../contexts";
@@ -9,6 +9,7 @@ import ProfileScreen from "../pages/App/Clinic/clinicProfileScreen";
 import BookConsultation from "../pages/App/Consultation/bookConsultation";
 import ContactUs from "../pages/App/ContactUs/contactUs";
 import Help from "../pages/App/Help/help";
+import { useSelector } from "react-redux";
 
 const Dashboard = React.lazy(() => import("../pages/App/Dashboard/dashBoardScreen"));
 const Login = React.lazy(() => import("../pages/Auth/Login/loginScreen"));
@@ -20,6 +21,7 @@ const ClinicProfile = React.lazy(() => import("../pages/App/Clinic/clinicProfile
 const DoctorProfile = React.lazy(() => import("../pages/App/Doctor/doctorProfileScreen"));
 const Appointments = React.lazy(() => import("../pages/App/Appointments/appointmentScreen"));
 const ClinicAppointments = React.lazy(() => import("../pages/App/Appointments/clinic/clinicAppointments"));
+const NotFound = React.lazy(() => import("../components/page/NoPageFound/noPageFound"));
 interface ContainerProps {
   role?: any;
 }
@@ -28,25 +30,31 @@ export const AppRouting = (props: ContainerProps) => {
   const { role } = props;
   const { isSideActive, toggleSidebar } = React.useContext(SideBarContext);
   const { isAuthenticated } = React.useContext(AuthContext);
+  const userDetails = useSelector((state: any) => state.userData.userDetails);
+  useEffect(() => {
+    console.log("userDetails", userDetails);
+
+  }, [userDetails])
+
   return (
     <Router>
       <div className="main-cont">
         <SideBar onSideBarActive={isSideActive} onCloseBtnClk={() => toggleSidebar(!isSideActive)} />
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Signup />}></Route>
           <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/otp" element={<OTP />}></Route>
           <Route path="/newPassword" element={<ChangePassword />}></Route>
-          <Route path="/appointments" element={<Appointments />}></Route>
           {isAuthenticated ?
             <>
               <Route path="/appointments" element={<Appointments />}></Route>
               <Route path="/appointment-confirm" element={<AppointmentConfirmScreen />}></Route>
+              <Route path="/clinic_appointments" element={<ClinicAppointments />}></Route>
             </>
             : null
           }
-          <Route path="/clinic_appointments" element={<ClinicAppointments />}></Route>
           <Route path="/consultation" element={<BookConsultation />}></Route>
           <Route path="/articles" element={<HealthArticles />}></Route>
           <Route path="/aboutus" element={<AboutUs />}></Route>
@@ -54,7 +62,12 @@ export const AppRouting = (props: ContainerProps) => {
           <Route path="/help" element={<Help />}></Route>
           <Route path="/clinic/:id" element={<ClinicProfile />}></Route>
           <Route path="/doctor/:id" element={<DoctorProfile />}></Route>
-          <Route path="/" element={<Dashboard />} />
+          {userDetails.userType && userDetails.userType === "clinic" ?
+            <Route path="/" element={<ClinicAppointments />}></Route>
+            :
+            <Route path="/" element={<Dashboard />} />
+          }
+
         </Routes>
       </div>
     </Router>

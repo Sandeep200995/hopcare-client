@@ -1,0 +1,43 @@
+.health-articles {
+    padding: 2rem;
+    text-align: center;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+
+            a {
+                color: blue;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 768px) {
+        padding: 4rem;
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        ul {
+            li {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

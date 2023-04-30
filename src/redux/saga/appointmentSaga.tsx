@@ -10,7 +10,7 @@ type WhatYouReturn = any;
 type WhatYouAccept = any;
 
 export function* getAllAppointmentsByPatient(action: any): Generator<WhatYouYield, WhatYouReturn, WhatYouAccept> {
-    console.log("getAllAppointmentsByPatient SAGA INVOKED ::::", action);
+    // console.log("getAllAppointmentsByPatient SAGA INVOKED ::::", action);
     try {
         const { formData } = action.payload;
         // console.log("formData", formData);
@@ -33,7 +33,7 @@ export function* GetAllAppointmentsByPatient() {
 
 
 export function* getAllAppointmentsByClinic(action: any): Generator<WhatYouYield, WhatYouReturn, WhatYouAccept> {
-    console.log("getAllAppointmentsByClinic SAGA INVOKED ::::", action);
+    // console.log("getAllAppointmentsByClinic SAGA INVOKED ::::", action);
     try {
         const { formData } = action.payload;
         // console.log("formData", formData);
