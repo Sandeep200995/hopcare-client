@@ -46,11 +46,20 @@ function SideBar(props: sideBarProps) {
   async function handleClkSideBarOpt(side_item: any) {
     // console.log("side_item-->", side_item);
     if (side_item.name === "Logout") {
-      let clearStore = await storage.clear();
-      console.log("clearStore resp ", clearStore);
+      let userType = await storage.getData(storage.keys.USER_TYPE);
+      if (userType === "clinic") {
+        history("/login", { replace: true });
+        setIsAuthenticated(false);
+        let clearStore = await storage.removeKey(storage.keys.TOKEN_HS);
+        console.log("clearStore resp ", clearStore);
+      } else {
+        history("/", { replace: true });
+        setIsAuthenticated(false);
+        let clearStore = await storage.removeKey(storage.keys.TOKEN_CL);
+        console.log("clearStore resp ", clearStore);
+      }
       props.onCloseBtnClk();
-      history("/", { replace: true });
-      setIsAuthenticated(false);
+
     } else {
       history(side_item.path, { replace: true });
       props.onCloseBtnClk();

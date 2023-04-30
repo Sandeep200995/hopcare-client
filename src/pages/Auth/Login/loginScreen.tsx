@@ -51,8 +51,8 @@ function LoginScreen() {
   });
 
   useEffect(() => {
-    // console.log("userState", userState);
-    console.log("formik.values",formik.values);
+    console.log("userState", userState);
+    console.log("formik.values", formik.values);
 
     switch (userState.case) {
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_SUCCESS:
@@ -60,16 +60,17 @@ function LoginScreen() {
         if (locationParams && locationParams.state && locationParams.state.pathName) {
           navigate(`${locationParams.state.pathName}`, { state: locationParams.state.stateData, replace: true })
         } else {
-          if (formik.values && formik.values.userType === "clinic") {
+          storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
+          if (formik.values && userState.userDetails.userType === "clinic") {
+            storage.storeData(storage.keys.TOKEN_HS, userState.userDetails.accessToken);
             navigate("/clinic_appointments", { replace: true });
+            setIsAuthenticated(true);
           } else {
+            storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
             navigate("/", { replace: true });
+            setIsAuthenticated(true);
           }
         }
-        storage.storeData(storage.keys.TOKEN_CL, userState.userDetails.accessToken);
-        storage.storeData(storage.keys.USER_TYPE, userState.userDetails.userType);
-        // storage.storeData(storage.keys.USER_ID, userState.userDetails.userId);
-        setIsAuthenticated(true);
         break;
       case AUTH_ACTIONS_TYPES.AUTHENTICATE_USER_NOT_VERIFIED:
         setIsAppLoader(false);

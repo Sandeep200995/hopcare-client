@@ -20,41 +20,40 @@ function ClinicAppointments() {
     const [appointmentData, setAppointmentData]: any = useState({
         list: [
             {
-                appointmentDate: "18-07-2023",
-                clinicId: "hsbahjd",
-                ptAge: "23",
-                ptFirstName: "Sandeep",
-                ptGender: "M",
-                ptLastName: "Singh",
-                ptPaymentMode: "Cash",
-                ptPaymentStatus: "Pending",
-                ptPhoneNumber: "7618815004",
-                _id: "shfajhdgsajhdjhsa"
+                // appointmentDate: "18-07-2023",
+                // clinicId: "hsbahjd",
+                // ptAge: "23",
+                // ptFirstName: "Sandeep",
+                // ptGender: "M",
+                // ptLastName: "Singh",
+                // ptPaymentMode: "Cash",
+                // ptPaymentStatus: "Pending",
+                // ptPhoneNumber: "7618815004",
+                // _id: "shfajhdgsajhdjhsa"
             }
         ], total: 0, skip: 0
     });
 
     useEffect(() => {
-        // dispatch(COMMON_ACTIONS.startLoading({}));
-        // dispatch(AppointmentActions.getAllAppointmentsAction({ formData: { limit: 20, skip: 0 } }));
+        dispatch(COMMON_ACTIONS.startLoading({}));
+        dispatch(AppointmentActions.getAllClinicAppointmentsAction({ formData: { limit: 20, skip: 0 } }));
     }, [])
 
-
-
     useEffect(() => {
-        // switch (appointmentState.case) {
-        //     case APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_SUCCESS:
-        //         setAppointmentData(appointmentState.userAppointments);
-        //         dispatch(COMMON_ACTIONS.stopLoading({}));
-        //         break;
-        //     case APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_FAILURE:
-        //         // toast(appointmentState.message);
-        //         toast(appointmentState.message, { position: "top-center" });
-        //         dispatch(COMMON_ACTIONS.stopLoading({}));
-        //         break;
-        //     default:
-        //         break;
-        // }
+        console.log("Appointment Store @CLNIC APOINTMNts",appointmentState);
+        switch (appointmentState.case) {
+            case APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_SUCCESS:
+                setAppointmentData(appointmentState.clinicAppointments);
+                dispatch(COMMON_ACTIONS.stopLoading({}));
+                break;
+            case APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_FAILURE:
+                // toast(appointmentState.message);
+                toast(appointmentState.message, { position: "top-center" });
+                dispatch(COMMON_ACTIONS.stopLoading({}));
+                break;
+            default:
+                break;
+        }
     }, [appointmentState]);
 
 

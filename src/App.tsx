@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import "./App.css";
 import { AppRouting } from "./router/appRouting";
@@ -12,8 +12,8 @@ import * as AUTH_ACTIONS_TYPES from "./redux/actions/Auth/types";
 
 
 function App() {
-  const { isAppLoader,setIsAppLoader } = React.useContext(AppLoaderContext);
-  const { isAuthenticated,setIsAuthenticated } = React.useContext(AuthContext);
+  const { isAppLoader, setIsAppLoader } = React.useContext(AppLoaderContext);
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchPersistUserData();
@@ -23,13 +23,14 @@ function App() {
     setIsAppLoader(true);
     let token = null;
     let userType = await storage.getData(storage.keys.USER_TYPE);
+    // console.log("userType", userType);
     if (userType && userType === "consumer") {
       token = await storage.getData(storage.keys.TOKEN_CL);
-    } else if (userType && userType === "hospital") {
-      token = await storage.getData(storage.keys.TOKEN_CL);
+    } else if (userType && userType === "clinic") {
+      token = await storage.getData(storage.keys.TOKEN_HS);
     }
-    console.log("token",token);
-    console.log("userType",userType);
+    console.log("token", token);
+    console.log("userType", userType);
     // let userId = await storage.getData(storage.keys.USER_ID);
     // console.log("Fetching Users keys ",token  ,"-=-=-=", userType);
     if (token && userType) {

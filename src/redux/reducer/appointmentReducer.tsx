@@ -20,7 +20,13 @@ export const AppointmentReducer = (state = initialState.appointmentData, action:
                 userAppointments: action.payload ? action.payload : initialState.appointmentData.userAppointments,
                 message: action.message ? action.message : ""
             };
-
+        case APPOINTMENT_TYPES.GET_ALL_APPOINTMENTS_BY_CLINIC_SUCCESS:
+            return {
+                ...state,
+                case: action.type,
+                clinicAppointments: action.payload ? action.payload : initialState.appointmentData.clinicAppointments,
+                message: action.message ? action.message : ""
+            };
         default:
             return {
                 ...state,

@@ -14,7 +14,7 @@ export const userData = {
     storeVersion: null,
     accessToken: null,
     otp: null,
-    userType: "consumer",
+    userType: null,
     userId: null,
   },
   // profileImgKey:null,
@@ -61,6 +61,11 @@ export const appointmentData = {
   loading: false,
   loadingtxt: "",
   userAppointments: {
+    list: [],
+    total: 0,
+    skip: 0
+  },
+  clinicAppointments: {
     list: [],
     total: 0,
     skip: 0

@@ -13,5 +13,6 @@ export function* rootSaga() {
     fork(clinicSaga.GetAllClinics),
     fork(doctorSaga.GetDashboardDoctorList),
     fork(AppointmentSaga.GetAllAppointmentsByPatient),
+    fork(AppointmentSaga.GetAllAppointmentsByClinic)
   ]);
 }

@@ -7,6 +7,10 @@ export default async function networkCall(variables?: any, method?: string, apiM
   // console.log("token", token);
   // console.log("BASE_URL_V1", BASE_URL_V1);
   let storedToken = await storage.getData(storage.keys.TOKEN_CL);
+  let userType = await storage.getData(storage.keys.USER_TYPE);
+  if (userType && userType === "hospital") {
+    storedToken = await storage.getData(storage.keys.TOKEN_HS);
+  }
   var init =
     apiMethod == "GET"
       ? {

@@ -6,6 +6,7 @@ const keys = {
   // CREDENTIALS: "@credentials",
   USER_ID:"@userId",
   TOKEN_CL: "@token",
+  TOKEN_HS: "@token",
   USER_TYPE: "@userType"
   // USER: "@user",
   // LANGUAGE: "@language"
@@ -64,4 +65,14 @@ const clear = async () => {
   }
 };
 
-export { keys, storeData, getData, removeData, clear };
+const removeKey = async (key:string) => {
+  try {
+    // const keysToRemove = (await getAllKeys()).filter((key) => key !== keys.CREDENTIALS);
+    await localStorage.removeItem(key);
+    // await Keychain.resetGenericPassword();
+  } catch (e) {
+    console.log("Error clearing storage: ", e);
+  }
+};
+
+export { keys, storeData, getData, removeData, clear ,removeKey};

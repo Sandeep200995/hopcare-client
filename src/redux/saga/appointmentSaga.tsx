@@ -32,6 +32,27 @@ export function* GetAllAppointmentsByPatient() {
 }
 
 
+export function* getAllAppointmentsByClinic(action: any): Generator<WhatYouYield, WhatYouReturn, WhatYouAccept> {
+    console.log("getAllAppointmentsByClinic SAGA INVOKED ::::", action);
+    try {
+        const { formData } = action.payload;
+        // console.log("formData", formData);
+        const response: any = yield networkCall(formData, API_ENDPOINTS.API_URLS.getAllAppointmentsByClinic, "POST");
+        console.log("Response getAllAppointmentsByClinic list ", response);
+        const { data }: any = response.data || {};
+        yield put({ type: APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_BY_CLINIC_SUCCESS, payload: data, message: "Successfully fetched" });
+    } catch (error: any) {
+        const message: any = error?.error;
+        // showErrorToast(message);
+        yield put({ type: APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_BY_CLINIC_FAILURE, payload: { error: message }, message: "Unable to fetch data " });
+    }
+}
+
+export function* GetAllAppointmentsByClinic() {
+    yield takeLatest(APPOINTMENT_ACTION_TYPES.GET_ALL_APPOINTMENTS_BY_CLINIC, getAllAppointmentsByClinic);
+}
+
+
 // export async function getDoctorDetailsById(params: any) {
 //   // console.log("Params1 ", params);
 //   try {
