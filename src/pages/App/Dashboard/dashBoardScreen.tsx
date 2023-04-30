@@ -27,6 +27,7 @@ import HowItWorks from "./howItWorks/howItWorks";
 import Footer from "../../../components/footer/footer";
 import Booking from "../../../components/card/booking";
 import ModalConfirm from "../../../components/modal/modalConfirm";
+import AppointmentModal from "../../../components/modal/appointmentModal";
 
 function DashboardScreen() {
   const history: any = useNavigate();

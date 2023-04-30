@@ -71,8 +71,8 @@ function ClinicAppointments() {
     const renderAppointments = useCallback(() => {
         // let appointments = [{""}]
         return (
-            <div className='booking-tab'>
-                <span >Today's Appointments </span>
+            <div className='booking-page'>
+                {/* <span >Today's Appointments </span> */}
                 {appointmentData.list.map((appInfo: any, ind: number) => {
                     const { appointmentDate,
                         clinicId,
@@ -86,7 +86,6 @@ function ClinicAppointments() {
                         _id } = appInfo;
                     return (
                         <div>
-                            <div className='booking-page'>
                                 <div className='booking-card'>
                                     {/* <img src={ImgHosp} /> */}
                                     <div className='booking-card-inner'>
@@ -97,7 +96,6 @@ function ClinicAppointments() {
                                         <p>{`${appointmentDate ? moment(appointmentDate).format("dddd D MMM YY") : " - "}`}</p>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     )
                 })}

@@ -29,13 +29,37 @@ function AppointmentScreen() {
       ptPaymentStatus: "Pending",
       ptPhoneNumber: "7618815004",
       _id: "shfajhdgsajhdjhsa"
+    },
+    {
+      appointmentDate: "18-07-2023",
+      clinicId: "hsbahjd",
+      ptAge: "23",
+      ptFirstName: "Sandeep",
+      ptGender: "M",
+      ptLastName: "Singh",
+      ptPaymentMode: "Cash",
+      ptPaymentStatus: "Pending",
+      ptPhoneNumber: "7618815004",
+      _id: "shfajhdgsajhdjhsa"
+    },
+    {
+      appointmentDate: "18-07-2023",
+      clinicId: "hsbahjd",
+      ptAge: "23",
+      ptFirstName: "Sandeep",
+      ptGender: "M",
+      ptLastName: "Singh",
+      ptPaymentMode: "Cash",
+      ptPaymentStatus: "Pending",
+      ptPhoneNumber: "7618815004",
+      _id: "shfajhdgsajhdjhsa"
     }
   ], total: 0, skip: 0 });
 
-  useEffect(() => {
-    dispatch(COMMON_ACTIONS.startLoading({}));
-    dispatch(AppointmentActions.getAllAppointmentsAction({ formData: { limit: 20, skip: 0 } }));
-  }, [])
+  // useEffect(() => {
+  //   dispatch(COMMON_ACTIONS.startLoading({}));
+  //   dispatch(AppointmentActions.getAllAppointmentsAction({ formData: { limit: 20, skip: 0 } }));
+  // }, [])
 
 
 
@@ -69,8 +93,9 @@ function AppointmentScreen() {
 
   const renderAppointments = useCallback(() => {
     // let appointments = [{""}]
+    console.log(appointmentData,"Apppppppp")
     return (
-      <div className='booking-tab'>
+      <div className='booking-page'>
         {appointmentData.list.map((appInfo: any, ind: number) => {
           const { appointmentDate,
             clinicId,
@@ -83,20 +108,21 @@ function AppointmentScreen() {
             ptPhoneNumber,
             _id } = appInfo;
           return (
-            <div>
-              <div className='booking-page'>
+              <div>
                 <div className='booking-card'>
                   {/* <img src={ImgHosp} /> */}
                   <div className='booking-card-inner'>
+                    <span></span>
                     {/* <span>Current</span> */}
                     <h5>Patient Details</h5>
                     <p>{`${ptFirstName ? ptFirstName : ""} ${ptLastName ? ptLastName : ""} ${ptAge ? ptAge : ""}/${ptGender ? ptGender : ""}`}</p>
                     <h5>Appointment Details</h5>
                     <p>{`${appointmentDate ? moment(appointmentDate).format("dddd D MMM YY") : " - "}`}</p>
+                    <button className="btn">Current</button>
+                    <button className="btn">next</button>
                   </div>
                 </div>
               </div>
-            </div>
           )
         })}
       </div>
